@@ -188,7 +188,7 @@
       <span class="section-label">Stay Updated</span>
       <h2>New Reviews, Straight to Your Inbox</h2>
       <p>Weekly roundups of the latest AI tool reviews, comparisons, and news. Join free.</p>
-      <form class="signup-form" action="#" method="POST" onsubmit="return false;">
+      <form class="signup-form">
         <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
         <button type="submit" class="btn btn-primary">Subscribe Free</button>
       </form>
@@ -246,6 +246,36 @@
   document.getElementById('navToggle').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
+
+  // Listmonk email signup
+  document.querySelectorAll('.signup-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      fetch('https://listmonk.aimastertools.com/api/public/subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailInput.value.trim(), name: '', list_uuids: ['2a453160-af75-4758-a2d8-d834dd409986'] })
+      }).then(function(res) {
+        if (res.ok) {
+          form.innerHTML = '<p style="color:#58a6ff;font-weight:600;">You\'re subscribed! Check your inbox.</p>';
+        } else {
+          btn.disabled = false;
+          setSignupError(form, 'Something went wrong, please try again.');
+        }
+      }).catch(function() {
+        btn.disabled = false;
+        setSignupError(form, 'Something went wrong, please try again.');
+      });
+    });
+  });
+  function setSignupError(form, msg) {
+    var err = form.querySelector('.signup-error');
+    if (!err) { err = document.createElement('p'); err.className = 'signup-error'; err.style.cssText = 'color:#f85149;margin-top:0.5rem;'; form.appendChild(err); }
+    err.textContent = msg;
+  }
 </script>
 </body>
 </html>

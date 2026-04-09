@@ -46,7 +46,15 @@
     .cta-affiliate { display: inline-block; background: #238636; color: #fff; font-weight: 600; font-size: 1.05rem; padding: 0.75rem 2rem; border-radius: 8px; transition: background 0.2s; }
     .cta-affiliate:hover { background: #2ea043; text-decoration: none; }
     .best-for { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
-    footer { background: #161b22; border-top: 1px solid #30363d; text-align: center; color: #8b949e; padding: 2rem; margin-top: 4rem; font-size: 0.9rem; }
+    footer { background: #161b22; border-top: 1px solid #30363d; text-align: center; color: #8b949e; padding: 2rem; margin-top: 0; font-size: 0.9rem; }
+    .signup-section { background: #161b22; border-top: 1px solid #30363d; padding: 3rem 1.5rem; text-align: center; margin-top: 4rem; }
+    .signup-section h2 { font-size: 1.5rem; border: none; padding: 0; margin-bottom: 0.75rem; }
+    .signup-section p { color: #8b949e; margin-bottom: 1rem; }
+    .signup-form { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto 0.75rem; }
+    .signup-form input[type="email"] { flex: 1; padding: 0.65rem 1rem; border-radius: 8px; border: 1px solid #30363d; background: #0d1117; color: #e6edf3; font-size: 1rem; }
+    .signup-form button { background: #238636; color: #fff; border: none; border-radius: 8px; padding: 0.65rem 1.25rem; font-size: 1rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .signup-form button:hover { background: #2ea043; }
+    .signup-note { font-size: 0.85rem; }
     @media (max-width: 600px) { h1 { font-size: 1.5rem; } .container { padding: 1rem; } }
   </style>
 </head>
@@ -114,9 +122,52 @@
   </div>
 </div>
 
+<section class="signup-section" id="signup">
+  <div style="max-width:560px;margin:0 auto;">
+    <span style="color:#8b949e;font-size:0.85rem;text-transform:uppercase;letter-spacing:.1em;">Stay Updated</span>
+    <h2>Get the Latest AI Reviews</h2>
+    <p>New reviews and AI news delivered weekly. No spam, ever.</p>
+    <form class="signup-form">
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="signup-note">&#128274; No spam. Unsubscribe any time.</p>
+  </div>
+</section>
+
 <footer>
   <p>© 2026 AIMasterTools.com · <a href="/about.html">About</a> · AI tool reviews and affiliate recommendations.</p>
 </footer>
 
+<script>
+  document.querySelectorAll('.signup-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      fetch('https://listmonk.aimastertools.com/api/public/subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailInput.value.trim(), name: '', list_uuids: ['2a453160-af75-4758-a2d8-d834dd409986'] })
+      }).then(function(res) {
+        if (res.ok) {
+          form.innerHTML = '<p style="color:#58a6ff;font-weight:600;">You\'re subscribed! Check your inbox.</p>';
+        } else {
+          btn.disabled = false;
+          setSignupError(form, 'Something went wrong, please try again.');
+        }
+      }).catch(function() {
+        btn.disabled = false;
+        setSignupError(form, 'Something went wrong, please try again.');
+      });
+    });
+  });
+  function setSignupError(form, msg) {
+    var err = form.querySelector('.signup-error');
+    if (!err) { err = document.createElement('p'); err.className = 'signup-error'; err.style.cssText = 'color:#f85149;margin-top:0.5rem;'; form.appendChild(err); }
+    err.textContent = msg;
+  }
+</script>
 </body>
 </html>
