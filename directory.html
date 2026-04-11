@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tool Directory 2025 — 100 Best AI Tools by Category | AIMasterTools</title>
+  <meta name="description" content="Browse 100 of the best AI tools across 10 categories: writing, coding, image, video, marketing, sales, support, data, automation, and productivity. Free searchable AI tool directory." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/directory.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Tool Directory 2025 — 100 Best AI Tools | AIMasterTools" />
+  <meta property="og:description" content="Browse 100 of the best AI tools across writing, coding, image, video, marketing, sales, support, data, automation, and productivity." />
+  <meta property="og:url" content="https://aimastertools.com/directory.html" />
+  <meta property="og:site_name" content="AIMasterTools" />
+  <meta property="og:image" content="https://aimastertools.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Tool Directory 2025 — 100 Best AI Tools" />
+  <meta name="twitter:description" content="Searchable directory of 100 AI tools across 10 categories." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI Tool Directory 2025",
+    "url": "https://aimastertools.com/directory.html",
+    "description": "A curated directory of 100 best AI tools across 10 categories",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aimastertools.com/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tool Directory", "item": "https://aimastertools.com/directory.html"}
+      ]
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .dir-hero {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, #0a1628 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+    .dir-hero h1 { margin-bottom: 0.75rem; }
+    .dir-hero p { font-size: 1.125rem; max-width: 640px; margin: 0 auto 1.5rem; }
+    .dir-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .dir-stat { text-align: center; }
+    .dir-stat-num { font-size: 2rem; font-weight: 800; color: var(--accent-light); display: block; }
+    .dir-stat-label { font-size: 0.85rem; color: var(--text-muted); }
+
+    .dir-controls {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .dir-controls-inner { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .dir-search { flex: 1; min-width: 220px; position: relative; }
+    .dir-search input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.65rem 1rem 0.65rem 2.75rem;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: border-color var(--transition);
+    }
+    .dir-search input:focus { outline: none; border-color: var(--accent); }
+    .dir-search::before { content: "Search"; position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); font-size: 0.75rem; color: var(--text-muted); pointer-events: none; }
+    .dir-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.4rem 0.9rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .filter-price {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem 0.75rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .filter-price:focus { outline: none; border-color: var(--accent); }
+
+    .cat-nav { padding: 2rem 0 0.5rem; }
+    .cat-nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+    .cat-nav-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .cat-nav-card:hover, .cat-nav-card.active { border-color: var(--accent); background: var(--bg-card-hover); box-shadow: var(--shadow-accent); }
+    .cat-nav-icon { font-size: 1.75rem; margin-bottom: 0.4rem; }
+    .cat-nav-label { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
+    .cat-nav-count { font-size: 0.75rem; color: var(--text-muted); }
+
+    .dir-section { margin-bottom: 3rem; }
+    .dir-section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dir-section-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .dir-section-title { font-size: 1.35rem; font-weight: 700; margin: 0; }
+    .dir-section-desc { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+    .dir-section-link { margin-left: auto; font-size: 0.85rem; color: var(--accent-light); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+    .dir-section-link:hover { color: #fff; }
+
+    .tools-dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+
+    .dir-tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+    }
+    .dir-tool-card:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--shadow-accent); }
+    .dir-tool-card.featured { border-color: var(--warning); }
+    .featured-badge {
+      position: absolute; top: 0.75rem; right: 0.75rem;
+      background: var(--warning); color: #000;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.15rem 0.5rem; border-radius: 2rem; text-transform: uppercase;
+    }
+    .dir-tool-name { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+    .dir-tool-tagline { font-size: 0.8rem; color: var(--text-muted); }
+    .dir-tool-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+    .dir-tool-features { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .feature-tag { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.15rem 0.5rem; font-size: 0.72rem; color: var(--text-muted); }
+    .dir-tool-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    .dir-tool-price { font-size: 0.85rem; color: var(--text-secondary); }
+    .dir-tool-meta { display: flex; align-items: center; gap: 0.75rem; }
+    .rating-num { font-size: 0.9rem; font-weight: 700; color: var(--warning); }
+    .rating-star { color: var(--warning); font-size: 0.8rem; }
+    .pricing-badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 2rem; font-weight: 600; }
+    .pricing-free     { background: rgba(16,185,129,0.15); color: var(--success); }
+    .pricing-freemium { background: rgba(37,99,235,0.15);  color: var(--accent-light); }
+    .pricing-paid     { background: rgba(245,158,11,0.12); color: var(--warning); }
+    .pricing-enterprise { background: rgba(239,68,68,0.12); color: var(--danger); }
+    .dir-visit-btn {
+      background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: background var(--transition);
+    }
+    .dir-visit-btn:hover { background: var(--accent-light); color: #fff; }
+
+    .results-info { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.5rem; }
+    .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); display: none; }
+    .empty-state h3 { margin-bottom: 0.5rem; color: var(--text-secondary); }
+
+    .submit-cta {
+      background: linear-gradient(135deg, var(--bg-secondary), #0a1628);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .submit-cta h2 { margin-bottom: 0.75rem; }
+    .submit-cta p  { max-width: 520px; margin: 0 auto 1.5rem; }
+    .submit-form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+      max-width: 540px; margin: 0 auto; text-align: left;
+    }
+    .submit-form-grid label { font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem; }
+    .submit-form-grid input,
+    .submit-form-grid select,
+    .submit-form-grid textarea {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 0.75rem 1rem; color: var(--text-primary); font-size: 0.9rem; width: 100%; font-family: var(--font);
+    }
+    .submit-form-grid input:focus,
+    .submit-form-grid select:focus,
+    .submit-form-grid textarea:focus { outline: none; border-color: var(--accent); }
+    .submit-form-grid select option { background: var(--bg-card); }
+    .submit-form-full { grid-column: 1 / -1; }
+    .submit-success {
+      background: rgba(16,185,129,0.1); border: 1px solid var(--success);
+      border-radius: var(--radius); padding: 1rem; color: var(--success);
+      display: none; margin-top: 1rem; max-width: 540px; margin-left: auto; margin-right: auto;
+    }
+
+    @media (max-width: 640px) {
+      .dir-controls-inner { flex-direction: column; }
+      .dir-search { width: 100%; }
+      .tools-dir-grid { grid-template-columns: 1fr; }
+      .submit-form-grid { grid-template-columns: 1fr; }
+      .cat-nav-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="directory.html" class="active">Directory</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="reviews/claude.html">Claude</a></li>
+        <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="reviews/cursor.html">Cursor</a></li>
+        <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+        <li><a href="#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="dir-hero">
+    <div class="container">
+      <h1>AI Tool Directory 2025</h1>
+      <p>100 of the best AI tools across 10 categories — researched, rated, and updated by the AIMasterTools team.</p>
+      <div class="dir-stats">
+        <div class="dir-stat"><span class="dir-stat-num">100</span><span class="dir-stat-label">AI Tools</span></div>
+        <div class="dir-stat"><span class="dir-stat-num">10</span><span class="dir-stat-label">Categories</span></div>
+        <div class="dir-stat"><span class="dir-stat-num">Free</span><span class="dir-stat-label">Always</span></div>
+        <div class="dir-stat"><span class="dir-stat-num">2025</span><span class="dir-stat-label">Updated</span></div>
+      </div>
+      <a href="#submit-tool" class="btn btn-secondary">Submit Your Tool</a>
+    </div>
+  </div>
+
+  <div class="dir-controls">
+    <div class="container">
+      <div class="dir-controls-inner">
+        <div class="dir-search">
+          <input type="text" id="searchInput" placeholder="Search 100 AI tools..." autocomplete="off" />
+        </div>
+        <div class="dir-filters" id="filterBtns">
+          <button class="filter-btn active" data-cat="all">All (100)</button>
+          <button class="filter-btn" data-cat="writing">Writing</button>
+          <button class="filter-btn" data-cat="coding">Coding</button>
+          <button class="filter-btn" data-cat="image">Image</button>
+          <button class="filter-btn" data-cat="video">Video</button>
+          <button class="filter-btn" data-cat="marketing">Marketing</button>
+          <button class="filter-btn" data-cat="sales">Sales</button>
+          <button class="filter-btn" data-cat="support">Support</button>
+          <button class="filter-btn" data-cat="data">Data</button>
+          <button class="filter-btn" data-cat="automation">Automation</button>
+          <button class="filter-btn" data-cat="productivity">Productivity</button>
+        </div>
+        <select class="filter-price" id="priceFilter">
+          <option value="all">All Pricing</option>
+          <option value="free">Free</option>
+          <option value="freemium">Freemium</option>
+          <option value="paid">Paid</option>
+          <option value="enterprise">Enterprise</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:2rem;">
+    <div class="cat-nav" id="categoryNav">
+      <div class="cat-nav-grid" id="catNavGrid"></div>
+    </div>
+    <div class="results-info" id="resultsInfo"></div>
+    <div class="empty-state" id="emptyState">
+      <h3>No tools found</h3>
+      <p>Try a different search term or filter.</p>
+    </div>
+    <div id="dirSections"></div>
+
+    <div class="submit-cta" id="submit-tool">
+      <h2>Submit Your AI Tool</h2>
+      <p>Have an AI tool that deserves a spot in the directory? Submit it — we review all submissions and add qualifying tools free of charge.</p>
+      <form id="submitForm" onsubmit="handleSubmit(event)">
+        <div class="submit-form-grid">
+          <div>
+            <label for="toolName">Tool Name</label>
+            <input type="text" id="toolName" placeholder="e.g. Acme AI" required />
+          </div>
+          <div>
+            <label for="toolUrl">Website URL</label>
+            <input type="url" id="toolUrl" placeholder="https://example.com" required />
+          </div>
+          <div>
+            <label for="toolCategory">Category</label>
+            <select id="toolCategory" required>
+              <option value="">Select category...</option>
+              <option value="writing">Writing</option>
+              <option value="coding">Coding</option>
+              <option value="image">Image Generation</option>
+              <option value="video">Video</option>
+              <option value="marketing">Marketing</option>
+              <option value="sales">Sales</option>
+              <option value="support">Customer Support</option>
+              <option value="data">Data and Analytics</option>
+              <option value="automation">Automation</option>
+              <option value="productivity">Productivity</option>
+            </select>
+          </div>
+          <div>
+            <label for="toolPricing">Pricing</label>
+            <select id="toolPricing" required>
+              <option value="">Select pricing...</option>
+              <option value="free">Free</option>
+              <option value="freemium">Freemium</option>
+              <option value="paid">Paid</option>
+              <option value="enterprise">Enterprise</option>
+            </select>
+          </div>
+          <div class="submit-form-full">
+            <label for="toolDesc">Short Description (1-2 sentences)</label>
+            <textarea id="toolDesc" rows="3" placeholder="What does your tool do and who is it for?" required></textarea>
+          </div>
+          <div>
+            <label for="submitterEmail">Your Email</label>
+            <input type="email" id="submitterEmail" placeholder="you@example.com" required />
+          </div>
+          <div style="display:flex;align-items:flex-end;">
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:0.75rem;">Submit for Review</button>
+          </div>
+        </div>
+      </form>
+      <div class="submit-success" id="submitSuccess">
+        Thanks! We will review your submission and add qualifying tools within 5-7 business days.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:0.75rem;">AI<span>Master</span>Tools</a>
+        <p>Independent AI tool reviews, comparisons, and the most complete free AI directory on the web.</p>
+      </div>
+      <div>
+        <h4>Directory</h4>
+        <ul class="footer-links">
+          <li><a href="directory.html?cat=writing">Writing Tools</a></li>
+          <li><a href="directory.html?cat=coding">Coding Tools</a></li>
+          <li><a href="directory.html?cat=image">Image Tools</a></li>
+          <li><a href="directory.html?cat=video">Video Tools</a></li>
+          <li><a href="directory.html?cat=marketing">Marketing Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More Categories</h4>
+        <ul class="footer-links">
+          <li><a href="directory.html?cat=sales">Sales Tools</a></li>
+          <li><a href="directory.html?cat=support">Support Tools</a></li>
+          <li><a href="directory.html?cat=data">Data Tools</a></li>
+          <li><a href="directory.html?cat=automation">Automation Tools</a></li>
+          <li><a href="directory.html?cat=productivity">Productivity Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="compare.html">Compare Tools</a></li>
+          <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="directory.html#submit-tool">Submit a Tool</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>2025 AIMasterTools. All rights reserved.
+        | <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+        | <a href="privacy-policy.html">Privacy</a>
+        | <a href="terms-of-service.html">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="products/directory/tools.js"></script>
+<script>
+  /*
+   * All rendered HTML is built from the static AI_TOOLS and CATEGORIES arrays
+   * defined in products/directory/tools.js (a controlled, authored data file).
+   * No user-supplied content is ever inserted as HTML — search queries are used
+   * only for filtering, and form values are read only on submit.
+   * Tool data values are escaped via esc() before insertion.
+   */
+
+  // HTML-escape helper for tool data fields
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // State
+  var activeCategory = 'all';
+  var activePricing  = 'all';
+  var searchQuery    = '';
+
+  // Read URL params
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('cat')) activeCategory = urlParams.get('cat');
+
+  // Helpers
+  function pricingClass(tier) {
+    var map = { free: 'pricing-free', freemium: 'pricing-freemium', paid: 'pricing-paid', enterprise: 'pricing-enterprise' };
+    return map[tier] || 'pricing-paid';
+  }
+  function pricingLabel(tier) {
+    var map = { free: 'Free', freemium: 'Freemium', paid: 'Paid', enterprise: 'Enterprise' };
+    return map[tier] || 'Paid';
+  }
+  function starText(score) {
+    var full  = Math.floor(score / 2);
+    var stars = '';
+    for (var i = 0; i < 5; i++) stars += (i < full ? '\u2605' : '\u2606');
+    return stars;
+  }
+
+  // Build a single tool card using DOM methods (no innerHTML for data)
+  function buildToolCard(tool) {
+    var card = document.createElement('div');
+    card.className = 'dir-tool-card' + (tool.featured ? ' featured' : '');
+    card.dataset.cat = tool.category;
+    card.dataset.pricing = tool.pricingTier;
+
+    if (tool.featured) {
+      var badge = document.createElement('span');
+      badge.className = 'featured-badge';
+      badge.textContent = 'Featured';
+      card.appendChild(badge);
+    }
+
+    // Name + tagline
+    var nameEl = document.createElement('div');
+    nameEl.className = 'dir-tool-name';
+    nameEl.textContent = tool.name;
+    card.appendChild(nameEl);
+
+    var tagEl = document.createElement('div');
+    tagEl.className = 'dir-tool-tagline';
+    tagEl.textContent = tool.tagline;
+    card.appendChild(tagEl);
+
+    // Description
+    var descEl = document.createElement('div');
+    descEl.className = 'dir-tool-desc';
+    descEl.textContent = tool.description;
+    card.appendChild(descEl);
+
+    // Features
+    var featWrap = document.createElement('div');
+    featWrap.className = 'dir-tool-features';
+    (tool.features || []).slice(0, 4).forEach(function(f) {
+      var tag = document.createElement('span');
+      tag.className = 'feature-tag';
+      tag.textContent = f;
+      featWrap.appendChild(tag);
+    });
+    card.appendChild(featWrap);
+
+    // Footer
+    var footer = document.createElement('div');
+    footer.className = 'dir-tool-footer';
+
+    var metaWrap = document.createElement('div');
+
+    var metaRow = document.createElement('div');
+    metaRow.className = 'dir-tool-meta';
+
+    var ratingWrap = document.createElement('div');
+    ratingWrap.className = 'dir-tool-rating';
+
+    var starEl = document.createElement('span');
+    starEl.className = 'rating-star';
+    starEl.textContent = starText(tool.rating);
+    ratingWrap.appendChild(starEl);
+
+    var numEl = document.createElement('span');
+    numEl.className = 'rating-num';
+    numEl.textContent = tool.rating;
+    ratingWrap.appendChild(numEl);
+
+    metaRow.appendChild(ratingWrap);
+
+    var priceBadge = document.createElement('span');
+    priceBadge.className = 'pricing-badge ' + pricingClass(tool.pricingTier);
+    priceBadge.textContent = pricingLabel(tool.pricingTier);
+    metaRow.appendChild(priceBadge);
+
+    metaWrap.appendChild(metaRow);
+
+    var priceEl = document.createElement('div');
+    priceEl.className = 'dir-tool-price';
+    priceEl.style.marginTop = '0.25rem';
+    priceEl.textContent = tool.pricing;
+    metaWrap.appendChild(priceEl);
+
+    footer.appendChild(metaWrap);
+
+    var visitBtn = document.createElement('a');
+    visitBtn.className = 'dir-visit-btn';
+    visitBtn.textContent = 'Visit';
+    visitBtn.href = tool.url;
+    visitBtn.target = '_blank';
+    visitBtn.rel = 'noopener noreferrer';
+    footer.appendChild(visitBtn);
+
+    card.appendChild(footer);
+    return card;
+  }
+
+  // Build category nav
+  function buildCategoryNav() {
+    var el = document.getElementById('catNavGrid');
+    el.innerHTML = '';
+    CATEGORIES.forEach(function(cat) {
+      var card = document.createElement('div');
+      card.className = 'cat-nav-card' + (activeCategory === cat.id ? ' active' : '');
+      card.dataset.cat = cat.id;
+      card.addEventListener('click', function() { setCategory(cat.id); });
+
+      var iconEl = document.createElement('div');
+      iconEl.className = 'cat-nav-icon';
+      iconEl.textContent = cat.icon;
+      card.appendChild(iconEl);
+
+      var labelEl = document.createElement('div');
+      labelEl.className = 'cat-nav-label';
+      labelEl.textContent = cat.label;
+      card.appendChild(labelEl);
+
+      var countEl = document.createElement('div');
+      countEl.className = 'cat-nav-count';
+      countEl.textContent = cat.count + ' tools';
+      card.appendChild(countEl);
+
+      el.appendChild(card);
+    });
+  }
+
+  // Main render
+  function render() {
+    var q = searchQuery.toLowerCase().trim();
+    var isSearch = q.length > 0;
+    var isCatFilter = activeCategory !== 'all';
+    var showSections = !isSearch && !isCatFilter;
+
+    var filtered = AI_TOOLS.filter(function(tool) {
+      var matchCat   = activeCategory === 'all' || tool.category === activeCategory;
+      var matchPrice = activePricing  === 'all' || tool.pricingTier === activePricing;
+      var haystack   = [tool.name, tool.tagline, tool.description, tool.category].concat(tool.features || []);
+      var matchQ     = !q || haystack.some(function(s) { return s.toLowerCase().indexOf(q) !== -1; });
+      return matchCat && matchPrice && matchQ;
+    });
+
+    var sectionsEl  = document.getElementById('dirSections');
+    var emptyEl     = document.getElementById('emptyState');
+    var categoryNav = document.getElementById('categoryNav');
+    var resultsInfo = document.getElementById('resultsInfo');
+
+    categoryNav.style.display = (isSearch || isCatFilter) ? 'none' : 'block';
+
+    document.querySelectorAll('.cat-nav-card').forEach(function(el) {
+      el.classList.toggle('active', el.dataset.cat === activeCategory);
+    });
+
+    resultsInfo.textContent = (isSearch || isCatFilter)
+      ? filtered.length + ' tool' + (filtered.length !== 1 ? 's' : '') + ' found'
+      : '';
+
+    while (sectionsEl.firstChild) sectionsEl.removeChild(sectionsEl.firstChild);
+
+    if (filtered.length === 0) {
+      emptyEl.style.display = 'block';
+      return;
+    }
+    emptyEl.style.display = 'none';
+
+    if (showSections) {
+      CATEGORIES.forEach(function(cat) {
+        var tools = filtered.filter(function(t) { return t.category === cat.id; });
+        if (!tools.length) return;
+
+        var section = document.createElement('div');
+        section.className = 'dir-section';
+        section.id = 'cat-' + cat.id;
+
+        // Section header
+        var header = document.createElement('div');
+        header.className = 'dir-section-header';
+
+        var iconEl = document.createElement('span');
+        iconEl.className = 'dir-section-icon';
+        iconEl.textContent = cat.icon;
+        header.appendChild(iconEl);
+
+        var titleWrap = document.createElement('div');
+        var titleEl = document.createElement('div');
+        titleEl.className = 'dir-section-title';
+        titleEl.textContent = cat.label + ' Tools';
+        titleWrap.appendChild(titleEl);
+        var descEl = document.createElement('div');
+        descEl.className = 'dir-section-desc';
+        descEl.textContent = cat.desc;
+        titleWrap.appendChild(descEl);
+        header.appendChild(titleWrap);
+
+        var linkEl = document.createElement('a');
+        linkEl.className = 'dir-section-link';
+        linkEl.href = 'directory.html?cat=' + cat.id;
+        linkEl.textContent = 'View all ' + cat.label + ' tools';
+        header.appendChild(linkEl);
+
+        section.appendChild(header);
+
+        var grid = document.createElement('div');
+        grid.className = 'tools-dir-grid';
+        tools.forEach(function(tool) { grid.appendChild(buildToolCard(tool)); });
+        section.appendChild(grid);
+
+        sectionsEl.appendChild(section);
+      });
+    } else {
+      // Flat view
+      if (isCatFilter) {
+        var catMeta = CATEGORIES.find(function(c) { return c.id === activeCategory; });
+        if (catMeta) {
+          var header = document.createElement('div');
+          header.className = 'dir-section-header';
+          header.style.marginBottom = '1.5rem';
+
+          var iconEl = document.createElement('span');
+          iconEl.className = 'dir-section-icon';
+          iconEl.textContent = catMeta.icon;
+          header.appendChild(iconEl);
+
+          var tw = document.createElement('div');
+          var te = document.createElement('div');
+          te.className = 'dir-section-title';
+          te.textContent = 'Best ' + catMeta.label + ' AI Tools 2025';
+          tw.appendChild(te);
+          var de = document.createElement('div');
+          de.className = 'dir-section-desc';
+          de.textContent = catMeta.desc;
+          tw.appendChild(de);
+          header.appendChild(tw);
+
+          sectionsEl.appendChild(header);
+        }
+      }
+      var grid = document.createElement('div');
+      grid.className = 'tools-dir-grid';
+      filtered.forEach(function(tool) { grid.appendChild(buildToolCard(tool)); });
+      sectionsEl.appendChild(grid);
+    }
+  }
+
+  function setCategory(cat) {
+    activeCategory = cat;
+    document.querySelectorAll('.filter-btn[data-cat]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.cat === cat);
+    });
+    var params = new URLSearchParams(window.location.search);
+    if (cat === 'all') params.delete('cat'); else params.set('cat', cat);
+    history.replaceState({}, '', params.toString() ? '?' + params.toString() : window.location.pathname);
+    buildCategoryNav();
+    render();
+    if (cat !== 'all') window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Wire filter buttons
+  document.querySelectorAll('.filter-btn[data-cat]').forEach(function(btn) {
+    btn.addEventListener('click', function() { setCategory(btn.dataset.cat); });
+  });
+
+  document.getElementById('priceFilter').addEventListener('change', function(e) {
+    activePricing = e.target.value;
+    render();
+  });
+
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    searchQuery = e.target.value;
+    if (searchQuery.length > 0) {
+      activeCategory = 'all';
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
+    }
+    render();
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('submitForm').style.display = 'none';
+    document.getElementById('submitSuccess').style.display = 'block';
+  }
+
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Init
+  if (activeCategory !== 'all') {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    var initBtn = document.querySelector('.filter-btn[data-cat="' + activeCategory + '"]');
+    if (initBtn) initBtn.classList.add('active');
+  }
+  document.getElementById('priceFilter').value = activePricing;
+  buildCategoryNav();
+  render();
+</script>
+</body>
+</html>
