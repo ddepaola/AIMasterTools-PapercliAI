@@ -7,12 +7,52 @@
   <meta name="description" content="Real-time AI-powered crypto trading signals and arbitrage detection across 20+ exchanges. Join thousands of traders using machine learning to capture market inefficiencies." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://aimastertools.com/crypto-signals/" />
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AIMasterTools" />
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png" />
+  <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+  <meta name="msapplication-TileColor" content="#6c63ff" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="AI Crypto Signals — Beat the Market with AI" />
   <meta property="og:description" content="Real-time AI-powered crypto trading signals and arbitrage detection across 20+ exchanges." />
   <meta property="og:url" content="https://aimastertools.com/crypto-signals/" />
   <meta property="og:site_name" content="AIMasterTools" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "AI Crypto Signals — Beat the Market with AI-Powered Arbitrage Detection",
+    "url": "https://aimastertools.com/crypto-signals/",
+    "description": "Real-time AI-powered crypto trading signals and arbitrage detection across 20+ exchanges.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AIMasterTools",
+      "url": "https://aimastertools.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aimastertools.com/icons/icon-192x192.png"
+      }
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aimastertools.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Crypto Signals", "item": "https://aimastertools.com/crypto-signals/"}
+      ]
+    }
+  }
+  </script>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1298,7 +1338,7 @@
     });
   });
 </script>
-
+  <script src="/js/pwa.js" defer></script>
 <!-- A/B Testing + Heatmap -->
 <script src="/products/ab-testing/ab-config.js"></script>
 <script src="/products/ab-testing/ab-testing.js"></script>
@@ -1308,7 +1348,6 @@
   var TEST_ID = 'crypto-hero-headline';
   var cfg = window.AIMT_AB_TESTS && window.AIMT_AB_TESTS[TEST_ID];
   if (!cfg || !window.AIMT_AB) return;
-
   // Assign variant and apply headline
   var variant = AIMT_AB.assign(TEST_ID, cfg.variants);
   var content = cfg.variantContent[variant];
@@ -1332,10 +1371,8 @@
       });
     }
   }
-
   // Record impression
   AIMT_AB.impression(TEST_ID);
-
   // Track email signup as conversion
   var emailForm = document.getElementById('signup-form');
   if (emailForm) {
@@ -1343,14 +1380,12 @@
       AIMT_AB.conversion(TEST_ID, 'email_signup');
     });
   }
-
   // Track CTA button clicks
   document.querySelectorAll('.btn-primary, .btn-pricing-primary').forEach(function (btn) {
     btn.addEventListener('click', function () {
       AIMT_AB.conversion(TEST_ID, 'cta_click');
     });
   });
-
   // Start click heatmap
   if (window.AIMT_HEATMAP) {
     AIMT_HEATMAP.init({ page: '/crypto-signals/' });

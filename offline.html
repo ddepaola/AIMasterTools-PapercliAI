@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline — AIMasterTools</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .offline-container { max-width: 480px; }
+    .offline-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #6c63ff;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #a0a0b0;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #6c63ff;
+      color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+    .btn:hover { background: #5a52d5; }
+    .cached-links { margin-top: 2rem; }
+    .cached-links h2 { font-size: 1rem; color: #a0a0b0; margin-bottom: 0.75rem; }
+    .cached-links a {
+      display: block;
+      color: #6c63ff;
+      text-decoration: none;
+      padding: 0.4rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <span class="offline-icon">📡</span>
+    <h1>You're Offline</h1>
+    <p>No internet connection detected. Some cached pages are still available below.</p>
+    <button class="btn" onclick="window.location.reload()">Try Again</button>
+    <div class="cached-links">
+      <h2>Available Cached Pages</h2>
+      <a href="/">Home</a>
+      <a href="/reviews/claude.html">Claude Review</a>
+      <a href="/reviews/chatgpt.html">ChatGPT Review</a>
+      <a href="/ai-prompt-library.html">AI Prompt Library</a>
+      <a href="/crypto-signals/">Crypto Signals</a>
+    </div>
+  </div>
+</body>
+</html>

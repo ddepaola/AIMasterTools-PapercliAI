@@ -7,6 +7,19 @@
   <meta name="description" content="Browse 150+ hand-curated AI prompts for coding, writing, marketing, image generation, and more. Free to browse, full library unlocked with email signup." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://aimastertools.com/ai-prompt-library.html" />
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AIMasterTools" />
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png" />
+  <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+  <meta name="msapplication-TileColor" content="#6c63ff" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Free AI Prompt Library — 150+ Curated Prompts | AIMasterTools" />
   <meta property="og:description" content="Browse 150+ hand-curated AI prompts for ChatGPT, Claude, Midjourney and more. Searchable, filterable, and free." />
@@ -1352,7 +1365,7 @@ document.getElementById('totalCount').textContent = PROMPTS.length + '+';
 if (isUnlocked) document.getElementById('ctaBanner').style.display = 'none';
 render();
 </script>
-
+  <script src="/js/pwa.js" defer></script>
 <!-- A/B Testing + Heatmap -->
 <script src="/products/ab-testing/ab-config.js"></script>
 <script src="/products/ab-testing/ab-testing.js"></script>
@@ -1362,7 +1375,6 @@ render();
   var TEST_ID = 'prompts-hero-headline';
   var cfg = window.AIMT_AB_TESTS && window.AIMT_AB_TESTS[TEST_ID];
   if (!cfg || !window.AIMT_AB) return;
-
   var variant = AIMT_AB.assign(TEST_ID, cfg.variants);
   var content = cfg.variantContent[variant];
   if (variant !== cfg.variants[0] && content) {
@@ -1371,16 +1383,13 @@ render();
     if (h1 && content.headline) h1.textContent = content.headline;
     if (sub && content.sub) sub.textContent = content.sub;
   }
-
   AIMT_AB.impression(TEST_ID);
-
   // Track all signup form submissions as conversions
   document.querySelectorAll('form.signup-form').forEach(function (form) {
     form.addEventListener('submit', function () {
       AIMT_AB.conversion(TEST_ID, 'email_signup');
     });
   });
-
   if (window.AIMT_HEATMAP) {
     AIMT_HEATMAP.init({ page: '/ai-prompt-library.html' });
   }
