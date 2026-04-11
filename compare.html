@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tool Comparison 2026 — Find the Best AI Tool for You | AIMasterTools</title>
+  <meta name="description" content="Compare the best AI tools side-by-side. Filter by category, see features, pricing, and ratings — then take our quiz to get a personalized recommendation." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/compare.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Tool Comparison 2026 | AIMasterTools" />
+  <meta property="og:description" content="Compare the best AI tools side-by-side. Find your perfect AI assistant, coding tool, or image generator." />
+  <meta property="og:url" content="https://aimastertools.com/compare.html" />
+  <meta property="og:site_name" content="AIMasterTools" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "AI Tool Comparison 2026",
+    "url": "https://aimastertools.com/compare.html",
+    "description": "Interactive AI tool comparison widget.",
+    "publisher": { "@type": "Organization", "name": "AIMasterTools" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Compare page styles ── */
+    .compare-hero { padding: 4rem 0 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .compare-hero::before { content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 700px; height: 500px; background: radial-gradient(ellipse at center, rgba(37,99,235,0.12) 0%, transparent 70%); pointer-events: none; }
+
+    /* Tabs */
+    .category-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 1.75rem 0 2rem; }
+    .cat-tab { padding: 0.5rem 1.25rem; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .cat-tab:hover { border-color: var(--accent-light); color: var(--text-primary); }
+    .cat-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Tool cards */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+    .tool-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; }
+    .tool-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-accent); }
+    .tool-card.top-pick { border-color: var(--accent); }
+    .tool-card[hidden] { display: none; }
+    .top-pick-badge { position: absolute; top: -0.65rem; left: 1.25rem; background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 999px; }
+    .tool-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; }
+    .tool-icon { width: 44px; height: 44px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .tool-title-group { flex: 1; }
+    .tool-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.2rem; }
+    .tool-tagline { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+    .tool-rating { display: flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; font-weight: 700; color: #f59e0b; flex-shrink: 0; white-space: nowrap; }
+    .tool-pricing { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.15); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; font-size: 0.82rem; color: var(--accent-light); font-weight: 600; margin-bottom: 1rem; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+    .pros-cons-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .pros-label { color: var(--success); }
+    .cons-label { color: var(--danger); }
+    .pros-list, .cons-list { list-style: none; padding: 0; margin: 0; }
+    .pros-list li, .cons-list li { font-size: 0.82rem; color: var(--text-secondary); padding: 0.15rem 0 0.15rem 1.1rem; position: relative; }
+    .pros-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+    .cons-list li::before { content: '✗'; position: absolute; left: 0; color: var(--danger); font-weight: 700; }
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .feature-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.2rem 0.55rem; font-size: 0.75rem; color: var(--text-muted); }
+    .tool-cta { margin-top: auto; display: block; text-align: center; background: var(--accent); color: #fff; font-weight: 600; font-size: 0.9375rem; padding: 0.65rem 1.25rem; border-radius: var(--radius-sm); text-decoration: none; transition: background 0.2s; }
+    .tool-cta:hover { background: var(--accent-light); color: #fff; }
+    .tool-cta-note { text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* Feature matrix */
+    .matrix-section { margin-bottom: 4rem; }
+    .matrix-section h2 { margin-bottom: 1.25rem; }
+    .matrix-scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+    .matrix-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+    .matrix-table th { background: var(--bg-secondary); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.75rem 1rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .matrix-table th:first-child { text-align: left; }
+    .matrix-table td { padding: 0.65rem 1rem; border-bottom: 1px solid rgba(30,45,69,0.5); text-align: center; font-size: 0.875rem; color: var(--text-secondary); }
+    .matrix-table td:first-child { text-align: left; color: var(--text-primary); font-weight: 500; }
+    .matrix-table tr:last-child td { border-bottom: none; }
+    .matrix-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .matrix-table .matrix-row[hidden] { display: none; }
+    .check { color: var(--success); }
+    .cross { color: var(--danger); }
+    .partial { color: var(--warning); font-size: 0.78rem; }
+    .matrix-col-header[hidden] { display: none; }
+
+    /* Affiliate notice */
+    .affiliate-notice { background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.15); border-radius: var(--radius); padding: 0.85rem 1.25rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2.5rem; text-align: center; }
+    .affiliate-notice a { color: var(--accent-light); }
+    .section-label { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.5rem; }
+
+    /* Quiz */
+    .quiz-section { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 4rem; }
+    .quiz-progress { display: flex; gap: 0.4rem; margin-bottom: 2rem; }
+    .progress-dot { height: 4px; border-radius: 2px; flex: 1; background: var(--border); transition: background 0.3s; }
+    .progress-dot.done { background: var(--accent); }
+    .progress-dot.active { background: var(--accent-light); }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+    .quiz-question { font-size: 1.15rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.25rem; }
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; }
+    .quiz-option { padding: 0.85rem 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; font-family: var(--font); font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); text-align: left; display: flex; align-items: center; gap: 0.6rem; }
+    .quiz-option:hover { border-color: var(--accent-light); color: var(--text-primary); background: var(--bg-card-hover); }
+    .quiz-option.selected { border-color: var(--accent); background: rgba(37,99,235,0.12); color: #fff; }
+    .quiz-option-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; }
+    .quiz-back { background: none; border: 1px solid var(--border); color: var(--text-secondary); padding: 0.55rem 1.2rem; border-radius: var(--radius-sm); font-family: var(--font); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .quiz-back:hover { border-color: var(--accent-light); color: #fff; }
+    .quiz-next { background: var(--accent); border: none; color: #fff; padding: 0.65rem 1.5rem; border-radius: var(--radius-sm); font-family: var(--font); font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .quiz-next:hover { background: var(--accent-light); }
+    .quiz-next:disabled { opacity: 0.4; cursor: not-allowed; }
+    .quiz-result { display: none; text-align: center; }
+    .quiz-result.active { display: block; }
+    .result-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); color: var(--accent-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 999px; margin-bottom: 1rem; }
+    .result-tool-name { font-size: 2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .result-reason { color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.75rem; }
+    .result-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .result-cta { display: inline-block; background: var(--accent); color: #fff; font-weight: 600; padding: 0.75rem 1.75rem; border-radius: var(--radius-sm); text-decoration: none; transition: background 0.2s; }
+    .result-cta:hover { background: var(--accent-light); color: #fff; }
+    .result-secondary { background: none; border: 1px solid var(--border); color: var(--text-secondary); font-weight: 500; padding: 0.75rem 1.5rem; border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font); font-size: 0.9375rem; transition: all 0.2s; }
+    .result-secondary:hover { border-color: var(--accent-light); color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 768px) { .pros-cons { grid-template-columns: 1fr; } .quiz-section { padding: 1.5rem; } .quiz-options { grid-template-columns: 1fr 1fr; } .result-tool-name { font-size: 1.5rem; } }
+    @media (max-width: 500px) { .quiz-options { grid-template-columns: 1fr; } .cat-tab { font-size: 0.8rem; padding: 0.4rem 0.9rem; } }
+    @media (max-width: 900px) { .nav-links { display: none; } .nav-toggle { display: flex; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(6,9,15,0.98); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); gap: 0.25rem; z-index: 99; } }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="compare.html" class="active">Compare</a></li>
+        <li><a href="reviews/claude.html">Claude</a></li>
+        <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="reviews/cursor.html">Cursor</a></li>
+        <li><a href="reviews/perplexity.html">Perplexity</a></li>
+        <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+        <li><a href="index.html#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ── Hero ── -->
+<section class="compare-hero">
+  <div class="container">
+    <div class="hero-badge">&#9654; Interactive Comparison Tool</div>
+    <h1 class="hero-title">Find the Best <span>AI Tool</span> for You</h1>
+    <p class="hero-subtitle">Compare top AI tools side-by-side — features, pricing, pros &amp; cons. Or take our 5-question quiz for a personalized pick.</p>
+  </div>
+</section>
+
+<!-- ── Comparison Widget ── -->
+<section class="section-sm" style="padding-top:0">
+  <div class="container">
+
+    <p class="affiliate-notice">
+      Some links below are affiliate links — we earn a commission at no extra cost to you if you buy through them. <a href="affiliate-disclosure.html">Full disclosure &rarr;</a>
+    </p>
+
+    <!-- Category tabs -->
+    <div style="text-align:center;margin-bottom:0.5rem"><span class="section-label">Browse by Category</span></div>
+    <div class="category-tabs" role="tablist" id="categoryTabs">
+      <button class="cat-tab active" data-cat="writing" role="tab" aria-selected="true">&#9997;&#65039; Writing</button>
+      <button class="cat-tab" data-cat="coding" role="tab" aria-selected="false">&#128187; Coding</button>
+      <button class="cat-tab" data-cat="image" role="tab" aria-selected="false">&#127912; Image</button>
+      <button class="cat-tab" data-cat="research" role="tab" aria-selected="false">&#128270; Research</button>
+      <button class="cat-tab" data-cat="marketing" role="tab" aria-selected="false">&#128200; Marketing</button>
+      <button class="cat-tab" data-cat="all" role="tab" aria-selected="false">&#9889; All Tools</button>
+    </div>
+
+    <!-- ── Tool cards (pre-rendered, shown/hidden by JS) ── -->
+    <div class="tools-grid" id="toolsGrid">
+
+      <!-- ChatGPT | cats: writing coding marketing research general -->
+      <article class="tool-card" data-cats="writing coding marketing research general">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#1e293b">&#129302;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">ChatGPT</div>
+            <div class="tool-tagline">Most versatile AI assistant</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.6</div>
+        </div>
+        <div class="tool-pricing">Free &middot; $20/mo Plus &middot; $25/mo Team</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Huge plugin ecosystem</li>
+              <li>Image gen (DALL&middot;E 3)</li>
+              <li>Code interpreter</li>
+              <li>GPT-4o included</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Can hallucinate facts</li>
+              <li>Best features paywalled</li>
+              <li>Rate limits on free tier</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Text Generation</span>
+          <span class="feature-tag">Image Gen</span>
+          <span class="feature-tag">Code</span>
+          <span class="feature-tag">File Analysis</span>
+          <span class="feature-tag">Plugins</span>
+          <span class="feature-tag">Web Browsing</span>
+        </div>
+        <a href="https://chat.openai.com/" class="tool-cta" target="_blank" rel="noopener sponsored">Try ChatGPT &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/chatgpt.html">Read our full review</a></p>
+      </article>
+
+      <!-- Claude | cats: writing coding research general -->
+      <article class="tool-card top-pick" data-cats="writing coding research general">
+        <span class="top-pick-badge">Top Pick</span>
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#1e2940">&#129504;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">Claude</div>
+            <div class="tool-tagline">Best for long-form writing &amp; reasoning</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.7</div>
+        </div>
+        <div class="tool-pricing">Free &middot; $20/mo Pro &middot; $25/mo Team</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>200K token context</li>
+              <li>Nuanced, high-quality writing</li>
+              <li>Strong reasoning</li>
+              <li>Safe &amp; reliable</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>No image generation</li>
+              <li>Fewer integrations</li>
+              <li>Search limited to Pro</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Text Generation</span>
+          <span class="feature-tag">Code</span>
+          <span class="feature-tag">File Analysis</span>
+          <span class="feature-tag">200K Context</span>
+          <span class="feature-tag">Document Q&amp;A</span>
+        </div>
+        <a href="https://claude.ai/" class="tool-cta" target="_blank" rel="noopener sponsored">Try Claude &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/claude.html">Read our full review</a></p>
+      </article>
+
+      <!-- Cursor | cats: coding -->
+      <article class="tool-card top-pick" data-cats="coding">
+        <span class="top-pick-badge">Top Pick</span>
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#0f172a">&#9889;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">Cursor</div>
+            <div class="tool-tagline">AI-native code editor</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.8</div>
+        </div>
+        <div class="tool-pricing">Free (limited) &middot; $20/mo Pro &middot; $40/mo Business</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Native IDE experience</li>
+              <li>Whole-codebase context</li>
+              <li>Multi-file edits</li>
+              <li>Fast completions</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Code-only focus</li>
+              <li>VS Code based only</li>
+              <li>Pro required for full use</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Code Completion</span>
+          <span class="feature-tag">AI Chat</span>
+          <span class="feature-tag">Codebase Indexing</span>
+          <span class="feature-tag">Multi-file Edits</span>
+          <span class="feature-tag">Terminal AI</span>
+        </div>
+        <a href="https://cursor.com/" class="tool-cta" target="_blank" rel="noopener sponsored">Try Cursor &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/cursor.html">Read our full review</a></p>
+      </article>
+
+      <!-- GitHub Copilot | cats: coding -->
+      <article class="tool-card" data-cats="coding">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#161b22">&#128025;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">GitHub Copilot</div>
+            <div class="tool-tagline">AI pair programmer for any IDE</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.5</div>
+        </div>
+        <div class="tool-pricing">Free (limited) &middot; $10/mo Individual &middot; $19/mo Business</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Works in all major IDEs</li>
+              <li>GitHub PR integration</li>
+              <li>Code review &amp; chat</li>
+              <li>Affordable plans</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Less context than Cursor</li>
+              <li>Quality varies by language</li>
+              <li>Business features pricey</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Code Completion</span>
+          <span class="feature-tag">AI Chat</span>
+          <span class="feature-tag">PR Review</span>
+          <span class="feature-tag">Multi-IDE</span>
+          <span class="feature-tag">CLI Assistant</span>
+        </div>
+        <a href="https://github.com/features/copilot" class="tool-cta" target="_blank" rel="noopener sponsored">Try Copilot &rarr;</a>
+        <p class="tool-cta-note">&nbsp;</p>
+      </article>
+
+      <!-- Midjourney | cats: image -->
+      <article class="tool-card top-pick" data-cats="image">
+        <span class="top-pick-badge">Top Pick</span>
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#1a1033">&#127912;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">Midjourney</div>
+            <div class="tool-tagline">World-class AI image generation</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.8</div>
+        </div>
+        <div class="tool-pricing">$10/mo Basic &middot; $30/mo Standard &middot; $60/mo Pro</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Stunning output quality</li>
+              <li>Diverse artistic styles</li>
+              <li>Active community</li>
+              <li>Consistent results</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>No free tier</li>
+              <li>Discord-based interface</li>
+              <li>Limited editing control</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Image Generation</span>
+          <span class="feature-tag">Style Control</span>
+          <span class="feature-tag">Upscaling</span>
+          <span class="feature-tag">Variations</span>
+          <span class="feature-tag">Inpainting</span>
+        </div>
+        <a href="https://midjourney.com/" class="tool-cta" target="_blank" rel="noopener sponsored">Try Midjourney &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/midjourney.html">Read our full review</a></p>
+      </article>
+
+      <!-- Perplexity | cats: research general -->
+      <article class="tool-card" data-cats="research general">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#0f1f2e">&#128270;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">Perplexity</div>
+            <div class="tool-tagline">AI-powered search with citations</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.5</div>
+        </div>
+        <div class="tool-pricing">Free &middot; $20/mo Pro</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Real-time web search</li>
+              <li>Source citations</li>
+              <li>Fast answers</li>
+              <li>Document upload (Pro)</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Limited creative writing</li>
+              <li>Pro needed for best features</li>
+              <li>Less conversational depth</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Web Search</span>
+          <span class="feature-tag">Source Citations</span>
+          <span class="feature-tag">Document Analysis</span>
+          <span class="feature-tag">Spaces</span>
+          <span class="feature-tag">API Access</span>
+        </div>
+        <a href="https://perplexity.ai/" class="tool-cta" target="_blank" rel="noopener sponsored">Try Perplexity &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/perplexity.html">Read our full review</a></p>
+      </article>
+
+      <!-- Jasper | cats: marketing writing -->
+      <article class="tool-card" data-cats="marketing writing">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#1a1033">&#128226;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">Jasper</div>
+            <div class="tool-tagline">Marketing-focused AI writing</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.3</div>
+        </div>
+        <div class="tool-pricing">$49/mo Creator &middot; $69/mo Pro &middot; Enterprise</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Marketing templates</li>
+              <li>Brand voice training</li>
+              <li>SEO integration</li>
+              <li>Team workflows</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Expensive</li>
+              <li>Overkill for basic writing</li>
+              <li>AI can feel formulaic</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Marketing Templates</span>
+          <span class="feature-tag">Brand Voice</span>
+          <span class="feature-tag">SEO Tools</span>
+          <span class="feature-tag">Team Collab</span>
+          <span class="feature-tag">Plagiarism Check</span>
+        </div>
+        <a href="https://www.jasper.ai/" class="tool-cta" target="_blank" rel="noopener sponsored">Try Jasper &rarr;</a>
+        <p class="tool-cta-note">&nbsp;</p>
+      </article>
+
+      <!-- PaperclipAI | cats: coding general -->
+      <article class="tool-card" data-cats="coding general">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:#0d1f1a">&#128204;</div>
+          <div class="tool-title-group">
+            <div class="tool-name">PaperclipAI</div>
+            <div class="tool-tagline">Autonomous AI agent platform</div>
+          </div>
+          <div class="tool-rating">&#9733; 4.6</div>
+        </div>
+        <div class="tool-pricing">Free trial &middot; $29/mo Starter &middot; $99/mo Pro</div>
+        <div class="pros-cons">
+          <div>
+            <div class="pros-cons-label pros-label">Pros</div>
+            <ul class="pros-list">
+              <li>Autonomous AI agents</li>
+              <li>Multi-agent orchestration</li>
+              <li>Claude &amp; GPT integration</li>
+              <li>Local &amp; cloud agents</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pros-cons-label cons-label">Cons</div>
+            <ul class="cons-list">
+              <li>Technical setup required</li>
+              <li>Early-stage product</li>
+              <li>Best for developers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-tags">
+          <span class="feature-tag">Agent Orchestration</span>
+          <span class="feature-tag">Task Automation</span>
+          <span class="feature-tag">Claude/GPT Integration</span>
+          <span class="feature-tag">Local Agents</span>
+          <span class="feature-tag">API</span>
+        </div>
+        <a href="https://paperclip.ing/" class="tool-cta" target="_blank" rel="noopener sponsored">Try PaperclipAI &rarr;</a>
+        <p class="tool-cta-note"><a href="reviews/paperclipai.html">Read our full review</a></p>
+      </article>
+
+    </div><!-- /tools-grid -->
+
+    <!-- ── Feature Matrix ── -->
+    <div class="matrix-section" id="matrixSection">
+      <span class="section-label">Feature Matrix</span>
+      <h2>Side-by-Side Feature Comparison</h2>
+      <div class="matrix-scroll">
+        <table class="matrix-table" id="matrixTable">
+          <thead>
+            <tr>
+              <th style="text-align:left;min-width:160px">Feature</th>
+              <th class="matrix-col-header" data-tool="chatgpt">&#129302; ChatGPT</th>
+              <th class="matrix-col-header" data-tool="claude">&#129504; Claude</th>
+              <th class="matrix-col-header" data-tool="cursor">&#9889; Cursor</th>
+              <th class="matrix-col-header" data-tool="copilot">&#128025; Copilot</th>
+              <th class="matrix-col-header" data-tool="midjourney">&#127912; Midjourney</th>
+              <th class="matrix-col-header" data-tool="perplexity">&#128270; Perplexity</th>
+              <th class="matrix-col-header" data-tool="jasper">&#128226; Jasper</th>
+              <th class="matrix-col-header" data-tool="paperclipai">&#128204; PaperclipAI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="matrix-row" data-feature="textGen">
+              <td>Text Generation</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="cross">&#10007;</span></td>
+              <td data-tool="copilot"><span class="cross">&#10007;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="check">&#10003;</span></td>
+              <td data-tool="jasper"><span class="check">&#10003;</span></td>
+              <td data-tool="paperclipai"><span class="cross">&#10007;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="imageGen">
+              <td>Image Generation</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="cross">&#10007;</span></td>
+              <td data-tool="cursor"><span class="cross">&#10007;</span></td>
+              <td data-tool="copilot"><span class="cross">&#10007;</span></td>
+              <td data-tool="midjourney"><span class="check">&#10003;</span></td>
+              <td data-tool="perplexity"><span class="cross">&#10007;</span></td>
+              <td data-tool="jasper"><span class="partial">Partial</span></td>
+              <td data-tool="paperclipai"><span class="cross">&#10007;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="code">
+              <td>Code / Coding</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="check">&#10003;</span></td>
+              <td data-tool="copilot"><span class="check">&#10003;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="cross">&#10007;</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="check">&#10003;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="webSearch">
+              <td>Web Search</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="partial">Partial</span></td>
+              <td data-tool="cursor"><span class="cross">&#10007;</span></td>
+              <td data-tool="copilot"><span class="cross">&#10007;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="check">&#10003;</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="cross">&#10007;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="fileAnalysis">
+              <td>File / Doc Analysis</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="check">&#10003;</span></td>
+              <td data-tool="copilot"><span class="check">&#10003;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="partial">Partial</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="check">&#10003;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="api">
+              <td>API Access</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="cross">&#10007;</span></td>
+              <td data-tool="copilot"><span class="cross">&#10007;</span></td>
+              <td data-tool="midjourney"><span class="partial">Partial</span></td>
+              <td data-tool="perplexity"><span class="check">&#10003;</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="check">&#10003;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="free">
+              <td>Free Tier</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="check">&#10003;</span></td>
+              <td data-tool="copilot"><span class="check">&#10003;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="check">&#10003;</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="check">&#10003;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="mobile">
+              <td>Mobile App</td>
+              <td data-tool="chatgpt"><span class="check">&#10003;</span></td>
+              <td data-tool="claude"><span class="check">&#10003;</span></td>
+              <td data-tool="cursor"><span class="cross">&#10007;</span></td>
+              <td data-tool="copilot"><span class="cross">&#10007;</span></td>
+              <td data-tool="midjourney"><span class="cross">&#10007;</span></td>
+              <td data-tool="perplexity"><span class="check">&#10003;</span></td>
+              <td data-tool="jasper"><span class="cross">&#10007;</span></td>
+              <td data-tool="paperclipai"><span class="cross">&#10007;</span></td>
+            </tr>
+            <tr class="matrix-row" data-feature="rating">
+              <td style="font-weight:600">Rating</td>
+              <td data-tool="chatgpt" style="color:#f59e0b;font-weight:700">&#9733; 4.6</td>
+              <td data-tool="claude" style="color:#f59e0b;font-weight:700">&#9733; 4.7</td>
+              <td data-tool="cursor" style="color:#f59e0b;font-weight:700">&#9733; 4.8</td>
+              <td data-tool="copilot" style="color:#f59e0b;font-weight:700">&#9733; 4.5</td>
+              <td data-tool="midjourney" style="color:#f59e0b;font-weight:700">&#9733; 4.8</td>
+              <td data-tool="perplexity" style="color:#f59e0b;font-weight:700">&#9733; 4.5</td>
+              <td data-tool="jasper" style="color:#f59e0b;font-weight:700">&#9733; 4.3</td>
+              <td data-tool="paperclipai" style="color:#f59e0b;font-weight:700">&#9733; 4.6</td>
+            </tr>
+            <tr class="matrix-row" data-feature="price">
+              <td style="font-weight:600">Starting Price</td>
+              <td data-tool="chatgpt" style="font-size:0.8rem">Free</td>
+              <td data-tool="claude" style="font-size:0.8rem">Free</td>
+              <td data-tool="cursor" style="font-size:0.8rem">Free</td>
+              <td data-tool="copilot" style="font-size:0.8rem">Free</td>
+              <td data-tool="midjourney" style="font-size:0.8rem">$10/mo</td>
+              <td data-tool="perplexity" style="font-size:0.8rem">Free</td>
+              <td data-tool="jasper" style="font-size:0.8rem">$49/mo</td>
+              <td data-tool="paperclipai" style="font-size:0.8rem">Free trial</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /matrix-section -->
+
+  </div><!-- /container -->
+</section>
+
+<!-- ── Quiz ── -->
+<section class="section-sm" style="padding-top:0">
+  <div class="container">
+    <div class="quiz-section">
+      <div>
+        <span class="section-label">Personalized Recommendation</span>
+        <h2 style="margin-bottom:0.5rem">Which AI Tool Is Right for You?</h2>
+        <p style="color:var(--text-secondary);margin:0">Answer 5 quick questions and we&rsquo;ll recommend the best AI tool for your needs.</p>
+      </div>
+
+      <div class="quiz-progress" id="quizProgress" style="margin-top:1.5rem">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+      </div>
+
+      <!-- Step 1: Use case -->
+      <div class="quiz-step active" id="step1">
+        <p class="quiz-question">1 / 5 &nbsp;&middot;&nbsp; What&rsquo;s your primary use case?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-key="use" data-val="writing"><span class="quiz-option-icon">&#9997;&#65039;</span>Writing &amp; Content</button>
+          <button class="quiz-option" data-key="use" data-val="coding"><span class="quiz-option-icon">&#128187;</span>Coding &amp; Dev</button>
+          <button class="quiz-option" data-key="use" data-val="image"><span class="quiz-option-icon">&#127912;</span>Image Generation</button>
+          <button class="quiz-option" data-key="use" data-val="research"><span class="quiz-option-icon">&#128270;</span>Research &amp; Search</button>
+          <button class="quiz-option" data-key="use" data-val="marketing"><span class="quiz-option-icon">&#128200;</span>Marketing &amp; Ads</button>
+          <button class="quiz-option" data-key="use" data-val="general"><span class="quiz-option-icon">&#9889;</span>General Assistant</button>
+        </div>
+        <div class="quiz-nav">
+          <span></span>
+          <button class="quiz-next" data-target="step2" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Budget -->
+      <div class="quiz-step" id="step2">
+        <p class="quiz-question">2 / 5 &nbsp;&middot;&nbsp; What&rsquo;s your monthly budget?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-key="budget" data-val="free"><span class="quiz-option-icon">&#128178;</span>Free only</button>
+          <button class="quiz-option" data-key="budget" data-val="low"><span class="quiz-option-icon">&#128181;</span>Under $20/mo</button>
+          <button class="quiz-option" data-key="budget" data-val="mid"><span class="quiz-option-icon">&#128184;</span>Under $50/mo</button>
+          <button class="quiz-option" data-key="budget" data-val="high"><span class="quiz-option-icon">&#128183;</span>No limit</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" data-target="step1">&#8592; Back</button>
+          <button class="quiz-next" data-target="step3" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Priority -->
+      <div class="quiz-step" id="step3">
+        <p class="quiz-question">3 / 5 &nbsp;&middot;&nbsp; What matters more to you?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-key="priority" data-val="accuracy"><span class="quiz-option-icon">&#128249;</span>Accuracy &amp; facts</button>
+          <button class="quiz-option" data-key="priority" data-val="both"><span class="quiz-option-icon">&#9878;&#65039;</span>Balance of both</button>
+          <button class="quiz-option" data-key="priority" data-val="creativity"><span class="quiz-option-icon">&#10024;</span>Creativity &amp; style</button>
+          <button class="quiz-option" data-key="priority" data-val="speed"><span class="quiz-option-icon">&#9889;</span>Speed &amp; efficiency</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" data-target="step2">&#8592; Back</button>
+          <button class="quiz-next" data-target="step4" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Integration -->
+      <div class="quiz-step" id="step4">
+        <p class="quiz-question">4 / 5 &nbsp;&middot;&nbsp; Do you need it to work inside your existing tools?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-key="integration" data-val="ide"><span class="quiz-option-icon">&#128187;</span>Yes &mdash; inside my IDE</button>
+          <button class="quiz-option" data-key="integration" data-val="browser"><span class="quiz-option-icon">&#127760;</span>Yes &mdash; in my browser</button>
+          <button class="quiz-option" data-key="integration" data-val="standalone"><span class="quiz-option-icon">&#128196;</span>No &mdash; standalone is fine</button>
+          <button class="quiz-option" data-key="integration" data-val="api"><span class="quiz-option-icon">&#128268;</span>I need API access</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" data-target="step3">&#8592; Back</button>
+          <button class="quiz-next" data-target="step5" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Tech level -->
+      <div class="quiz-step" id="step5">
+        <p class="quiz-question">5 / 5 &nbsp;&middot;&nbsp; How would you describe your technical level?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-key="tech" data-val="beginner"><span class="quiz-option-icon">&#128274;</span>Beginner &mdash; keep it simple</button>
+          <button class="quiz-option" data-key="tech" data-val="intermediate"><span class="quiz-option-icon">&#127775;</span>Intermediate &mdash; I get tech</button>
+          <button class="quiz-option" data-key="tech" data-val="expert"><span class="quiz-option-icon">&#128640;</span>Expert &mdash; give me the power</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" data-target="step4">&#8592; Back</button>
+          <button class="quiz-next" data-target="result" disabled>See My Result &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="quiz-result" id="quizResult">
+        <div class="result-badge">&#127775; Our Recommendation</div>
+        <div class="result-tool-name" id="resultName"></div>
+        <p class="result-reason" id="resultReason"></p>
+        <div class="result-actions">
+          <a href="#" id="resultLink" class="result-cta" target="_blank" rel="noopener">Try It Free &rarr;</a>
+          <button class="result-secondary" id="retakeBtn">Retake Quiz</button>
+        </div>
+      </div>
+
+    </div><!-- /quiz-section -->
+  </div>
+</section>
+</main>
+
+<!-- ── Footer ── -->
+<footer style="background:var(--bg-secondary);border-top:1px solid var(--border);padding:2.5rem 0;margin-top:2rem">
+  <div class="container" style="text-align:center;color:var(--text-muted);font-size:0.875rem">
+    <p style="margin-bottom:0.5rem">
+      <a href="index.html">Home</a> &middot;
+      <a href="compare.html">Compare</a> &middot;
+      <a href="ai-prompt-library.html">Prompt Library</a> &middot;
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a> &middot;
+      <a href="privacy-policy.html">Privacy</a> &middot;
+      <a href="terms-of-service.html">Terms</a>
+    </p>
+    <p style="margin:0">&copy; 2026 AIMasterTools &middot; Independent AI Tool Reviews</p>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   CATEGORY FILTERING
+   Maps category tab -> which tool cards to show
+   ================================================================ */
+var catMap = {
+  writing:   ['chatgpt','claude','jasper'],
+  coding:    ['chatgpt','claude','cursor','copilot','paperclipai'],
+  image:     ['midjourney'],
+  research:  ['chatgpt','claude','perplexity'],
+  marketing: ['chatgpt','jasper'],
+  general:   ['chatgpt','claude','perplexity','paperclipai'],
+  all:       ['chatgpt','claude','cursor','copilot','midjourney','perplexity','jasper','paperclipai']
+};
+
+/* Map tool id -> article and matrix columns */
+var toolCards = {};
+var matrixCols = {};
+document.querySelectorAll('.tools-grid article[data-cats]').forEach(function(el) {
+  /* derive tool id from the CTA href */
+  var ctaHref = el.querySelector('.tool-cta') ? el.querySelector('.tool-cta').href : '';
+  var toolId = el.querySelector('.tool-name').textContent.trim().toLowerCase().replace(/\s+/g,'').replace(/[^a-z]/g,'');
+  /* use known mapping */
+  var nameMap = {
+    'chatgpt':'chatgpt','claude':'claude','cursor':'cursor',
+    'githubcopilot':'copilot','midjourney':'midjourney','perplexity':'perplexity',
+    'jasper':'jasper','paperclipai':'paperclipai'
+  };
+  var id = nameMap[toolId] || toolId;
+  toolCards[id] = el;
+});
+document.querySelectorAll('.matrix-col-header[data-tool]').forEach(function(th) {
+  matrixCols[th.dataset.tool] = th;
+});
+var matrixCells = {};
+document.querySelectorAll('.matrix-table td[data-tool]').forEach(function(td) {
+  var t = td.dataset.tool;
+  if (!matrixCells[t]) matrixCells[t] = [];
+  matrixCells[t].push(td);
+});
+
+function applyCategory(cat) {
+  var visible = catMap[cat] || catMap['all'];
+  /* cards */
+  Object.keys(toolCards).forEach(function(id) {
+    toolCards[id].hidden = visible.indexOf(id) === -1;
+  });
+  /* matrix columns */
+  Object.keys(matrixCols).forEach(function(id) {
+    var show = visible.indexOf(id) !== -1;
+    matrixCols[id].hidden = !show;
+    if (matrixCells[id]) {
+      matrixCells[id].forEach(function(td) { td.hidden = !show; });
+    }
+  });
+}
+
+document.getElementById('categoryTabs').addEventListener('click', function(e) {
+  var tab = e.target.closest('.cat-tab');
+  if (!tab) return;
+  document.querySelectorAll('.cat-tab').forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  tab.classList.add('active');
+  tab.setAttribute('aria-selected', 'true');
+  applyCategory(tab.dataset.cat);
+});
+
+/* initial filter */
+applyCategory('writing');
+
+/* ================================================================
+   QUIZ
+   ================================================================ */
+var quizAnswers = {};
+var stepOrder = ['step1','step2','step3','step4','step5'];
+
+/* recommendation data: purely static lookup */
+var recommendations = {
+  chatgpt:    { name: 'ChatGPT',       url: 'https://chat.openai.com/' },
+  claude:     { name: 'Claude',        url: 'https://claude.ai/' },
+  cursor:     { name: 'Cursor',        url: 'https://cursor.com/' },
+  copilot:    { name: 'GitHub Copilot', url: 'https://github.com/features/copilot' },
+  midjourney: { name: 'Midjourney',    url: 'https://midjourney.com/' },
+  perplexity: { name: 'Perplexity',   url: 'https://perplexity.ai/' },
+  jasper:     { name: 'Jasper',        url: 'https://www.jasper.ai/' },
+  paperclipai:{ name: 'PaperclipAI',  url: 'https://paperclip.ing/' }
+};
+
+var reasons = {
+  chatgpt:    'ChatGPT is the most versatile AI tool available, handling writing, coding, research, and more with a plugin ecosystem and image generation built in.',
+  claude:     'Claude delivers the most nuanced, high-quality writing of any AI assistant, with a massive 200K-token context window and reliable, thoughtful reasoning.',
+  cursor:     'Cursor is the most powerful AI code editor available, with deep codebase awareness and multi-file edits \u2014 perfect for developers who live in their IDE.',
+  copilot:    'GitHub Copilot works across all major IDEs and has a generous free tier \u2014 the easiest way to add AI assistance to your existing coding workflow.',
+  midjourney: 'Midjourney consistently produces the most stunning AI-generated images available, with unmatched stylistic variety and a passionate community.',
+  perplexity: 'Perplexity gives you real-time web search with source citations \u2014 the best tool for accurate, up-to-date research without hallucination.',
+  jasper:     'Jasper is purpose-built for marketing teams, with brand voice training, 50+ templates, and SEO tools that general AI tools simply cannot match.',
+  paperclipai:'PaperclipAI lets you run autonomous AI agents that work while you sleep \u2014 perfect for developers and teams who want to automate complex multi-step workflows.'
+};
+
+function getRecommendation(ans) {
+  var use = ans.use, budget = ans.budget, priority = ans.priority,
+      integration = ans.integration, tech = ans.tech;
+
+  if (use === 'image') return 'midjourney';
+  if (use === 'coding') {
+    if (integration === 'ide') return 'cursor';
+    if (tech === 'beginner') return 'copilot';
+    return 'cursor';
+  }
+  if (use === 'research') return 'perplexity';
+  if (use === 'marketing') {
+    return (budget === 'high' || budget === 'mid') ? 'jasper' : 'chatgpt';
+  }
+  if (use === 'writing') {
+    if (priority === 'creativity') return 'claude';
+    if (priority === 'accuracy') return 'perplexity';
+    return 'claude';
+  }
+  /* general */
+  if (budget === 'free') return 'chatgpt';
+  if (priority === 'accuracy') return 'perplexity';
+  if (priority === 'creativity') return 'claude';
+  if (integration === 'ide') return 'cursor';
+  return 'chatgpt';
+}
+
+function showStep(id) {
+  document.querySelectorAll('.quiz-step').forEach(function(s) { s.classList.remove('active'); });
+  var el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  /* update progress dots */
+  var stepIdx = stepOrder.indexOf(id);
+  document.querySelectorAll('.progress-dot').forEach(function(dot, i) {
+    dot.classList.remove('done','active');
+    if (i < stepIdx) dot.classList.add('done');
+    else if (i === stepIdx) dot.classList.add('active');
+  });
+}
+
+function showResult() {
+  var toolId = getRecommendation(quizAnswers);
+  var rec = recommendations[toolId];
+  var reason = reasons[toolId] || '';
+  document.getElementById('resultName').textContent = rec.name;
+  document.getElementById('resultReason').textContent = reason;
+  document.getElementById('resultLink').href = rec.url;
+  document.querySelectorAll('.quiz-step').forEach(function(s) { s.classList.remove('active'); });
+  var result = document.getElementById('quizResult');
+  result.classList.add('active');
+  document.getElementById('quizProgress').style.visibility = 'hidden';
+}
+
+/* Option selection */
+document.querySelectorAll('.quiz-option').forEach(function(opt) {
+  opt.addEventListener('click', function() {
+    var step = opt.closest('.quiz-step');
+    step.querySelectorAll('.quiz-option').forEach(function(o) { o.classList.remove('selected'); });
+    opt.classList.add('selected');
+    quizAnswers[opt.dataset.key] = opt.dataset.val;
+    var nextBtn = step.querySelector('.quiz-next');
+    if (nextBtn) nextBtn.disabled = false;
+  });
+});
+
+/* Next buttons */
+document.querySelectorAll('.quiz-next').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var target = btn.dataset.target;
+    if (target === 'result') { showResult(); return; }
+    showStep(target);
+  });
+});
+
+/* Back buttons */
+document.querySelectorAll('.quiz-back').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    showStep(btn.dataset.target);
+  });
+});
+
+/* Retake */
+document.getElementById('retakeBtn').addEventListener('click', function() {
+  quizAnswers = {};
+  document.querySelectorAll('.quiz-option').forEach(function(o) { o.classList.remove('selected'); });
+  document.querySelectorAll('.quiz-next').forEach(function(b) { b.disabled = true; });
+  document.getElementById('quizResult').classList.remove('active');
+  document.getElementById('quizProgress').style.visibility = 'visible';
+  showStep('step1');
+});
+
+/* ================================================================
+   NAV TOGGLE
+   ================================================================ */
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
+</body>
+</html>
