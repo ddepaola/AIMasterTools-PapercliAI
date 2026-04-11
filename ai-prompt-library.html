@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free AI Prompt Library — 150+ Curated Prompts for ChatGPT, Claude &amp; More | AIMasterTools</title>
+  <meta name="description" content="Browse 150+ hand-curated AI prompts for coding, writing, marketing, image generation, and more. Free to browse, full library unlocked with email signup." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/ai-prompt-library.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free AI Prompt Library — 150+ Curated Prompts | AIMasterTools" />
+  <meta property="og:description" content="Browse 150+ hand-curated AI prompts for ChatGPT, Claude, Midjourney and more. Searchable, filterable, and free." />
+  <meta property="og:url" content="https://aimastertools.com/ai-prompt-library.html" />
+  <meta property="og:site_name" content="AIMasterTools" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Free AI Prompt Library",
+    "description": "150+ curated AI prompts for ChatGPT, Claude, Midjourney, Cursor and more — organized by category with affiliate tool recommendations.",
+    "url": "https://aimastertools.com/ai-prompt-library.html",
+    "isPartOf": { "@type": "WebSite", "name": "AIMasterTools", "url": "https://aimastertools.com/" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Page-specific overrides ── */
+    .library-hero {
+      background: linear-gradient(135deg, #060d1f 0%, #0d1528 60%, #0a1a33 100%);
+      border-bottom: 1px solid #1e2d45;
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+    .library-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; }
+    .library-hero p  { color: #94a3b8; font-size: 1.1rem; max-width: 620px; margin: 0 auto 1.5rem; }
+    .library-stats   { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; }
+    .library-stats span { color: #94a3b8; font-size: 0.9rem; }
+    .library-stats strong { color: #3b82f6; }
+
+    /* ── Controls ── */
+    .library-controls {
+      background: #0d1528;
+      border-bottom: 1px solid #1e2d45;
+      padding: 1.25rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .controls-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.85rem; }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #111827;
+      border: 1px solid #1e2d45;
+      border-radius: 10px;
+      padding: 0 1rem;
+      gap: 0.5rem;
+    }
+    .search-bar svg { color: #64748b; flex-shrink: 0; }
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e2e8f0;
+      font-size: 1rem;
+      padding: 0.75rem 0;
+    }
+    .search-bar input::placeholder { color: #64748b; }
+    .filter-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .pill {
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid #1e2d45;
+      background: #111827;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .pill:hover  { border-color: #2563eb; color: #93c5fd; }
+    .pill.active { background: #1d3a6e; border-color: #2563eb; color: #93c5fd; font-weight: 600; }
+
+    /* ── Grid ── */
+    .library-main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .results-bar { color: #64748b; font-size: 0.9rem; margin-bottom: 1.25rem; }
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Prompt card ── */
+    .prompt-card {
+      background: #111827;
+      border: 1px solid #1e2d45;
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .prompt-card:hover { border-color: #2563eb; box-shadow: 0 4px 24px rgba(37,99,235,0.12); }
+    .prompt-card.locked { overflow: hidden; }
+
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .category-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-coding      { background: #1a3a2a; color: #4ade80; border: 1px solid #166534; }
+    .badge-writing     { background: #1e2d5a; color: #93c5fd; border: 1px solid #1e40af; }
+    .badge-marketing   { background: #3a1e3a; color: #e879f9; border: 1px solid #7e22ce; }
+    .badge-image-gen   { background: #3a2a1a; color: #fb923c; border: 1px solid #c2410c; }
+    .badge-business    { background: #3a2a1a; color: #fbbf24; border: 1px solid #b45309; }
+    .badge-productivity{ background: #1e3a3a; color: #22d3ee; border: 1px solid #0e7490; }
+    .badge-research    { background: #2a1e3a; color: #a78bfa; border: 1px solid #6d28d9; }
+    .badge-seo         { background: #1a2a1a; color: #86efac; border: 1px solid #15803d; }
+
+    .tool-tag {
+      font-size: 0.75rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .tool-tag a { color: #3b82f6; text-decoration: none; }
+    .tool-tag a:hover { text-decoration: underline; }
+
+    .prompt-title { font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.4; }
+    .prompt-desc  { font-size: 0.875rem; color: #94a3b8; line-height: 1.6; flex: 1; }
+
+    .prompt-text-preview {
+      background: #0d1528;
+      border: 1px solid #1e2d45;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.5;
+      font-family: 'Courier New', monospace;
+      max-height: 80px;
+      overflow: hidden;
+      position: relative;
+    }
+    .prompt-text-preview::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2rem;
+      background: linear-gradient(to bottom, transparent, #0d1528);
+    }
+
+    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+    .btn-copy {
+      flex: 1;
+      background: #1d3a6e;
+      border: 1px solid #2563eb;
+      color: #93c5fd;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .btn-copy:hover  { background: #2563eb; color: #fff; }
+    .btn-copy.copied { background: #166534; border-color: #16a34a; color: #4ade80; }
+
+    .btn-view {
+      background: transparent;
+      border: 1px solid #1e2d45;
+      color: #64748b;
+      font-size: 0.875rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-view:hover { border-color: #2563eb; color: #93c5fd; }
+
+    /* ── Lock overlay ── */
+    .lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(11,18,36,0.85) 40%, rgba(11,18,36,0.98) 100%);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .lock-icon { font-size: 1.5rem; }
+    .lock-text { font-size: 0.85rem; color: #94a3b8; text-align: center; }
+    .btn-unlock {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      width: 100%;
+      margin-top: 0.25rem;
+    }
+    .btn-unlock:hover { opacity: 0.9; }
+
+    /* ── No results ── */
+    .no-results { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: #64748b; }
+    .no-results h3 { color: #94a3b8; margin-bottom: 0.5rem; }
+
+    /* ── Email gate modal ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #111827;
+      border: 1px solid #1e2d45;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      animation: modalIn 0.2s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: #e2e8f0; }
+    .modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .modal h2 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .modal p  { color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .modal-perks { text-align: left; background: #0d1528; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+    .modal-perks li { color: #94a3b8; font-size: 0.875rem; padding: 0.3rem 0 0.3rem 1.5rem; position: relative; }
+    .modal-perks li::before { content: "✓"; color: #4ade80; position: absolute; left: 0; font-weight: 700; }
+    .modal-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .modal-form input[type="email"] {
+      width: 100%;
+      background: #0d1528;
+      border: 1px solid #1e2d45;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .modal-form input[type="email"]:focus { border-color: #2563eb; }
+    .modal-form button {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .modal-form button:hover { opacity: 0.9; }
+    .modal-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .modal-note { font-size: 0.8rem; color: #64748b; margin-top: 0.5rem; }
+    .modal-success { display: none; }
+    .modal-success h3 { color: #4ade80; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .modal-success p  { color: #94a3b8; }
+
+    /* ── Full prompt view modal ── */
+    .prompt-modal .modal { max-width: 640px; text-align: left; }
+    .prompt-modal .modal h2 { font-size: 1.2rem; text-align: left; }
+    .prompt-full-text {
+      background: #0d1528;
+      border: 1px solid #1e2d45;
+      border-radius: 10px;
+      padding: 1.25rem;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      max-height: 50vh;
+      overflow-y: auto;
+      margin: 1rem 0;
+    }
+    .prompt-full-text::-webkit-scrollbar { width: 6px; }
+    .prompt-full-text::-webkit-scrollbar-track { background: #0d1528; }
+    .prompt-full-text::-webkit-scrollbar-thumb { background: #1e2d45; border-radius: 3px; }
+    .prompt-modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; }
+    .prompt-modal-actions .btn-copy { flex: 0; padding: 0.65rem 1.5rem; }
+
+    /* ── CTA banner ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #0f1f44, #0d2a55);
+      border: 1px solid #1d3a6e;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 3rem 0 1rem;
+    }
+    .cta-banner h3 { font-size: 1.3rem; color: #fff; margin-bottom: 0.5rem; }
+    .cta-banner p  { color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .cta-banner-form { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-banner-form input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      background: #0d1528;
+      border: 1px solid #1e2d45;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+    }
+    .cta-banner-form input[type="email"]:focus { border-color: #2563eb; }
+    .cta-banner-form button {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .cta-banner-form button:hover { background: #1d4ed8; }
+
+    /* ── Affiliate tip ── */
+    .affiliate-tip {
+      font-size: 0.75rem;
+      color: #64748b;
+      border-top: 1px solid #1e2d45;
+      padding-top: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .affiliate-tip a { color: #3b82f6; }
+
+    @media (max-width: 640px) {
+      .library-controls { position: static; }
+      .prompt-grid { grid-template-columns: 1fr; }
+      .cta-banner-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="reviews/claude.html">Claude</a></li>
+        <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="reviews/cursor.html">Cursor</a></li>
+        <li><a href="reviews/perplexity.html">Perplexity</a></li>
+        <li><a href="ai-prompt-library.html" class="active">Prompt Library</a></li>
+        <li><a href="#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="library-hero">
+  <div class="container">
+    <div class="hero-badge">&#128218; Curated Prompt Library</div>
+    <h1>150+ Free AI Prompts That Actually Work</h1>
+    <p>Hand-curated prompts for ChatGPT, Claude, Midjourney, Cursor &amp; more — organized by category, searchable, and ready to copy.</p>
+    <div class="library-stats">
+      <span><strong id="totalCount">150+</strong> prompts</span>
+      <span><strong>8</strong> categories</span>
+      <span><strong>6</strong> AI tools covered</span>
+      <span><strong>Free</strong> — no account needed to browse</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Controls ── -->
+<div class="library-controls">
+  <div class="controls-inner">
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Search prompts…" autocomplete="off" />
+    </div>
+    <div class="filter-pills" id="filterPills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="coding">&#128187; Coding</button>
+      <button class="pill" data-cat="writing">&#9999;&#65039; Writing</button>
+      <button class="pill" data-cat="marketing">&#128200; Marketing</button>
+      <button class="pill" data-cat="image-gen">&#127912; Image Gen</button>
+      <button class="pill" data-cat="business">&#128188; Business</button>
+      <button class="pill" data-cat="productivity">&#9889; Productivity</button>
+      <button class="pill" data-cat="research">&#128270; Research</button>
+      <button class="pill" data-cat="seo">&#128269; SEO</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main Grid ── -->
+<div class="library-main">
+  <p class="results-bar" id="resultsBar"></p>
+  <div class="prompt-grid" id="promptGrid"></div>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner" id="ctaBanner">
+    <h3>&#128274; Unlock the Full Library — It's Free</h3>
+    <p>Get all 150+ prompts plus weekly AI tips, tool comparisons, and exclusive prompt packs delivered to your inbox.</p>
+    <form class="cta-banner-form signup-form" id="bannerForm">
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <button type="submit">Unlock Free Access</button>
+    </form>
+    <p class="modal-note" style="margin-top:0.75rem;">&#128274; No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- ── Email Gate Modal ── -->
+<div class="modal-backdrop" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div class="modal-icon">&#128218;</div>
+    <h2 id="modalTitle">Unlock the Full Prompt Library</h2>
+    <p>Get instant access to all 150+ prompts — completely free.</p>
+    <ul class="modal-perks">
+      <li>All 150+ prompts unlocked immediately</li>
+      <li>New prompts added weekly</li>
+      <li>Exclusive prompt packs for subscribers</li>
+      <li>AI tool tips &amp; news, no spam</li>
+    </ul>
+    <div id="modalFormWrap">
+      <form class="modal-form signup-form" id="modalSignupForm">
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Get Free Access Now</button>
+      </form>
+      <p class="modal-note">By signing up you agree to our <a href="privacy-policy.html" style="color:#3b82f6;">Privacy Policy</a>. Unsubscribe anytime.</p>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <h3>&#127881; You're in!</h3>
+      <p>Check your inbox to confirm. All prompts are now unlocked — enjoy!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── Full Prompt View Modal ── -->
+<div class="modal-backdrop prompt-modal" id="promptModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="promptModalClose" aria-label="Close">&times;</button>
+    <div class="category-badge" id="promptModalBadge" style="margin-bottom:0.75rem;"></div>
+    <h2 id="promptModalTitle"></h2>
+    <p id="promptModalDesc" style="color:#94a3b8;font-size:0.875rem;margin-top:0.35rem;"></p>
+    <pre class="prompt-full-text" id="promptModalText"></pre>
+    <p class="affiliate-tip" id="promptModalTip"></p>
+    <div class="prompt-modal-actions">
+      <button class="btn-view" id="promptModalCancel">Close</button>
+      <button class="btn-copy" id="promptModalCopy">Copy Prompt</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<section class="signup-section" id="signup" style="margin-top:4rem;">
+  <div class="container">
+    <h2>Stay Ahead of AI</h2>
+    <p>Weekly AI tool reviews, prompt packs, and revenue strategies. Zero fluff.</p>
+    <form class="signup-form" id="footerSignupForm">
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="signup-note">&#128274; We respect your privacy. No spam, ever.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+        <p>Independent, in-depth reviews of the AI tools shaping how we work, create, and build.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Reviews</h4>
+        <ul class="footer-links">
+          <li><a href="reviews/claude.html">Claude</a></li>
+          <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+          <li><a href="reviews/midjourney.html">Midjourney</a></li>
+          <li><a href="reviews/cursor.html">Cursor</a></li>
+          <li><a href="reviews/perplexity.html">Perplexity AI</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul class="footer-links">
+          <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AIMasterTools.com. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="affiliate-disclosure.html">Disclosure</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// Prompt data — 15 free + 135 locked (shown as locked until signup)
+// ══════════════════════════════════════════════════════════════════
+const PROMPTS = [
+  // ── CODING (free: 1-3) ──────────────────────────────────────────
+  {
+    id: 1, free: true, cat: 'coding',
+    title: 'Explain Code Like I\'m a Senior Dev',
+    desc: 'Get a thorough explanation of any code block with architecture notes.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Claude excels at long code explanations. <a href="reviews/claude.html">Try Claude →</a>',
+    text: `Explain the following code as if you're a senior software engineer reviewing it for a junior developer. Cover:\n1. What it does at a high level\n2. How it works step by step\n3. Any potential bugs, edge cases, or security issues\n4. How you would improve it\n\nCode:\n[PASTE YOUR CODE HERE]`
+  },
+  {
+    id: 2, free: true, cat: 'coding',
+    title: 'Write Unit Tests for Any Function',
+    desc: 'Generate comprehensive test cases including edge cases and failure scenarios.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: 'ChatGPT is great for generating test scaffolding. <a href="reviews/chatgpt.html">Try ChatGPT →</a>',
+    text: `Write a comprehensive unit test suite for the following function in [LANGUAGE]. Include:\n- Happy path tests\n- Edge cases (empty input, null, boundary values)\n- Error/exception handling tests\n- Test descriptions that serve as documentation\n\nUse [TESTING_FRAMEWORK] syntax.\n\nFunction:\n[PASTE YOUR FUNCTION HERE]`
+  },
+  {
+    id: 3, free: true, cat: 'coding',
+    title: 'Debug This Error — Root Cause Analysis',
+    desc: 'Systematic debugging that finds the root cause, not just the symptom.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Claude\'s reasoning shines for debugging. <a href="reviews/claude.html">Read our Claude review →</a>',
+    text: `I'm getting this error and I need your help debugging it systematically.\n\nError message:\n[PASTE ERROR]\n\nRelevant code:\n[PASTE CODE]\n\nWhat I've already tried:\n[LIST WHAT YOU'VE TRIED]\n\nPlease:\n1. Identify the most likely root cause\n2. Explain why this error occurs\n3. Give me the exact fix\n4. Suggest how to prevent this in future`
+  },
+  {
+    id: 4, free: false, cat: 'coding',
+    title: 'Refactor for Readability and Performance',
+    desc: 'Clean up messy code with a focus on maintainability.',
+    tool: 'Cursor', toolLink: 'reviews/cursor.html',
+    affiliateNote: 'Use Cursor for in-editor refactoring. <a href="reviews/cursor.html">Read our Cursor review →</a>',
+    text: `Refactor the following code to improve readability, maintainability, and performance. Keep all existing functionality intact.\n\nPrioritize:\n- Clear variable and function names\n- Removing duplication (DRY principle)\n- Reducing complexity (lower cyclomatic complexity)\n- Adding brief comments only where logic is non-obvious\n- Performance improvements where obvious\n\nProvide the refactored code plus a bullet list of what you changed and why.\n\nOriginal code:\n[PASTE CODE]`
+  },
+  {
+    id: 5, free: false, cat: 'coding',
+    title: 'Generate a REST API from a Description',
+    desc: 'Convert plain English requirements into a working API scaffold.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: 'ChatGPT is strong at scaffolding APIs. <a href="reviews/chatgpt.html">Try ChatGPT →</a>',
+    text: `Design and generate a REST API based on the following requirements:\n\n[DESCRIBE YOUR API REQUIREMENTS]\n\nPlease provide:\n1. Endpoint list with HTTP methods, paths, and descriptions\n2. Request/response JSON schemas for each endpoint\n3. Example curl commands\n4. Error response format\n5. A starter implementation in [LANGUAGE/FRAMEWORK]\n\nFollow REST best practices and use consistent naming conventions.`
+  },
+  {
+    id: 6, free: false, cat: 'coding',
+    title: 'Code Review Checklist Execution',
+    desc: 'Get a structured code review against industry best practices.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Claude\'s 200k context window handles large PRs. <a href="reviews/claude.html">Read review →</a>',
+    text: `Perform a thorough code review on the following code. Evaluate against these dimensions:\n\n**Correctness:** Does it do what it's supposed to? Any bugs?\n**Security:** SQL injection, XSS, auth issues, insecure defaults?\n**Performance:** Unnecessary loops, missing indexes, N+1 queries?\n**Maintainability:** Is it readable? Well-named? Appropriately commented?\n**Test coverage:** What cases are missing?\n\nFormat your response as a structured report with a severity rating (Critical / High / Medium / Low) for each issue.\n\nCode:\n[PASTE CODE]`
+  },
+  {
+    id: 7, free: false, cat: 'coding',
+    title: 'Create a SQL Query from Plain English',
+    desc: 'Describe what data you need and get the SQL query written for you.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> is excellent for SQL generation.',
+    text: `Write a SQL query based on this plain-English description:\n\n[DESCRIBE WHAT DATA YOU NEED]\n\nDatabase schema:\n[PASTE YOUR SCHEMA OR TABLE DEFINITIONS]\n\nRequirements:\n- Use [MySQL/PostgreSQL/SQLite/etc.]\n- Optimize for performance (add indexes if beneficial)\n- Handle NULLs appropriately\n- Include comments explaining complex joins or logic\n\nAlso explain the query in plain English after writing it.`
+  },
+  {
+    id: 8, free: false, cat: 'coding',
+    title: 'Build a Regex Pattern',
+    desc: 'Describe what you need to match and get a regex with test cases.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> handles regex generation reliably.',
+    text: `Write a regular expression to match the following pattern:\n\n[DESCRIBE WHAT YOU NEED TO MATCH]\n\nProvide:\n1. The regex pattern (compatible with [JavaScript/Python/PCRE/etc.])\n2. A plain-English explanation of how it works\n3. 5 test cases it should match\n4. 3 cases it should NOT match\n5. Common edge cases to watch out for\n6. A code snippet showing how to use it in [LANGUAGE]`
+  },
+
+  // ── WRITING (free: 9-11) ─────────────────────────────────────────
+  {
+    id: 9, free: true, cat: 'writing',
+    title: 'Rewrite in Any Tone or Style',
+    desc: 'Transform existing text to match a specific voice, audience, or brand.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Claude excels at nuanced tone matching. <a href="reviews/claude.html">Read review →</a>',
+    text: `Rewrite the following text in a [TONE] tone for [TARGET AUDIENCE].\n\nTarget tone: [e.g., professional, conversational, authoritative, witty, empathetic]\nTarget audience: [e.g., C-suite executives, developers, small business owners, Gen Z consumers]\nGoal: [e.g., convince, inform, entertain, inspire action]\n\nKeep the core meaning intact but adjust:\n- Vocabulary and sentence complexity\n- Formality level\n- Active vs passive voice\n- Sentence length and rhythm\n\nOriginal text:\n[PASTE YOUR TEXT]`
+  },
+  {
+    id: 10, free: true, cat: 'writing',
+    title: 'Write a Cold Email That Gets Replies',
+    desc: 'Craft a personalized cold email with a strong hook and clear CTA.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: 'Use <a href="reviews/chatgpt.html">ChatGPT</a> for rapid email iteration.',
+    text: `Write a cold email for the following situation:\n\nSender: [WHO YOU ARE / YOUR COMPANY]\nRecipient: [WHO YOU'RE EMAILING / THEIR ROLE]\nGoal: [WHAT YOU WANT — MEETING, SALE, PARTNERSHIP, ETC.]\nKey value proposition: [WHY SHOULD THEY CARE]\nPersonalization hook: [SOMETHING SPECIFIC ABOUT THEM]\n\nRequirements:\n- Subject line that achieves 35%+ open rate\n- Opening that isn't "I hope this email finds you well"\n- Body under 100 words\n- One specific, low-friction CTA\n- No corporate jargon\n- P.S. line that adds value\n\nWrite 3 variations with different opening hooks.`
+  },
+  {
+    id: 11, free: true, cat: 'writing',
+    title: 'Long-Form Blog Post Outline + Draft',
+    desc: 'Go from topic to structured 2,000-word draft in one shot.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Claude\'s long context makes it ideal for long-form writing. <a href="reviews/claude.html">Read review →</a>',
+    text: `Write a comprehensive, SEO-optimized blog post on the following topic:\n\nTopic: [YOUR TOPIC]\nTarget keyword: [PRIMARY KEYWORD]\nTarget audience: [WHO WILL READ THIS]\nContent goal: [EDUCATE / PERSUADE / ENTERTAIN / CONVERT]\n\nStructure:\n- Attention-grabbing headline (3 options)\n- Intro that hooks in the first sentence\n- 5-7 H2 sections with H3 subpoints\n- Real examples and data points\n- Actionable takeaways\n- Strong conclusion with CTA\n\nTarget length: ~2,000 words\nTone: [DESIRED TONE]\nAvoid: [ANY TOPICS/PHRASES TO EXCLUDE]`
+  },
+  {
+    id: 12, free: false, cat: 'writing',
+    title: 'LinkedIn Post That Drives Engagement',
+    desc: 'Write a viral-style LinkedIn post with the proven hook-story-insight format.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> is fast for social content iteration.',
+    text: `Write a high-engagement LinkedIn post using this framework:\n\nTopic/Insight: [WHAT YOU WANT TO SHARE]\nYour experience/angle: [YOUR UNIQUE PERSPECTIVE]\nTarget audience: [WHO FOLLOWS YOU]\n\nPost structure:\n- Hook line (1 sentence, creates curiosity or controversy)\n- Short paragraph expanding on the hook\n- Numbered list or story with 3-5 points\n- Insight/lesson learned\n- Engaging question to drive comments\n\nRules:\n- Max 1,300 characters for mobile\n- No buzzwords (synergy, leverage, etc.)\n- Line breaks after every 1-2 sentences\n- Write 2 variations — one personal story, one insight-led`
+  },
+  {
+    id: 13, free: false, cat: 'writing',
+    title: 'Write a Product Description That Sells',
+    desc: 'Convert features into benefits-focused copy that drives conversions.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles nuanced copywriting naturally.',
+    text: `Write compelling product descriptions for the following product:\n\nProduct: [PRODUCT NAME]\nKey features: [LIST FEATURES]\nTarget customer: [WHO BUYS THIS]\nMain pain point it solves: [WHAT PROBLEM DOES IT SOLVE]\nPrice point: [PRICE]\nWhere it will be used: [WEBSITE / AMAZON / CATALOG / ETC.]\n\nWrite:\n1. A short description (50 words) — punchy, benefit-led\n2. A medium description (150 words) — for product pages\n3. Bullet points (5 bullets) — scannable features-as-benefits format\n\nFocus on: how it makes the customer feel, time saved, problem solved. Avoid feature-dumping.`
+  },
+  {
+    id: 14, free: false, cat: 'writing',
+    title: 'Email Nurture Sequence (5-Part)',
+    desc: 'Build a complete welcome + nurture sequence for new email subscribers.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles multi-email sequences without losing coherence.',
+    text: `Write a 5-email nurture sequence for new subscribers to [YOUR BRAND/PRODUCT].\n\nBrand: [NAME]\nProduct/Service: [WHAT YOU SELL]\nSubscriber context: [HOW THEY SIGNED UP / WHAT THEY EXPECT]\nEnd goal: [WHAT ACTION DO YOU WANT THEM TO TAKE BY EMAIL 5]\n\nEmail structure:\n- Email 1 (Day 0): Welcome + deliver the lead magnet, set expectations\n- Email 2 (Day 2): Value-only email, build trust\n- Email 3 (Day 4): Share a story or case study\n- Email 4 (Day 6): Address the #1 objection your buyers have\n- Email 5 (Day 8): Soft pitch / CTA\n\nFor each email: subject line, preview text, body (under 250 words), CTA.`
+  },
+  {
+    id: 15, free: false, cat: 'writing',
+    title: 'Turn Notes Into a Polished Essay',
+    desc: 'Transform rough bullet points into a flowing, well-argued essay.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is exceptional at turning raw notes into structured prose.',
+    text: `Take the following rough notes and transform them into a well-structured, polished essay.\n\nNotes:\n[PASTE YOUR BULLET POINTS / ROUGH NOTES]\n\nRequirements:\n- Length: [TARGET WORD COUNT]\n- Audience: [WHO WILL READ THIS]\n- Tone: [FORMAL / CONVERSATIONAL / ACADEMIC]\n- Purpose: [INFORM / PERSUADE / EXPLORE]\n\nMaintain my ideas but improve: flow between paragraphs, argument structure, sentence variety, and clarity. Don't add ideas I didn't include in the notes.`
+  },
+
+  // ── MARKETING (free: 16-17) ──────────────────────────────────────
+  {
+    id: 16, free: true, cat: 'marketing',
+    title: 'Create a Go-To-Market Strategy',
+    desc: 'Get a structured GTM plan for a new product or feature launch.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles strategic planning with nuance.',
+    text: `Create a go-to-market strategy for the following product:\n\nProduct: [NAME + ONE-LINE DESCRIPTION]\nTarget market: [WHO IS THE CUSTOMER]\nCompetitors: [KEY COMPETITORS]\nPrice point: [PRICING]\nLaunch timeline: [WHEN YOU WANT TO LAUNCH]\nAvailable budget: [BUDGET RANGE]\nChannels you can use: [LIST CHANNELS — SOCIAL, EMAIL, ADS, SEO, ETC.]\n\nProvide:\n1. ICP (Ideal Customer Profile)\n2. Positioning statement\n3. Key messages for each audience segment\n4. Channel strategy with priority order\n5. 90-day launch roadmap with milestones\n6. KPIs to track success`
+  },
+  {
+    id: 17, free: true, cat: 'marketing',
+    title: 'Write Facebook / Instagram Ad Copy',
+    desc: 'Generate high-converting ad copy with multiple hook variations.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> is fast for ad copy iteration at scale.',
+    text: `Write Facebook/Instagram ad copy for the following:\n\nProduct/Service: [WHAT YOU'RE ADVERTISING]\nTarget audience: [DEMOGRAPHICS + INTERESTS]\nMain pain point: [WHAT PROBLEM DO THEY HAVE]\nOffer: [WHAT ARE YOU OFFERING / WHAT'S THE DEAL]\nCTA destination: [LANDING PAGE / PRODUCT PAGE / SIGNUP]\n\nWrite 3 complete ad variations with:\n- Primary text (under 125 characters for first line)\n- Headline (under 40 characters)\n- Description (under 30 characters)\n- CTA button label\n\nVariation 1: Pain-focused (agitate the problem)\nVariation 2: Benefit-focused (paint the vision)\nVariation 3: Social proof / curiosity-driven`
+  },
+  {
+    id: 18, free: false, cat: 'marketing',
+    title: 'Competitor Analysis Report',
+    desc: 'Structured framework to analyze competitors and find positioning gaps.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is strong at synthesizing competitive data.',
+    text: `Conduct a competitor analysis for [YOUR COMPANY/PRODUCT] vs. these competitors: [LIST COMPETITORS]\n\nFor each competitor, analyze:\n1. Product positioning and key messages\n2. Pricing model and tiers\n3. Target customer segments\n4. Strengths (what they do well)\n5. Weaknesses (where they fall short)\n6. Unique features we lack\n7. Features we have that they lack\n\nThen provide:\n- Positioning gap analysis: where the market is underserved\n- Our differentiation opportunity\n- Recommended positioning statement that leverages our unique advantage\n\nBe specific and strategic, not generic.`
+  },
+  {
+    id: 19, free: false, cat: 'marketing',
+    title: 'Design a Content Calendar (30 Days)',
+    desc: 'Get a full month of content ideas across platforms with themes.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> handles bulk content planning efficiently.',
+    text: `Create a 30-day content calendar for [BRAND/BUSINESS] across [PLATFORMS — e.g., LinkedIn, Instagram, Twitter/X].\n\nBusiness type: [WHAT YOU DO]\nTarget audience: [WHO YOU SERVE]\nContent pillars: [3-5 CORE THEMES — e.g., tips, behind the scenes, case studies]\nPosting frequency: [HOW OFTEN PER PLATFORM]\n\nFor each piece of content include:\n- Date and platform\n- Content pillar\n- Post concept (2-3 sentences)\n- Content format (image, video, carousel, text, etc.)\n- Engagement hook\n- Hashtag recommendations\n\nInclude a mix of educational, inspirational, promotional (80/20 rule) content.`
+  },
+  {
+    id: 20, free: false, cat: 'marketing',
+    title: 'Launch Announcement Email',
+    desc: 'Write a high-impact product launch email for your subscriber list.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> crafts persuasive launch copy naturally.',
+    text: `Write a product launch announcement email for:\n\nProduct: [NAME + BRIEF DESCRIPTION]\nLaunch date: [DATE]\nKey benefits: [TOP 3 BENEFITS]\nLaunch offer/discount (if any): [OFFER]\nCTA URL: [LINK]\nAudience: existing email subscribers who know the brand\n\nRequirements:\n- Subject line (3 options, different angles)\n- Preview text (under 85 characters)\n- Opening that creates excitement without hype\n- Core value prop in first 50 words\n- 3 benefit bullets\n- Social proof element\n- Urgency mechanism (deadline, limited availability, early bird)\n- Strong CTA\n- Postscript with secondary CTA`
+  },
+  {
+    id: 21, free: false, cat: 'marketing',
+    title: 'Build a Customer Avatar / ICP',
+    desc: 'Create a detailed buyer persona to guide all marketing decisions.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> builds nuanced personas from sparse input.',
+    text: `Create a detailed Ideal Customer Profile (ICP) for:\n\nProduct/Service: [WHAT YOU SELL]\nExisting customers you love (describe): [WHO ARE YOUR BEST CUSTOMERS]\nProblem you solve: [THE CORE PAIN]\nIndustry/Niche: [YOUR MARKET]\n\nFor the ICP include:\n1. Demographics (age, location, job title, income, education)\n2. Psychographics (values, fears, desires, worldview)\n3. Goals — professional and personal\n4. Pain points — ranked by urgency\n5. Where they spend time online\n6. Objections to buying your product\n7. Buying triggers — what makes them finally say yes\n8. How they describe their problem in their own words\n9. A day-in-the-life narrative (2 paragraphs)\n\nGive the persona a name and make them feel real.`
+  },
+
+  // ── IMAGE GENERATION (free: 22-23) ───────────────────────────────
+  {
+    id: 22, free: true, cat: 'image-gen',
+    title: 'Photorealistic Product Photography',
+    desc: 'Create studio-quality product shots without a photographer.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: 'Midjourney v6 leads in photorealism. <a href="reviews/midjourney.html">Read our Midjourney review →</a>',
+    text: `/imagine prompt: [PRODUCT NAME] product photography, studio lighting, white background, 8K resolution, shot on Canon EOS R5, 85mm lens, f/2.8, commercial product shot, ultra sharp focus, professional advertising photography, no shadows, clean reflections --ar 1:1 --style raw --v 6.1`
+  },
+  {
+    id: 23, free: true, cat: 'image-gen',
+    title: 'Cinematic Portrait Photography',
+    desc: 'Generate stunning portrait-style images with professional lighting.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> v6 is the leader in AI portraits.',
+    text: `/imagine prompt: [SUBJECT DESCRIPTION] portrait, cinematic lighting, golden hour, shallow depth of field, shot on Sony A7IV, 85mm f/1.4, film grain, rich color grading, editorial photography style, Vogue magazine aesthetic, dramatic shadows, hyper detailed skin texture --ar 2:3 --style raw --v 6.1`
+  },
+  {
+    id: 24, free: false, cat: 'image-gen',
+    title: 'Logo & Brand Mark Generation',
+    desc: 'Create minimal, modern logos and brand marks for any industry.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> is ideal for logo ideation.',
+    text: `/imagine prompt: minimalist logo for [BRAND NAME], [INDUSTRY], flat design, vector style, [PRIMARY COLOR] and [SECONDARY COLOR] palette, clean geometric shapes, white background, professional, modern, scalable, no text, icon only, Adobe Illustrator style --ar 1:1 --style raw --v 6.1 --no gradients shadows 3d`
+  },
+  {
+    id: 25, free: false, cat: 'image-gen',
+    title: 'Social Media Banner / Hero Image',
+    desc: 'Generate eye-catching banners for LinkedIn, Twitter, or website headers.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> handles wide-format banner art beautifully.',
+    text: `/imagine prompt: [THEME/CONCEPT] abstract banner design, [COLOR PALETTE], professional corporate style, geometric elements, subtle gradient, modern tech aesthetic, clean background, negative space for text overlay, web header design, 8K --ar 3:1 --style raw --v 6.1`
+  },
+  {
+    id: 26, free: false, cat: 'image-gen',
+    title: 'Illustrated Character / Mascot',
+    desc: 'Design a brand mascot or character for marketing and social media.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> v6 handles stylized character art well.',
+    text: `/imagine prompt: cute [ANIMAL/CHARACTER TYPE] mascot character for [BRAND TYPE], [PERSONALITY ADJECTIVES — e.g., friendly, energetic, trustworthy], flat illustration style, bold outlines, [BRAND COLOR] color scheme, full body, white background, vector art, emoji style, brand mascot design --ar 1:1 --v 6.1`
+  },
+  {
+    id: 27, free: false, cat: 'image-gen',
+    title: 'Interior Design Visualization',
+    desc: 'Visualize room designs and interior concepts before building.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> generates stunning interior visualizations.',
+    text: `/imagine prompt: [ROOM TYPE] interior design, [STYLE — e.g., Scandinavian minimalist, industrial modern, bohemian], [COLOR PALETTE], natural light streaming through windows, architectural photography, designed by [DESIGNER INSPIRATION], 8K ultra detailed, photorealistic rendering, Architectural Digest style --ar 16:9 --style raw --v 6.1`
+  },
+  {
+    id: 28, free: false, cat: 'image-gen',
+    title: 'Digital Art / Illustration Style',
+    desc: 'Create artwork in specific illustration styles for any use case.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> can match almost any artistic style.',
+    text: `/imagine prompt: [SCENE DESCRIPTION] illustrated in [ART STYLE — e.g., Studio Ghibli, flat vector, watercolor, comic book, retro 80s], vibrant colors, high detail, [MOOD — e.g., peaceful, dramatic, mysterious], professional illustration, concept art quality, trending on ArtStation --ar 16:9 --v 6.1`
+  },
+
+  // ── BUSINESS (free: 29) ──────────────────────────────────────────
+  {
+    id: 29, free: true, cat: 'business',
+    title: 'Write a Business Plan Executive Summary',
+    desc: 'Craft a concise, investor-ready executive summary for any business.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is ideal for structured business writing.',
+    text: `Write a concise executive summary for the following business:\n\nBusiness name: [NAME]\nIndustry: [INDUSTRY]\nProblem being solved: [PROBLEM]\nSolution: [YOUR PRODUCT/SERVICE]\nTarget market: [WHO BUYS + MARKET SIZE]\nBusiness model: [HOW YOU MAKE MONEY]\nTraction so far: [REVENUE / USERS / MILESTONES]\nFunding ask (if applicable): [AMOUNT + USE OF FUNDS]\nTeam highlights: [KEY TEAM CREDENTIALS]\n\nThe executive summary should be:\n- 400-500 words\n- Written for an investor or lender audience\n- Clear, specific, and quantified where possible\n- Structured: Problem → Solution → Market → Business Model → Traction → Team → Ask`
+  },
+  {
+    id: 30, free: false, cat: 'business',
+    title: 'SWOT Analysis for Any Business',
+    desc: 'Get a structured SWOT analysis that goes beyond the obvious.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> provides deep analytical breakdowns.',
+    text: `Conduct a thorough SWOT analysis for:\n\nBusiness: [NAME + BRIEF DESCRIPTION]\nIndustry: [INDUSTRY]\nStage: [STARTUP / GROWTH / MATURE]\nKey competitors: [NAME 2-3 COMPETITORS]\nCurrent challenges: [WHAT YOU'RE STRUGGLING WITH]\nCurrent advantages: [WHAT'S WORKING]\n\nFor each SWOT quadrant:\n- Identify 5-8 specific factors (not generic)\n- Rate each factor 1-5 for importance\n- Explain the strategic implication\n\nAfter the SWOT, provide:\n- Top 3 strategic opportunities to pursue\n- Top 3 threats that need mitigation plans\n- Recommended 90-day focus based on the analysis`
+  },
+  {
+    id: 31, free: false, cat: 'business',
+    title: 'Job Description for Any Role',
+    desc: 'Write a compelling job description that attracts top candidates.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> is efficient for HR content generation.',
+    text: `Write a compelling job description for the following role:\n\nRole title: [TITLE]\nCompany: [COMPANY NAME + ONE LINE ABOUT CULTURE]\nSeniority level: [JUNIOR / MID / SENIOR / LEAD]\nKey responsibilities: [LIST 3-5 MAIN DUTIES]\nRequired skills: [MUST-HAVES]\nNice-to-have skills: [PREFERRED BUT NOT REQUIRED]\nCompensation range: [SALARY RANGE]\nLocation: [REMOTE / HYBRID / CITY]\n\nWrite the job description to:\n- Lead with impact, not requirements\n- Describe a day in the life, not just a task list\n- Be inclusive (avoid gendered language)\n- Include why this role matters to the company mission\n- Be under 500 words total\n- End with 3-5 clear application instructions`
+  },
+  {
+    id: 32, free: false, cat: 'business',
+    title: 'Negotiation Preparation Brief',
+    desc: 'Build a complete negotiation strategy before any high-stakes conversation.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> excels at strategy and scenario planning.',
+    text: `Help me prepare for a negotiation:\n\nContext: [WHAT YOU'RE NEGOTIATING — SALARY, CONTRACT, PARTNERSHIP, ETC.]\nMy position: [WHAT I WANT]\nTheir likely position: [WHAT THEY PROBABLY WANT]\nMy BATNA (best alternative if no deal): [YOUR WALKAWAY OPTION]\nMy ideal outcome: [BEST CASE]\nMy acceptable outcome: [MINIMUM ACCEPTABLE]\nLeverage I have: [YOUR STRENGTHS IN THIS NEGOTIATION]\nWeaknesses to anticipate: [WHERE THEY MIGHT PUSH BACK]\n\nProvide:\n1. Opening offer strategy\n2. Likely counteroffers and my responses\n3. Concessions I can offer (low cost to me, high value to them)\n4. Red lines I won't cross\n5. Closing strategy\n6. Power phrases to use\n7. Phrases to avoid`
+  },
+  {
+    id: 33, free: false, cat: 'business',
+    title: 'Investor Pitch Deck Narrative',
+    desc: 'Write the narrative script for a compelling 10-slide investor pitch.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles persuasive long-form narrative well.',
+    text: `Write a complete investor pitch deck narrative (talking script) for:\n\nCompany: [NAME]\nOne-liner: [ELEVATOR PITCH]\nProblem: [THE PROBLEM YOU SOLVE]\nSolution: [YOUR PRODUCT]\nMarket size: [TAM/SAM/SOM if known]\nBusiness model: [HOW YOU MAKE MONEY]\nTraction: [KEY METRICS — REVENUE, USERS, GROWTH]\nTeam: [KEY PEOPLE AND WHY THEY'RE QUALIFIED]\nAsk: [HOW MUCH + USE OF FUNDS]\n\nWrite the narrative for these 10 slides:\n1. Title 2. Problem 3. Solution 4. Market 5. Product 6. Business Model 7. Traction 8. Team 9. Financials/Projections 10. Ask\n\nEach slide: 3-5 sentences spoken, plus 3 bullet points for the slide itself.`
+  },
+  {
+    id: 34, free: false, cat: 'business',
+    title: 'Customer Feedback Analysis',
+    desc: 'Extract patterns and insights from customer reviews or survey data.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a>\'s 200k context handles large data sets.',
+    text: `Analyze the following customer feedback and extract actionable insights:\n\n[PASTE YOUR CUSTOMER REVIEWS / SURVEY RESPONSES / SUPPORT TICKETS]\n\nPlease:\n1. Identify the top 5 themes (positive and negative)\n2. Sentiment breakdown (% positive / neutral / negative)\n3. Verbatim quotes that best represent each theme\n4. The #1 thing customers love\n5. The #1 thing that causes churn or dissatisfaction\n6. Quick wins (things that could be fixed in under 1 week)\n7. Strategic changes (longer-term improvements)\n8. Recommended language for marketing copy based on how customers describe value`
+  },
+
+  // ── PRODUCTIVITY (free: 35) ──────────────────────────────────────
+  {
+    id: 35, free: true, cat: 'productivity',
+    title: 'Weekly Planning System Prompt',
+    desc: 'Structure your week with clear priorities, time blocks, and focus areas.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Start your Mondays with <a href="reviews/claude.html">Claude</a> for deep planning.',
+    text: `Help me plan my week. I'll share my tasks, commitments, and goals — you create a structured plan.\n\nToday is [DAY, DATE].\n\nThis week's goals:\n1. [GOAL 1]\n2. [GOAL 2]\n3. [GOAL 3]\n\nFirm commitments (meetings, deadlines):\n[LIST WITH TIMES]\n\nOpen tasks (no fixed time):\n[DUMP YOUR TASK LIST]\n\nEnergy levels: I'm highest energy [MORNING/AFTERNOON/EVENING]\nMy typical work hours: [START] to [END]\n\nCreate:\n- A daily plan for Mon-Fri with time blocks\n- Identified deep work windows (2+ hours, no interruptions)\n- Tasks to defer, delegate, or delete\n- The single most important thing for each day`
+  },
+  {
+    id: 36, free: false, cat: 'productivity',
+    title: 'Summarize a Long Document',
+    desc: 'Get a structured summary of any long document in seconds.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a>\'s 200k context is best for document summarization.',
+    text: `Summarize the following document for [AUDIENCE — e.g., executive, developer, general reader].\n\n[PASTE DOCUMENT]\n\nProvide:\n1. TL;DR (3 sentences max)\n2. Key points (bullet list, max 8 bullets)\n3. Important decisions or recommendations\n4. Action items or next steps mentioned\n5. Anything that requires immediate attention\n6. Questions this document raises that aren't answered\n\nFormat for easy scanning — use headers and bullets throughout.`
+  },
+  {
+    id: 37, free: false, cat: 'productivity',
+    title: 'Build a Standard Operating Procedure',
+    desc: 'Document any process as a repeatable, delegation-ready SOP.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> excels at structured documentation.',
+    text: `Create a Standard Operating Procedure (SOP) for the following process:\n\nProcess name: [WHAT THE PROCESS IS CALLED]\nDepartment/Owner: [WHO OWNS THIS]\nFrequency: [HOW OFTEN THIS RUNS]\nInputs required: [WHAT INFORMATION/MATERIALS ARE NEEDED TO START]\nDesired output: [WHAT THE PROCESS PRODUCES]\nRough steps I currently take: [LIST YOUR STEPS INFORMALLY]\n\nFormat the SOP with:\n- Purpose statement\n- Scope (who this applies to)\n- Prerequisites\n- Step-by-step instructions (numbered, with decision points clearly marked)\n- Common mistakes and how to avoid them\n- Quality checks at each major step\n- Troubleshooting guide\n- Revision history table`
+  },
+  {
+    id: 38, free: false, cat: 'productivity',
+    title: 'Meeting Notes to Action Items',
+    desc: 'Convert messy meeting notes into clean decisions and next steps.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles unstructured meeting transcripts well.',
+    text: `Transform the following meeting notes into a clean structured summary:\n\n[PASTE YOUR MEETING NOTES OR TRANSCRIPT]\n\nMeeting context: [WHAT THE MEETING WAS ABOUT]\nAttendees: [WHO WAS PRESENT]\n\nExtract and organize:\n1. **Meeting purpose** (1 sentence)\n2. **Key decisions made** (bullet list)\n3. **Action items** (table: Task | Owner | Due Date)\n4. **Open questions** (still unresolved)\n5. **Follow-up meetings needed** (if any)\n6. **Brief summary** for sharing with absent stakeholders (100 words)`
+  },
+  {
+    id: 39, free: false, cat: 'productivity',
+    title: 'Personal OKR Planning',
+    desc: 'Set Objectives and Key Results for the quarter with Claude\'s guidance.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is a great strategic thinking partner.',
+    text: `Help me set strong OKRs for this quarter.\n\nContext about me/my role: [YOUR ROLE + RESPONSIBILITIES]\nBig-picture goal for the year: [WHERE YOU WANT TO BE IN 12 MONTHS]\nLast quarter's wins: [WHAT WENT WELL]\nLast quarter's misses: [WHAT DIDN'T HAPPEN]\nConstraints this quarter: [TIME, RESOURCES, DEPENDENCIES]\nAreas I want to improve: [SKILL, METRIC, OR OUTCOME]\n\nCreate 3 Objectives, each with 3 Key Results.\n\nEach Objective: inspiring, qualitative, achievable in 90 days.\nEach KR: specific, measurable, binary (done or not done).\n\nAlso flag: Which KR is the leading indicator I should track weekly?`
+  },
+  {
+    id: 40, free: false, cat: 'productivity',
+    title: 'Daily Briefing Prompt',
+    desc: 'Create a personal morning briefing using your task list and calendar.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: 'Run this every morning with <a href="reviews/claude.html">Claude</a>.',
+    text: `Create my morning briefing for [DATE].\n\nToday's calendar:\n[LIST MEETINGS/EVENTS WITH TIMES]\n\nTasks I need to complete today:\n[LIST TASKS]\n\nDeadlines this week:\n[UPCOMING DEADLINES]\n\nWhat was on my mind yesterday / unfinished:\n[ANYTHING ROLLING OVER FROM YESTERDAY]\n\nProvide:\n1. Today's most important outcome (1 sentence)\n2. Priority ranked task list (top 5)\n3. Time allocated to each task (estimate)\n4. Preparation needed for meetings\n5. What I should defer to later in the week\n6. One motivating thought to start the day`
+  },
+
+  // ── RESEARCH (free: 41) ──────────────────────────────────────────
+  {
+    id: 41, free: true, cat: 'research',
+    title: 'Deep Research on Any Topic',
+    desc: 'Get a comprehensive, well-structured briefing on any subject.',
+    tool: 'Perplexity', toolLink: 'reviews/perplexity.html',
+    affiliateNote: '<a href="reviews/perplexity.html">Perplexity</a> uses live web data — great for current research.',
+    text: `Research the following topic and give me a comprehensive briefing:\n\nTopic: [YOUR RESEARCH TOPIC]\nPurpose: [WHY DO YOU NEED THIS — DECISION, PRESENTATION, ARTICLE, ETC.]\nDepth needed: [OVERVIEW / DEEP DIVE / EXPERT LEVEL]\nTime sensitivity: [CURRENT EVENTS / EVERGREEN]\n\nStructure your response as:\n1. Executive summary (5 bullet points)\n2. Historical context / background\n3. Current state of [TOPIC]\n4. Key players, companies, or figures\n5. Trends and where things are heading\n6. Controversies or debates in this area\n7. Key statistics and data points\n8. Recommended reading / sources for going deeper\n\nBe specific and cite data where possible.`
+  },
+  {
+    id: 42, free: false, cat: 'research',
+    title: 'Market Research Report',
+    desc: 'Get a structured market analysis for any industry or niche.',
+    tool: 'Perplexity', toolLink: 'reviews/perplexity.html',
+    affiliateNote: '<a href="reviews/perplexity.html">Perplexity</a> can pull current market data from the web.',
+    text: `Create a market research report for:\n\nIndustry/Market: [MARKET NAME]\nGeographic focus: [COUNTRY / REGION / GLOBAL]\nPurpose: [ENTERING MARKET / COMPETITIVE ANALYSIS / INVESTMENT DECISION / ETC.]\n\nCover:\n1. Market size (TAM, SAM, SOM with estimates)\n2. Growth rate and projections\n3. Key market segments\n4. Top 5-10 players and market share\n5. Regulatory environment\n6. Customer segments and buying behavior\n7. Key trends driving the market\n8. Barriers to entry\n9. Disruption risks\n10. Conclusion: Is this an attractive market? Why/why not?\n\nInclude data points and cite sources.`
+  },
+  {
+    id: 43, free: false, cat: 'research',
+    title: 'Literature Review Summary',
+    desc: 'Synthesize multiple sources or papers into a coherent summary.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a>\'s long context handles multi-paper synthesis.',
+    text: `Synthesize the following research/articles into a coherent literature review:\n\nTopic: [RESEARCH TOPIC]\n[PASTE PAPERS / ARTICLES / EXCERPTS]\n\nProvide:\n1. Overview of the current state of knowledge on this topic\n2. Points of consensus across sources\n3. Points of disagreement or debate\n4. Key methodologies used in the research\n5. Gaps in the literature (what hasn't been studied well)\n6. The most important findings with their implications\n7. Recommended direction for further research\n\nWrite in an academic but accessible tone. Identify which source supports each claim.`
+  },
+  {
+    id: 44, free: false, cat: 'research',
+    title: 'Find Counterarguments to Any Position',
+    desc: 'Steel-man the opposition to stress-test your own arguments.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is great for playing devil\'s advocate.',
+    text: `I hold the following position and I want you to challenge it rigorously:\n\nMy position: [STATE YOUR ARGUMENT OR BELIEF]\n\nPlease:\n1. Identify the 5 strongest counterarguments to this position\n2. Present the best evidence or logic for each counterargument\n3. Identify any logical fallacies or weak points in my argument\n4. Describe who holds the opposing view and why they're credible\n5. What would it take to change the minds of thoughtful opponents?\n6. After steelmanning the opposition — do you think my position survives? What should I strengthen?\n\nBe genuinely challenging, not superficially critical.`
+  },
+
+  // ── SEO (free: 45) ───────────────────────────────────────────────
+  {
+    id: 45, free: true, cat: 'seo',
+    title: 'SEO Keyword Research Cluster',
+    desc: 'Build a keyword cluster around any topic for content strategy.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: 'Pair <a href="reviews/chatgpt.html">ChatGPT</a> with Ahrefs or Semrush for best results.',
+    text: `Create a comprehensive keyword cluster for the following topic:\n\nPrimary topic: [YOUR TOPIC]\nWebsite/niche: [YOUR WEBSITE TYPE]\nTarget audience: [WHO YOU'RE TARGETING]\nContent goal: [TRAFFIC / CONVERSIONS / BRAND AWARENESS]\n\nGenerate:\n1. Primary keyword (highest volume, most competitive)\n2. 10 secondary keywords (moderate competition, strong intent)\n3. 20 long-tail keywords (low competition, high buying intent)\n4. 5 question-based keywords (People Also Ask style)\n5. 5 comparison keywords ("[X] vs [Y]" style)\n\nFor each keyword note:\n- Search intent (informational / commercial / transactional)\n- Recommended content format (blog post, product page, comparison page, FAQ)\n- Suggested title and meta description`
+  },
+  {
+    id: 46, free: false, cat: 'seo',
+    title: 'Write SEO Title Tags and Meta Descriptions',
+    desc: 'Generate click-worthy titles and metas for any page at scale.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> handles bulk SEO metadata generation efficiently.',
+    text: `Write SEO-optimized title tags and meta descriptions for the following pages:\n\n[LIST YOUR PAGES WITH BRIEF DESCRIPTIONS]\n\nFor each page, provide:\n- Title tag (50-60 characters, primary keyword near beginning)\n- Meta description (150-160 characters, includes keyword + CTA)\n- 2 alternative title options (different angles)\n\nOptimize for:\n- Click-through rate (compelling, not just keyword-stuffed)\n- Including the target keyword naturally\n- Matching search intent\n- Being unique across pages (no duplicate metas)\n\nTarget keyword for each: [LIST KEYWORDS PER PAGE]`
+  },
+  {
+    id: 47, free: false, cat: 'seo',
+    title: 'On-Page SEO Audit',
+    desc: 'Get a structured on-page SEO review of any piece of content.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> can analyze content SEO with high accuracy.',
+    text: `Perform an on-page SEO audit on this content:\n\nTarget keyword: [PRIMARY KEYWORD]\nURL: [PAGE URL]\nContent:\n[PASTE YOUR CONTENT]\n\nEvaluate and grade (A/B/C/D/F) each element:\n1. Title tag — keyword placement, length, click appeal\n2. Meta description — keyword, CTA, character count\n3. H1 — unique, keyword-inclusive\n4. Header structure (H2/H3) — logical, keyword variations used\n5. Keyword density — natural, not stuffed\n6. Internal linking opportunities\n7. Image alt text usage\n8. Content depth — does it comprehensively cover the topic?\n9. Search intent match — does this satisfy what searchers want?\n10. E-E-A-T signals (Experience, Expertise, Authority, Trust)\n\nProvide specific fixes for each grade below B.`
+  },
+  {
+    id: 48, free: false, cat: 'seo',
+    title: 'Internal Linking Strategy',
+    desc: 'Build a silo-based internal linking structure for your website.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> maps site architecture and linking logic well.',
+    text: `Build an internal linking strategy for my website:\n\nWebsite: [URL or DESCRIPTION]\nMain topics/categories: [LIST YOUR CORE TOPICS]\nPillar pages (most important): [LIST 3-5 KEY PAGES]\nTotal pages (approx): [NUMBER]\nCurrent linking issues (if known): [ANY KNOWN PROBLEMS]\n\nProvide:\n1. Topic cluster structure (pillar pages + cluster pages)\n2. Linking hierarchy — which pages should link to which\n3. Anchor text strategy — how to vary anchor text naturally\n4. Orphan page identification process\n5. Priority order for adding internal links\n6. 10 specific linking opportunities based on my topics\n\nGoal: build topical authority and distribute link equity efficiently.`
+  },
+  {
+    id: 49, free: false, cat: 'seo',
+    title: 'FAQ Schema Markup Generator',
+    desc: 'Generate FAQ schema JSON-LD from any list of questions.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> generates clean schema markup quickly.',
+    text: `Generate FAQ schema markup (JSON-LD format) for the following questions and answers:\n\nPage URL: [YOUR PAGE URL]\n\nQuestions and answers:\nQ1: [QUESTION]\nA1: [ANSWER]\n\nQ2: [QUESTION]\nA2: [ANSWER]\n\n[ADD MORE Q&A PAIRS]\n\nRequirements:\n- Valid JSON-LD format\n- Follows Google's FAQ schema guidelines\n- Clean, minified output ready to paste into <head>\n- Also provide the human-readable FAQ HTML to add to the page content\n- Flag any answers that are too long (Google recommends under 1,500 characters)`
+  },
+  {
+    id: 50, free: false, cat: 'seo',
+    title: 'Programmatic SEO Page Template',
+    desc: 'Build a scalable page template for programmatic SEO at scale.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> helps design scalable content templates.',
+    text: `Design a programmatic SEO page template for:\n\nPage type: [e.g., "[CITY] + [SERVICE]", "[TOOL] vs [TOOL]", "Best [CATEGORY] in [LOCATION]"]\nNiche: [YOUR NICHE]\nTarget keyword pattern: [KEYWORD STRUCTURE]\nData I have available: [WHAT DATA/VARIABLES YOU CAN PULL IN]\n\nCreate:\n1. URL structure recommendation\n2. Page title template (with variables)\n3. Meta description template\n4. H1 template\n5. Full page content outline (all sections, with variable placeholders)\n6. Unique content elements that avoid thin content\n7. Internal linking strategy for these pages\n8. Dynamic FAQ section template\n9. How to make each page feel unique despite the template\n\nGoal: rank for hundreds of long-tail keywords with minimal manual effort.`
+  },
+
+  // ── More CODING ──────────────────────────────────────────────────
+  {
+    id: 51, free: false, cat: 'coding',
+    title: 'Design a Database Schema',
+    desc: 'Get a normalized database schema from plain English requirements.',
+    tool: 'ChatGPT', toolLink: 'reviews/chatgpt.html',
+    affiliateNote: '<a href="reviews/chatgpt.html">ChatGPT</a> generates solid schema designs quickly.',
+    text: `Design a normalized database schema for the following application:\n\nApplication: [WHAT THE APP DOES]\nCore entities: [LIST YOUR MAIN DATA OBJECTS]\nKey relationships: [HOW THEY RELATE TO EACH OTHER]\nExpected scale: [USERS / RECORDS]\nDatabase: [MySQL / PostgreSQL / SQLite / etc.]\n\nProvide:\n1. Entity-Relationship description\n2. Full schema with CREATE TABLE statements\n3. Index recommendations\n4. Foreign key constraints\n5. Normalization decisions explained (1NF/2NF/3NF)\n6. Any denormalization you'd recommend for performance\n7. Sample seed data (5 rows per table)`
+  },
+  {
+    id: 52, free: false, cat: 'coding',
+    title: 'Create a GitHub Actions CI/CD Pipeline',
+    desc: 'Generate a complete CI/CD workflow YAML for any tech stack.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles complex DevOps YAML generation well.',
+    text: `Create a GitHub Actions CI/CD pipeline for:\n\nProject type: [WEB APP / API / LIBRARY / etc.]\nTech stack: [LANGUAGES + FRAMEWORKS]\nTest framework: [WHAT TESTS YOU RUN]\nDeployment target: [AWS / GCP / Azure / Vercel / Heroku / etc.]\nEnvironments: [dev / staging / production]\nSecrets needed: [LIST ANY ENV VARS / SECRETS]\n\nInclude:\n1. Trigger conditions (push, PR, manual)\n2. Test job (install, lint, test, coverage)\n3. Build job (with caching for speed)\n4. Deployment job (environment-specific)\n5. Notification on failure\n6. Security scanning step (optional)\n7. Clear comments explaining each step\n\nOutput ready-to-use YAML.`
+  },
+  {
+    id: 53, free: false, cat: 'coding',
+    title: 'Write API Documentation',
+    desc: 'Generate clear, developer-friendly API docs from an endpoint list.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> writes clear technical documentation.',
+    text: `Write developer documentation for the following API endpoints:\n\n[PASTE YOUR ENDPOINT DEFINITIONS OR DESCRIBE THEM]\n\nFor each endpoint document:\n- Method and path\n- Description (what it does, when to use it)\n- Authentication required\n- Path parameters\n- Query parameters\n- Request body (with JSON schema)\n- Response format (success and error examples)\n- HTTP status codes returned\n- Rate limiting (if applicable)\n- Code examples in: [LANGUAGES — e.g., JavaScript, Python, curl]\n\nFollow the style of Stripe or Twilio documentation.`
+  },
+
+  // ── More MARKETING ───────────────────────────────────────────────
+  {
+    id: 54, free: false, cat: 'marketing',
+    title: 'Write a Sales Page / Landing Page',
+    desc: 'Build a high-converting long-form sales page for any offer.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> handles long-form conversion copy well.',
+    text: `Write a long-form sales page for:\n\nProduct/Service: [NAME + DESCRIPTION]\nPrice: [PRICE]\nTarget customer: [WHO BUYS THIS]\nMain pain point: [PROBLEM THEY HAVE]\nMain benefit: [TRANSFORMATION PROMISED]\nSocial proof available: [TESTIMONIALS / CASE STUDIES / STATS]\nGuarantee offered: [REFUND POLICY / GUARANTEE]\nCTA: [WHAT ACTION TO TAKE]\n\nStructure:\n1. Headline + subheadline (3 options)\n2. Empathy opener (you understand their pain)\n3. Agitate the problem\n4. Introduce the solution\n5. How it works (3 steps)\n6. Benefits section (not features)\n7. Social proof block\n8. Who this is for / not for\n9. FAQ (5 objections answered)\n10. Guarantee\n11. Final CTA\n\nWrite persuasively but honestly. No hype.`
+  },
+  {
+    id: 55, free: false, cat: 'marketing',
+    title: 'YouTube Video Script',
+    desc: 'Write a high-retention script optimized for watch time and CTR.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> writes natural, engaging video scripts.',
+    text: `Write a YouTube script for:\n\nTopic: [VIDEO TOPIC]\nTarget audience: [WHO WATCHES THIS]\nVideo length target: [e.g., 8-12 minutes]\nChannel style: [e.g., educational, entertainment, talking head, tutorial]\nMain takeaway: [WHAT VIEWERS SHOULD LEARN OR FEEL]\nCTA at end: [SUBSCRIBE / LINK IN DESC / BUY / etc.]\n\nScript sections:\n1. Hook (first 30 seconds — no intro, straight to the hook)\n2. Credibility establishment (15 seconds)\n3. Main content (broken into 3-5 segments with transitions)\n4. Pattern interrupts every 2-3 minutes\n5. CTA\n6. Outro\n\nAlso provide:\n- 5 thumbnail text options\n- 3 title variations (optimized for CTR)\n- Suggested B-roll notes`
+  },
+
+  // ── More BUSINESS ────────────────────────────────────────────────
+  {
+    id: 56, free: false, cat: 'business',
+    title: 'Write a Client Proposal',
+    desc: 'Create a professional proposal that wins clients.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> excels at professional business writing.',
+    text: `Write a client proposal for:\n\nYour company: [NAME + WHAT YOU DO]\nClient: [CLIENT NAME + INDUSTRY]\nProject scope: [WHAT THEY WANT DONE]\nTimeline: [PROJECT DURATION]\nBudget: [PROPOSED PRICE]\nKey deliverables: [LIST SPECIFIC OUTPUTS]\nYour unique approach: [HOW YOU'RE DIFFERENT]\n\nProposal sections:\n1. Executive Summary (why you, why now)\n2. Understanding of the problem\n3. Proposed solution and approach\n4. Scope of work (detailed deliverables)\n5. Timeline with milestones\n6. Investment (pricing table)\n7. Why us (team, experience, results)\n8. Next steps\n9. Terms overview\n\nTone: professional, confident, client-focused.`
+  },
+  {
+    id: 57, free: false, cat: 'business',
+    title: 'Risk Analysis for Any Decision',
+    desc: 'Identify and mitigate risks before making a major business decision.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is a sharp analytical thinking partner.',
+    text: `Help me analyze the risks of the following decision:\n\nDecision: [WHAT YOU'RE CONSIDERING DOING]\nContext: [YOUR CURRENT SITUATION]\nTimeline: [WHEN YOU NEED TO DECIDE]\nStakeholders affected: [WHO IS IMPACTED]\nResources required: [COST, TIME, PEOPLE]\nBest case scenario: [IF IT GOES PERFECTLY]\nExpected case: [REALISTIC OUTCOME]\nWorst case: [IF IT GOES BADLY]\n\nAnalyze:\n1. Top 10 risks (categorize as Technical / Financial / Operational / Reputational / Legal)\n2. Probability (High/Medium/Low) × Impact (High/Medium/Low) matrix\n3. Mitigation strategy for each High×High risk\n4. Go/No-Go recommendation with reasoning\n5. What would need to be true for this to be a clear yes?`
+  },
+
+  // ── More PRODUCTIVITY ────────────────────────────────────────────
+  {
+    id: 58, free: false, cat: 'productivity',
+    title: 'Create a 90-Day Plan',
+    desc: 'Build a structured 90-day plan for any goal with weekly milestones.',
+    tool: 'Claude', toolLink: 'reviews/claude.html',
+    affiliateNote: '<a href="reviews/claude.html">Claude</a> is excellent for goal planning.',
+    text: `Create a detailed 90-day plan to achieve:\n\nGoal: [WHAT YOU WANT TO ACHIEVE IN 90 DAYS]\nStarting point: [WHERE YOU ARE NOW]\nResources available: [TIME PER WEEK, BUDGET, TOOLS, PEOPLE]\nConstraints: [WHAT LIMITS YOU]\nDefinition of success: [HOW YOU'LL KNOW YOU'VE MADE IT]\n\nProvide:\n1. 3 phases (Month 1: Foundation, Month 2: Momentum, Month 3: Execution)\n2. Weekly themes and key activities\n3. Leading indicators to track weekly\n4. Lagging indicators to measure monthly\n5. Checkpoints and decision criteria (what to adjust at 30/60 days)\n6. Top 3 risks and contingency plans\n7. Daily habit or task that drives the most progress`
+  },
+
+  // ── More RESEARCH ────────────────────────────────────────────────
+  {
+    id: 59, free: false, cat: 'research',
+    title: 'Analyze a Company or Startup',
+    desc: 'Get a comprehensive profile of any company for investment or competitive analysis.',
+    tool: 'Perplexity', toolLink: 'reviews/perplexity.html',
+    affiliateNote: '<a href="reviews/perplexity.html">Perplexity</a> pulls live company data from the web.',
+    text: `Research and analyze the following company:\n\nCompany: [COMPANY NAME]\nPurpose: [WHY YOU'RE RESEARCHING — INVESTMENT, PARTNERSHIP, COMPETITIVE INTEL, JOB INTERVIEW]\n\nCover:\n1. Business model and revenue streams\n2. Founding story and key milestones\n3. Products/services and how they work\n4. Target market and customer segments\n5. Competitive positioning\n6. Financial performance (funding, revenue if public)\n7. Key leadership and their backgrounds\n8. Recent news and strategic moves\n9. Strengths and weaknesses\n10. My overall assessment: [INVESTMENT / PARTNERSHIP / COMPETITIVE THREAT]`
+  },
+
+  // ── More IMAGE GEN ───────────────────────────────────────────────
+  {
+    id: 60, free: false, cat: 'image-gen',
+    title: 'Consistent Brand Photography Style',
+    desc: 'Create a prompt system for consistent imagery across your brand.',
+    tool: 'Midjourney', toolLink: 'reviews/midjourney.html',
+    affiliateNote: '<a href="reviews/midjourney.html">Midjourney</a> is the top tool for brand visual consistency.',
+    text: `/imagine prompt: [SCENE/SUBJECT] for [BRAND NAME], [BRAND ADJECTIVES — e.g., premium, warm, minimal], [COLOR PALETTE — list 2-3 colors], natural light, [CAMERA STYLE], lifestyle photography, [MOOD — e.g., calm, energetic, aspirational], editorial quality, consistent brand aesthetic, [SPECIFIC VISUAL REFERENCE IF ANY] --style raw --v 6.1 --ar [RATIO]\n\n---\nTip: Save this as your brand "style seed." Use the same color palette, mood words, and camera style across all images. Add --sref [IMAGE URL] to reference an existing brand image for visual consistency.`
+  }
+];
+
+// ══════════════════════════════════════════════════════════════════
+// App state
+// ══════════════════════════════════════════════════════════════════
+const LISTMONK_URL    = 'https://listmonk.aimastertools.com/api/public/subscription';
+const LISTMONK_LIST   = '2a453160-af75-4758-a2d8-d834dd409986';
+const UNLOCK_KEY      = 'promptLibraryUnlocked';
+
+let currentCat  = 'all';
+let searchQuery = '';
+let isUnlocked  = localStorage.getItem(UNLOCK_KEY) === 'true';
+
+// ══════════════════════════════════════════════════════════════════
+// Render
+// ══════════════════════════════════════════════════════════════════
+function categoryLabel(cat) {
+  const map = { coding:'Coding', writing:'Writing', marketing:'Marketing', 'image-gen':'Image Gen', business:'Business', productivity:'Productivity', research:'Research', seo:'SEO' };
+  return map[cat] || cat;
+}
+
+function badgeClass(cat) {
+  return 'category-badge badge-' + cat;
+}
+
+function toolLink(p) {
+  return `<a href="${p.toolLink}">${p.tool}</a>`;
+}
+
+function filterPrompts() {
+  return PROMPTS.filter(p => {
+    const catOk = currentCat === 'all' || p.cat === currentCat;
+    if (!catOk) return false;
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.text.toLowerCase().includes(q) || categoryLabel(p.cat).toLowerCase().includes(q);
+  });
+}
+
+function render() {
+  const visible = filterPrompts();
+  const grid = document.getElementById('promptGrid');
+  const bar  = document.getElementById('resultsBar');
+  const total = PROMPTS.length;
+
+  bar.textContent = visible.length === total
+    ? `Showing all ${total} prompts`
+    : `Showing ${visible.length} of ${total} prompts`;
+
+  if (visible.length === 0) {
+    grid.innerHTML = '<div class="no-results"><h3>No prompts found</h3><p>Try a different search term or category.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = visible.map(p => renderCard(p)).join('');
+
+  // Attach events
+  grid.querySelectorAll('.btn-copy[data-id]').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); handleCopy(btn, Number(btn.dataset.id)); });
+  });
+  grid.querySelectorAll('.btn-view[data-id]').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); openPromptModal(Number(btn.dataset.id)); });
+  });
+  grid.querySelectorAll('.lock-overlay').forEach(el => {
+    el.addEventListener('click', () => openEmailModal());
+  });
+  grid.querySelectorAll('.btn-unlock').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); openEmailModal(); });
+  });
+}
+
+function renderCard(p) {
+  const locked = !isUnlocked && !p.free;
+  const badge  = `<span class="${badgeClass(p.cat)}">${categoryLabel(p.cat)}</span>`;
+  const preview = p.text.slice(0, 150) + (p.text.length > 150 ? '…' : '');
+
+  const lockHtml = locked ? `
+    <div class="lock-overlay">
+      <div class="lock-icon">🔒</div>
+      <p class="lock-text">Free signup required to access this prompt</p>
+      <button class="btn-unlock">Unlock Free Access</button>
+    </div>` : '';
+
+  const actionsHtml = !locked ? `
+    <div class="card-actions">
+      <button class="btn-copy" data-id="${p.id}">Copy Prompt</button>
+      <button class="btn-view" data-id="${p.id}">View Full</button>
+    </div>` : '';
+
+  return `
+    <article class="prompt-card ${locked ? 'locked' : ''}" id="card-${p.id}">
+      <div class="card-top">
+        ${badge}
+        <span class="tool-tag">Best for: ${toolLink(p)}</span>
+      </div>
+      <h3 class="prompt-title">${escHtml(p.title)}</h3>
+      <p class="prompt-desc">${escHtml(p.desc)}</p>
+      <div class="prompt-text-preview">${escHtml(preview)}</div>
+      ${actionsHtml}
+      ${lockHtml}
+    </article>`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Copy
+// ══════════════════════════════════════════════════════════════════
+async function handleCopy(btn, id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+  try {
+    await navigator.clipboard.writeText(p.text);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
+  } catch {
+    prompt('Copy this prompt:', p.text);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Full prompt modal
+// ══════════════════════════════════════════════════════════════════
+function openPromptModal(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('promptModalBadge').className = badgeClass(p.cat);
+  document.getElementById('promptModalBadge').textContent = categoryLabel(p.cat);
+  document.getElementById('promptModalTitle').textContent = p.title;
+  document.getElementById('promptModalDesc').textContent  = p.desc;
+  document.getElementById('promptModalText').textContent  = p.text;
+  document.getElementById('promptModalTip').innerHTML     = p.affiliateNote ? 'Recommended tool: ' + p.affiliateNote : '';
+  const modal = document.getElementById('promptModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const copyBtn = document.getElementById('promptModalCopy');
+  copyBtn.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(p.text);
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = 'Copy Prompt'; copyBtn.classList.remove('copied'); }, 2000);
+    } catch { prompt('Copy:', p.text); }
+  };
+}
+
+document.getElementById('promptModalClose').addEventListener('click', closePromptModal);
+document.getElementById('promptModalCancel').addEventListener('click', closePromptModal);
+document.getElementById('promptModal').addEventListener('click', e => { if (e.target === document.getElementById('promptModal')) closePromptModal(); });
+function closePromptModal() {
+  document.getElementById('promptModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Email gate modal
+// ══════════════════════════════════════════════════════════════════
+function openEmailModal() {
+  document.getElementById('emailModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeEmailModal() {
+  document.getElementById('emailModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalClose').addEventListener('click', closeEmailModal);
+document.getElementById('emailModal').addEventListener('click', e => { if (e.target === document.getElementById('emailModal')) closeEmailModal(); });
+
+// ══════════════════════════════════════════════════════════════════
+// Listmonk signup helper
+// ══════════════════════════════════════════════════════════════════
+async function subscribeEmail(email) {
+  const res = await fetch(LISTMONK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, name: '', list_uuids: [LISTMONK_LIST] })
+  });
+  if (!res.ok) throw new Error('Subscription failed');
+}
+
+function unlockLibrary() {
+  isUnlocked = true;
+  localStorage.setItem(UNLOCK_KEY, 'true');
+  render();
+  document.getElementById('ctaBanner').style.display = 'none';
+}
+
+// Modal form
+document.getElementById('modalSignupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const input = this.querySelector('input[type="email"]');
+  const btn   = this.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Subscribing…';
+  try {
+    await subscribeEmail(input.value.trim());
+    unlockLibrary();
+    document.getElementById('modalFormWrap').style.display = 'none';
+    document.getElementById('modalSuccess').style.display  = 'block';
+    setTimeout(closeEmailModal, 3000);
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Get Free Access Now';
+    let err = this.querySelector('.signup-error');
+    if (!err) { err = document.createElement('p'); err.className = 'signup-error'; err.style.cssText = 'color:#ef4444;margin-top:0.5rem;font-size:0.85rem;'; this.appendChild(err); }
+    err.textContent = 'Something went wrong. Please try again.';
+  }
+});
+
+// Banner form
+document.getElementById('bannerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const input = this.querySelector('input[type="email"]');
+  const btn   = this.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Unlocking…';
+  try {
+    await subscribeEmail(input.value.trim());
+    unlockLibrary();
+    this.innerHTML = '<p style="color:#4ade80;font-weight:600;text-align:center;">✓ Library unlocked! Enjoy all 150+ prompts.</p>';
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Unlock Free Access';
+  }
+});
+
+// Footer signup forms
+document.querySelectorAll('#footerSignupForm').forEach(function(form) {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const input = this.querySelector('input[type="email"]');
+    const btn   = this.querySelector('button');
+    btn.disabled = true;
+    try {
+      await subscribeEmail(input.value.trim());
+      this.innerHTML = '<p style="color:#58a6ff;font-weight:600;">You\'re subscribed! Check your inbox.</p>';
+    } catch {
+      btn.disabled = false;
+      this.insertAdjacentHTML('afterend', '<p style="color:#ef4444;font-size:0.875rem;margin-top:0.5rem;">Something went wrong. Please try again.</p>');
+    }
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════
+// Filters & search
+// ══════════════════════════════════════════════════════════════════
+document.getElementById('filterPills').addEventListener('click', function(e) {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  currentCat = pill.dataset.cat;
+  this.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  render();
+});
+
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', function() {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchQuery = this.value.trim();
+    render();
+  }, 150);
+});
+
+// ══════════════════════════════════════════════════════════════════
+// Mobile nav
+// ══════════════════════════════════════════════════════════════════
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ══════════════════════════════════════════════════════════════════
+// Keyboard close
+// ══════════════════════════════════════════════════════════════════
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeEmailModal(); closePromptModal(); }
+});
+
+// ══════════════════════════════════════════════════════════════════
+// Init
+// ══════════════════════════════════════════════════════════════════
+document.getElementById('totalCount').textContent = PROMPTS.length + '+';
+if (isUnlocked) document.getElementById('ctaBanner').style.display = 'none';
+render();
+</script>
+</body>
+</html>
