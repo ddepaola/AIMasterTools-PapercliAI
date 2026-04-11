@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  AIMasterTools — Shareable Social Card
+  Renders at 1200×630px for OG / Twitter card screenshots.
+  Use a headless browser (Puppeteer, Playwright) to screenshot this file
+  and save as og-referral.png.
+
+  CLI example:
+    npx playwright screenshot campaigns/referral-program/social-card.html \
+      --viewport 1200x630 --output campaigns/referral-program/og-referral.png
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <title>AIMasterTools — Social Card</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #06090f;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Glow blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+    }
+    .blob-1 { width: 500px; height: 400px; background: #2563eb; top: -120px; left: -80px; }
+    .blob-2 { width: 400px; height: 350px; background: #7c3aed; bottom: -100px; right: -60px; }
+
+    /* Card */
+    .card {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.4);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #3b82f6;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: #3b82f6;
+    }
+
+    .sub {
+      font-size: 1.4rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    /* Credit pills */
+    .pills {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .pill {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.35);
+      border-radius: 12px;
+      padding: 0.75rem 1.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #10b981;
+    }
+    .pill span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.1rem;
+    }
+
+    /* Domain badge */
+    .domain {
+      font-size: 1rem;
+      color: #475569;
+      letter-spacing: 0.06em;
+    }
+
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #e2e8f0;
+      z-index: 2;
+    }
+    .logo span { color: #3b82f6; }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="logo">AI<span>Master</span>Tools</div>
+
+  <div class="card">
+    <div class="badge">Referral Program</div>
+    <h1>I just discovered<br>the <em>best AI tools</em> site</h1>
+    <p class="sub">Independent reviews · Crypto signals · AI prompt library<br>Sign up through my link — we both get $5 credit</p>
+    <div class="pills">
+      <div class="pill"><span>$5</span>You earn</div>
+      <div class="pill"><span>$5</span>Friend earns</div>
+      <div class="pill"><span>∞</span>No cap</div>
+    </div>
+    <p class="domain">aimastertools.com</p>
+  </div>
+</body>
+</html>
