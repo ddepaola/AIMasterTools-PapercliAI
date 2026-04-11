@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free AI Email Subject Line Tester — Score &amp; Optimize | AIMasterTools</title>
+  <meta name="description" content="Test your email subject lines for free. Get an AI-powered score (1-100) with analysis of emotional impact, spam risk, length, and click-worthiness. Plus improvement suggestions." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/tools/subject-line-tester/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free AI Email Subject Line Tester — Score Your Subject Lines" />
+  <meta property="og:description" content="Get an instant AI score for your email subject line. Analyze emotional impact, spam risk, length, and click-worthiness." />
+  <meta property="og:url" content="https://aimastertools.com/tools/subject-line-tester/" />
+  <meta property="og:site_name" content="AIMasterTools" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Email Subject Line Tester",
+    "url": "https://aimastertools.com/tools/subject-line-tester/",
+    "description": "Free AI-powered email subject line scorer.",
+    "applicationCategory": "BusinessApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    .tool-hero { padding: 4rem 1rem 2rem; text-align: center; background: linear-gradient(180deg,#0a1020 0%,var(--bg-primary) 100%); }
+    .tool-badge { display:inline-block; background:rgba(37,99,235,.15); color:var(--accent-light); border:1px solid rgba(37,99,235,.3); border-radius:999px; padding:.3rem 1rem; font-size:.85rem; font-weight:600; margin-bottom:1rem; letter-spacing:.04em; }
+    .tool-hero h1 { margin-bottom:1rem; }
+    .tool-hero > .container > p { max-width:600px; margin:0 auto 2rem; font-size:1.1rem; }
+    .usage-bar { display:flex; align-items:center; justify-content:center; gap:.5rem; margin-bottom:1.5rem; font-size:.9rem; color:var(--text-secondary); }
+    .usage-dots { display:flex; gap:6px; }
+    .usage-dot { width:10px; height:10px; border-radius:50%; background:var(--border); transition:background var(--transition); }
+    .usage-dot.used { background:var(--accent); }
+    .tester-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2rem; max-width:680px; margin:0 auto 2rem; }
+    .subject-input-wrap { position:relative; margin-bottom:1rem; }
+    .subject-input { width:100%; background:var(--bg-secondary); border:2px solid var(--border); border-radius:var(--radius); padding:1rem 4rem 1rem 1.25rem; color:var(--text-primary); font-size:1.05rem; font-family:var(--font); transition:border-color var(--transition); }
+    .subject-input:focus { outline:none; border-color:var(--accent); }
+    .char-count { position:absolute; right:1rem; top:50%; transform:translateY(-50%); font-size:.8rem; color:var(--text-muted); pointer-events:none; }
+    .char-count.warn  { color:var(--warning); }
+    .char-count.ideal { color:var(--success); }
+    .char-count.over  { color:var(--danger); }
+    .btn-analyze { width:100%; padding:1rem; font-size:1.1rem; font-weight:700; background:var(--accent); color:#fff; border:none; border-radius:var(--radius); cursor:pointer; transition:background var(--transition),transform var(--transition); }
+    .btn-analyze:hover:not(:disabled) { background:var(--accent-light); transform:translateY(-1px); }
+    .btn-analyze:disabled { opacity:.5; cursor:not-allowed; }
+    .loading-state { display:none; text-align:center; padding:2rem; }
+    .spinner { width:48px; height:48px; border:4px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 1rem; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .results-panel { display:none; }
+    .score-display { text-align:center; margin-bottom:2rem; }
+    .score-ring { position:relative; width:140px; height:140px; margin:0 auto 1rem; }
+    .score-ring svg { transform:rotate(-90deg); }
+    .score-ring circle { fill:none; stroke-width:10; }
+    .score-track { stroke:var(--border); }
+    .score-fill { stroke:var(--accent); stroke-linecap:round; transition:stroke-dashoffset 1s ease, stroke .3s; }
+    .score-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .score-number { font-size:2.4rem; font-weight:800; color:var(--text-primary); line-height:1; }
+    .score-label { font-size:.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; }
+    .score-verdict { font-size:1.2rem; font-weight:700; margin-bottom:.25rem; }
+    .score-verdict.excellent { color:var(--success); }
+    .score-verdict.good      { color:#22d3ee; }
+    .score-verdict.okay      { color:var(--warning); }
+    .score-verdict.poor      { color:var(--danger); }
+    .metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2rem; }
+    @media(max-width:500px) { .metrics-grid { grid-template-columns:1fr; } }
+    .metric-card { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; }
+    .metric-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+    .metric-name { font-size:.85rem; color:var(--text-secondary); font-weight:600; }
+    .metric-score { font-size:1rem; font-weight:800; }
+    .metric-bar-bg { height:6px; background:var(--border); border-radius:999px; overflow:hidden; }
+    .metric-bar-fill { height:100%; border-radius:999px; transition:width .8s ease; }
+    .bar-excellent { background:var(--success); }
+    .bar-good      { background:#22d3ee; }
+    .bar-okay      { background:var(--warning); }
+    .bar-poor      { background:var(--danger); }
+    .metric-detail { font-size:.8rem; color:var(--text-muted); margin-top:.4rem; }
+    .suggestions-section h3 { font-size:1rem; margin-bottom:.75rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em; }
+    .suggestion-list { list-style:none; padding:0; margin-bottom:1.5rem; }
+    .suggestion-list li { display:flex; align-items:flex-start; gap:.6rem; padding:.6rem 0; border-bottom:1px solid var(--border); color:var(--text-secondary); font-size:.95rem; }
+    .suggestion-list li:last-child { border-bottom:none; }
+    .sug-icon { flex-shrink:0; font-size:1rem; }
+    .email-gate { display:none; background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(37,99,235,.05)); border:1px solid rgba(37,99,235,.3); border-radius:var(--radius); padding:1.5rem; text-align:center; margin-bottom:1.5rem; }
+    .email-gate h3 { margin-bottom:.5rem; font-size:1.1rem; }
+    .email-gate p  { margin-bottom:1rem; font-size:.9rem; }
+    .email-gate-form { display:flex; gap:.5rem; max-width:420px; margin:0 auto; }
+    .email-gate-form input { flex:1; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.65rem 1rem; color:var(--text-primary); font-size:.95rem; }
+    .email-gate-form input:focus { outline:none; border-color:var(--accent); }
+    .btn-sm { padding:.65rem 1.25rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); font-weight:700; cursor:pointer; font-size:.95rem; white-space:nowrap; }
+    .btn-sm:hover { background:var(--accent-light); }
+    @media(max-width:440px) { .email-gate-form { flex-direction:column; } }
+    .try-again-row { display:flex; gap:.75rem; margin-top:1.5rem; flex-wrap:wrap; }
+    .btn-secondary { flex:1; padding:.7rem; background:transparent; color:var(--text-secondary); border:1px solid var(--border); border-radius:var(--radius); font-size:.95rem; cursor:pointer; transition:all var(--transition); }
+    .btn-secondary:hover { border-color:var(--accent-light); color:var(--accent-light); }
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:1000; align-items:center; justify-content:center; padding:1rem; }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:var(--bg-card); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:2.5rem; max-width:480px; width:100%; position:relative; text-align:center; }
+    .modal-close { position:absolute; top:1rem; right:1rem; background:none; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer; line-height:1; }
+    .modal-close:hover { color:var(--text-primary); }
+    .price-tag { font-size:2.5rem; font-weight:800; color:var(--accent-light); margin:1rem 0 .25rem; }
+    .price-period { font-size:.9rem; color:var(--text-muted); margin-bottom:1.5rem; }
+    .modal-features { list-style:none; padding:0; text-align:left; margin-bottom:1.5rem; }
+    .modal-features li { padding:.4rem 0; color:var(--text-secondary); font-size:.95rem; display:flex; align-items:center; gap:.5rem; }
+    .modal-features .check { color:var(--success); font-weight:700; }
+    .btn-upgrade { display:block; width:100%; padding:1rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius); font-size:1.05rem; font-weight:700; cursor:pointer; margin-bottom:.75rem; transition:background var(--transition); }
+    .btn-upgrade:hover { background:var(--accent-light); }
+    .modal-dismiss { background:none; border:none; color:var(--text-muted); font-size:.85rem; cursor:pointer; }
+    .modal-dismiss:hover { color:var(--text-secondary); }
+    .ab-section { display:none; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border); }
+    .ab-section h3 { font-size:1rem; margin-bottom:1rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em; }
+    .variant-list { list-style:none; padding:0; }
+    .variant-item { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem 1rem; margin-bottom:.6rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+    .variant-text { font-size:.95rem; color:var(--text-primary); flex:1; }
+    .variant-score { font-size:.85rem; font-weight:700; color:var(--accent-light); white-space:nowrap; }
+    .how-section { padding:4rem 1rem; background:var(--bg-secondary); }
+    .how-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .how-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; text-align:center; }
+    .how-card .step-num { width:36px; height:36px; background:var(--accent); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; margin:0 auto 1rem; }
+    .how-card h4 { margin-bottom:.5rem; }
+    .faq-section { padding:4rem 1rem; }
+    .faq-list { max-width:700px; margin:2rem auto 0; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-question { width:100%; background:none; border:none; color:var(--text-primary); font-size:1rem; font-weight:600; text-align:left; padding:1.2rem 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+    .faq-question:hover { color:var(--accent-light); }
+    .faq-chevron { transition:transform var(--transition); }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); }
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .faq-item.open .faq-answer { max-height:300px; }
+    .faq-answer p { padding-bottom:1.2rem; font-size:.95rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="../../index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about.html">About</a></li>
+        <li><a href="../../compare.html">Compare</a></li>
+        <li><a href="../../reviews/claude.html">Claude</a></li>
+        <li><a href="../../reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="../../reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="../../reviews/cursor.html">Cursor</a></li>
+        <li><a href="../../reviews/perplexity.html">Perplexity</a></li>
+        <li><a href="../../ai-prompt-library.html">Prompt Library</a></li>
+        <li><a href="#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-badge">&#129302; Free AI Tool</div>
+      <h1>AI Email Subject Line Tester</h1>
+      <p>Get an instant AI-powered score for any email subject line. Analyze emotional impact, spam risk, length, and click-worthiness — with specific suggestions to improve opens.</p>
+      <div class="usage-bar" id="usageBar">
+        <span id="usageText">3 free tests today</span>
+        <div class="usage-dots">
+          <div class="usage-dot" id="dot1"></div>
+          <div class="usage-dot" id="dot2"></div>
+          <div class="usage-dot" id="dot3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 1rem 3rem;">
+    <div class="container">
+      <div class="tester-card">
+
+        <div id="inputSection">
+          <label for="subjectInput" style="display:block;font-weight:600;margin-bottom:.5rem;color:var(--text-secondary);font-size:.9rem;text-transform:uppercase;letter-spacing:.06em;">Your Subject Line</label>
+          <div class="subject-input-wrap">
+            <input type="text" id="subjectInput" class="subject-input"
+              placeholder="e.g. You won't believe what we just launched…"
+              maxlength="120" autocomplete="off" />
+            <span class="char-count" id="charCount">0</span>
+          </div>
+          <button class="btn-analyze" id="analyzeBtn" disabled>&#9889; Analyze Subject Line</button>
+        </div>
+
+        <div class="loading-state" id="loadingState">
+          <div class="spinner"></div>
+          <p style="color:var(--text-secondary);">Analyzing your subject line…</p>
+        </div>
+
+        <div class="results-panel" id="resultsPanel">
+
+          <div class="email-gate" id="emailGate">
+            <h3>&#128235; Unlock your full report</h3>
+            <p>Enter your email to save results and get weekly email marketing tips.</p>
+            <form class="email-gate-form" id="emailGateForm">
+              <input type="email" id="gateEmail" placeholder="you@example.com" required />
+              <button type="submit" class="btn-sm">Unlock</button>
+            </form>
+            <p style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;">No spam. Unsubscribe any time.</p>
+          </div>
+
+          <div class="score-display">
+            <div class="score-ring">
+              <svg width="140" height="140" viewBox="0 0 140 140">
+                <circle class="score-track" cx="70" cy="70" r="60" />
+                <circle class="score-fill" id="scoreFill" cx="70" cy="70" r="60"
+                  stroke-dasharray="377" stroke-dashoffset="377" />
+              </svg>
+              <div class="score-text">
+                <span class="score-number" id="scoreNumber">—</span>
+                <span class="score-label">/ 100</span>
+              </div>
+            </div>
+            <div class="score-verdict" id="scoreVerdict"></div>
+            <div style="color:var(--text-muted);font-size:.9rem;" id="scoreSummary"></div>
+          </div>
+
+          <div class="metrics-grid" id="metricsGrid"></div>
+
+          <div class="suggestions-section">
+            <h3>&#128270; Improvement Suggestions</h3>
+            <ul class="suggestion-list" id="suggestionList"></ul>
+          </div>
+
+          <div class="ab-section" id="abSection">
+            <h3>&#127315; A/B Variant Suggestions</h3>
+            <ul class="variant-list" id="variantList"></ul>
+          </div>
+
+          <div class="try-again-row">
+            <button class="btn-secondary" id="tryAnotherBtn">&#8635; Test Another</button>
+            <button class="btn-secondary" id="copyResultsBtn">&#128203; Copy Results</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-label">How It Works</span>
+        <h2>4 Signals That Drive Opens</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="step-num">1</div>
+          <h4>Emotional Impact</h4>
+          <p>We scan for power words, curiosity triggers, and emotional language that make readers feel something — and act.</p>
+        </div>
+        <div class="how-card">
+          <div class="step-num">2</div>
+          <h4>Spam Risk</h4>
+          <p>Over 200 spam trigger words and patterns are checked against known email filter rules to protect your deliverability.</p>
+        </div>
+        <div class="how-card">
+          <div class="step-num">3</div>
+          <h4>Length Analysis</h4>
+          <p>The sweet spot is 30–50 characters. We score your subject line against open-rate data from millions of emails.</p>
+        </div>
+        <div class="how-card">
+          <div class="step-num">4</div>
+          <h4>Click-Worthiness</h4>
+          <p>Numbers, personalization hooks, urgency cues, and curiosity gaps — we check what converts browsers to openers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-label">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list" id="faqList">
+        <!-- populated by JS to avoid repeated inline handlers -->
+      </div>
+    </div>
+  </section>
+
+  <section class="signup-section" id="signup">
+    <div class="container">
+      <span class="section-label">Stay Updated</span>
+      <h2>Weekly Email Marketing Tips</h2>
+      <p>Subject line formulas, open rate benchmarks, and AI tool reviews — every week. No spam.</p>
+      <form class="signup-form" id="signupForm">
+        <input type="email" id="signupEmail" name="email" placeholder="you@example.com" required autocomplete="email" />
+        <button type="submit" class="btn btn-primary">Subscribe Free</button>
+      </form>
+      <p class="signup-note">&#128274; We respect your privacy. No spam, ever.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="upsellModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close">&times;</button>
+    <div style="font-size:2rem;">&#128285;</div>
+    <h2 style="margin:.5rem 0 .25rem;font-size:1.4rem;">You've used your 3 free tests</h2>
+    <p style="font-size:.95rem;color:var(--text-secondary);">Upgrade to Pro for unlimited tests + A/B variant generation.</p>
+    <div class="price-tag">$9</div>
+    <div class="price-period">per month &middot; cancel any time</div>
+    <ul class="modal-features">
+      <li><span class="check">&#10003;</span> Unlimited subject line tests</li>
+      <li><span class="check">&#10003;</span> A/B variant generator (5 variants per test)</li>
+      <li><span class="check">&#10003;</span> Full analysis history &amp; export</li>
+      <li><span class="check">&#10003;</span> Priority email support</li>
+    </ul>
+    <button class="btn-upgrade" id="upgradeBtn">Upgrade to Pro &mdash; $9/mo</button>
+    <button class="modal-dismiss" id="modalDismissBtn">Maybe later &mdash; resets tomorrow</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+        <p>Independent, in-depth reviews of the AI tools shaping how we work, create, and build.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Reviews</h4>
+        <ul class="footer-links">
+          <li><a href="../../reviews/claude.html">Claude</a></li>
+          <li><a href="../../reviews/chatgpt.html">ChatGPT</a></li>
+          <li><a href="../../reviews/midjourney.html">Midjourney</a></li>
+          <li><a href="../../reviews/cursor.html">Cursor</a></li>
+          <li><a href="../../reviews/perplexity.html">Perplexity AI</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Free Tools</h4>
+        <ul class="footer-links">
+          <li><a href="../../ai-prompt-library.html">AI Prompt Library</a></li>
+          <li><a href="index.html" style="color:var(--accent-light)">Subject Line Tester</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="../../about.html">About</a></li>
+          <li><a href="../../pricing.html">Pricing</a></li>
+          <li><a href="#signup">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="../../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../../terms-of-service.html">Terms of Service</a></li>
+          <li><a href="../../affiliate-disclosure.html">Affiliate Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AIMasterTools.com. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../../privacy-policy.html">Privacy</a>
+        <a href="../../terms-of-service.html">Terms</a>
+        <a href="../../affiliate-disclosure.html">Disclosure</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Constants ──────────────────────────────
+  var FREE_LIMIT   = 3;
+  var STORAGE_KEY  = 'slt_usage';
+  var EMAIL_KEY    = 'slt_email';
+  var PRO_KEY      = 'slt_pro';
+
+  var SPAM_WORDS = [
+    'free','click here','buy now','act now','limited time','urgent','winner','prize',
+    'cash','casino','guarantee','no cost','risk free','100%','earn money','make money',
+    'order now','cheap','discount','offer','promotion','deal','sale','save big',
+    'amazing','incredible','bonus','double your','opportunity','congratulations',
+    'selected','claim','collect','no fees','no hidden','instant','immediately',
+    'exclusive offer','special promotion','this is not spam','credit card',
+    'billing','invoice','account update','verify your','confirm your'
+  ];
+
+  var POWER_WORDS = [
+    'secret','hidden','proven','results','fast','easy','simple','quick','discover',
+    'reveal','truth','warning','mistake','avoid','stop','start','improve','boost',
+    'increase','grow','learn','master','expert','tip','trick','hack','strategy',
+    'guide','checklist','template','system','method','formula','blueprint',
+    'transform','achieve','success','win','gain','profit','save','help','love',
+    'perfect','best','top','ultimate','complete','step-by-step','how to',
+    'new','introducing','announcing'
+  ];
+
+  var CURIOSITY_PATTERNS = [
+    /\?$/,
+    /\.\.\./,
+    /you won't believe/i,
+    /nobody talks about/i,
+    /the real reason/i,
+    /what happens when/i,
+    /here's why/i,
+    /the secret/i,
+    /\bdon't\b.*\buntil\b/i
+  ];
+
+  var URGENCY_WORDS = [
+    'today','tonight','now','last chance','ending','expires','deadline','hurry',
+    'only','left','limited','running out','don\'t miss','final','closing'
+  ];
+
+  var IMPERATIVE_VERBS = [
+    'discover','learn','get','see','try','start','stop','find','join','unlock','claim','boost'
+  ];
+
+  var NUMBER_RE = /\b\d+\b/;
+  var EMOJI_RE  = /\p{Emoji_Presentation}/u;
+
+  // ── Storage helpers ───────────────────────
+  function todayStr() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function getUsage() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { date: todayStr(), count: 0 };
+      var d = JSON.parse(raw);
+      if (d.date !== todayStr()) return { date: todayStr(), count: 0 };
+      return d;
+    } catch (e) { return { date: todayStr(), count: 0 }; }
+  }
+
+  function saveUsage(count) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: todayStr(), count: count }));
+  }
+
+  function isPro()      { return localStorage.getItem(PRO_KEY) === '1'; }
+  function hasEmail()   { return !!localStorage.getItem(EMAIL_KEY); }
+  function storeEmail(e){ localStorage.setItem(EMAIL_KEY, e); }
+
+  // ── DOM helpers ───────────────────────────
+  function el(id) { return document.getElementById(id); }
+
+  function setText(id, text) {
+    var node = el(id);
+    if (node) node.textContent = text;
+  }
+
+  // Create a safe element with textContent
+  function makeEl(tag, text, attrs) {
+    var node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (attrs) {
+      Object.keys(attrs).forEach(function(k) {
+        if (k === 'className') node.className = attrs[k];
+        else if (k === 'style') node.style.cssText = attrs[k];
+        else node.setAttribute(k, attrs[k]);
+      });
+    }
+    return node;
+  }
+
+  // ── Usage UI ──────────────────────────────
+  function updateUsageUI() {
+    if (isPro()) { el('usageBar').style.display = 'none'; return; }
+    var count = getUsage().count;
+    var rem   = Math.max(0, FREE_LIMIT - count);
+    setText('usageText',
+      rem === 0 ? 'Daily limit reached' :
+      rem === 1 ? '1 free test remaining today' :
+                  rem + ' free tests today');
+    ['dot1','dot2','dot3'].forEach(function(id, i) {
+      el(id).classList.toggle('used', i < count);
+    });
+  }
+
+  // ── Char count ────────────────────────────
+  function updateCharCount(val) {
+    var len  = val.length;
+    var node = el('charCount');
+    node.textContent = len;
+    node.className = 'char-count' + (
+      len === 0 ? '' : len < 20 ? ' warn' : len <= 50 ? ' ideal' : len <= 70 ? '' : ' over'
+    );
+    el('analyzeBtn').disabled = len < 3;
+  }
+
+  // ── Analyzer ──────────────────────────────
+  function analyze(subject) {
+    var s     = subject.trim();
+    var lower = s.toLowerCase();
+    var len   = s.length;
+
+    // 1. Length (max 25)
+    var lengthScore, lengthDetail;
+    if      (len < 15) { lengthScore = 8;  lengthDetail = 'Too short (' + len + ' chars). Aim for 30\u201350.'; }
+    else if (len < 20) { lengthScore = 14; lengthDetail = 'A bit short (' + len + ' chars). Try 30\u201350 for best opens.'; }
+    else if (len <= 50){ lengthScore = 25; lengthDetail = 'Ideal length (' + len + ' chars). Displays fully on most devices.'; }
+    else if (len <= 60){ lengthScore = 20; lengthDetail = 'Slightly long (' + len + ' chars). May clip on mobile.'; }
+    else if (len <= 70){ lengthScore = 15; lengthDetail = 'Long (' + len + ' chars). Will cut off on ~50% of devices.'; }
+    else               { lengthScore = 8;  lengthDetail = 'Too long (' + len + ' chars). Trim to under 60 characters.'; }
+
+    // 2. Spam risk (max 25)
+    var spamPenalty = 0;
+    var foundSpam   = [];
+    SPAM_WORDS.forEach(function(w) {
+      if (lower.indexOf(w) !== -1) { spamPenalty += 6; foundSpam.push(w); }
+    });
+    var letters      = (s.match(/[A-Za-z]/g) || []).length;
+    var capsLetters  = (s.match(/[A-Z]/g) || []).length;
+    var capsRatio    = letters > 0 ? capsLetters / letters : 0;
+    if (capsRatio > 0.4) { spamPenalty += 10; foundSpam.push('excessive caps'); }
+    if ((s.match(/!/g) || []).length >= 2) { spamPenalty += 5; foundSpam.push('multiple !!'); }
+    var spamScore  = Math.max(0, 25 - spamPenalty);
+    var spamDetail = foundSpam.length
+      ? 'Issues: ' + foundSpam.slice(0, 3).join(', ') + (foundSpam.length > 3 ? ' +' + (foundSpam.length - 3) + ' more' : '')
+      : 'No spam triggers detected. Great!';
+
+    // 3. Emotional impact (max 25)
+    var emotionScore = 5;
+    var foundPower   = [];
+    POWER_WORDS.forEach(function(w) {
+      if (lower.indexOf(w) !== -1) {
+        emotionScore = Math.min(25, emotionScore + 5);
+        foundPower.push(w);
+      }
+    });
+    CURIOSITY_PATTERNS.forEach(function(p) {
+      if (p.test(s)) emotionScore = Math.min(25, emotionScore + 4);
+    });
+    if (s.charAt(s.length - 1) === '?') emotionScore = Math.min(25, emotionScore + 2);
+    var emotionDetail = foundPower.length
+      ? 'Power words: ' + foundPower.slice(0, 3).join(', ')
+      : 'Add a power word or curiosity hook to increase impact.';
+
+    // 4. Click-worthiness (max 25)
+    var clickScore = 5;
+    if (NUMBER_RE.test(s))               clickScore = Math.min(25, clickScore + 8);
+    if (EMOJI_RE.test(s))               clickScore = Math.min(25, clickScore + 5);
+    var urgencyFound = false;
+    URGENCY_WORDS.forEach(function(w) {
+      if (lower.indexOf(w) !== -1) { clickScore = Math.min(25, clickScore + 4); urgencyFound = true; }
+    });
+    if (/\byou\b|\byour\b/i.test(s))    clickScore = Math.min(25, clickScore + 4);
+    if (s.indexOf('?') !== -1)          clickScore = Math.min(25, clickScore + 3);
+    var firstWord = lower.split(/\s+/)[0] || '';
+    if (IMPERATIVE_VERBS.indexOf(firstWord) !== -1) clickScore = Math.min(25, clickScore + 4);
+    var clickTriggers = [
+      NUMBER_RE.test(s) && 'number',
+      EMOJI_RE.test(s) && 'emoji',
+      urgencyFound && 'urgency',
+      /\byou\b/i.test(s) && 'personalization'
+    ].filter(Boolean);
+    var clickDetail = clickScore >= 18
+      ? 'Strong triggers: ' + clickTriggers.join(', ')
+      : 'Add a number, personalization, or urgency word to boost clicks.';
+
+    var total = lengthScore + spamScore + emotionScore + clickScore;
+
+    // Suggestions (safe strings — no user input interpolated)
+    var suggestions = [];
+    if (len > 60)
+      suggestions.push({ icon: '\u2702\uFE0F', text: 'Shorten to under 60 characters \u2014 long subjects get clipped on mobile.' });
+    if (len < 20)
+      suggestions.push({ icon: '\uD83D\uDCDD', text: 'Add more detail. Very short subjects lack context and intrigue.' });
+    if (foundSpam.length > 0)
+      suggestions.push({ icon: '\u26A0\uFE0F', text: 'Remove spam trigger words to protect deliverability and inbox placement.' });
+    if (capsRatio > 0.4)
+      suggestions.push({ icon: '\uD83D\uDD21', text: 'Avoid ALL CAPS \u2014 it reads as shouting and flags spam filters.' });
+    if (!NUMBER_RE.test(s))
+      suggestions.push({ icon: '\uD83D\uDD22', text: 'Add a specific number (e.g. \u20185 ways\u2019, \u20183x faster\u2019) \u2014 numbers increase open rates by ~15%.' });
+    if (!/\byou\b|\byour\b/i.test(s))
+      suggestions.push({ icon: '\uD83D\uDC64', text: 'Use \u201Cyou\u201D or \u201Cyour\u201D to make it feel personal \u2014 personalized subjects get 26% higher opens.' });
+    if (s.indexOf('?') === -1 && emotionScore < 15)
+      suggestions.push({ icon: '\u2753', text: 'Try turning it into a question \u2014 curiosity gaps are one of the strongest open-rate drivers.' });
+    if (!foundPower.length)
+      suggestions.push({ icon: '\u26A1', text: 'Add a power word like \u201Csecret\u201D, \u201Cproven\u201D, \u201Cfast\u201D, or \u201Cnew\u201D to boost emotional pull.' });
+    if (!urgencyFound && total < 75)
+      suggestions.push({ icon: '\u23F0', text: 'Consider adding genuine urgency (\u201Ctoday\u201D, \u201Clast chance\u201D, \u201Cexpires\u201D) to drive immediate action.' });
+    if (suggestions.length === 0)
+      suggestions.push({ icon: '\uD83C\uDFAF', text: 'Excellent subject line! Try A/B testing against a curiosity-hook variant.' });
+
+    // A/B variants — derived from original but scored independently
+    var variants = buildVariants(s);
+
+    return {
+      total: total,
+      breakdown: {
+        emotion: { score: emotionScore, max: 25, detail: emotionDetail },
+        spam:    { score: spamScore,    max: 25, detail: spamDetail    },
+        length:  { score: lengthScore,  max: 25, detail: lengthDetail  },
+        click:   { score: clickScore,   max: 25, detail: clickDetail   }
+      },
+      suggestions: suggestions,
+      variants:    variants
+    };
+  }
+
+  function buildVariants(original) {
+    var variants = [];
+    var lower = original.toLowerCase();
+
+    if (!NUMBER_RE.test(original))
+      variants.push({ strategy: 'Number hook', text: '7 ways: ' + original });
+
+    if (original.charAt(original.length - 1) !== '?')
+      variants.push({ strategy: 'Curiosity question', text: original.replace(/\.$/, '') + '?' });
+
+    if (!/you|your/i.test(original))
+      variants.push({ strategy: 'Personalized', text: 'Here\u2019s what you need: ' + original.toLowerCase() });
+
+    variants.push({ strategy: 'Urgency trigger', text: 'Don\u2019t miss: ' + original });
+
+    var punchy = original.length > 42
+      ? original.slice(0, 39).trimRight() + '\u2026'
+      : original.split(' ').slice(0, 5).join(' ') + '\u2026';
+    variants.push({ strategy: 'Short & punchy', text: punchy });
+
+    return variants.slice(0, 5).map(function(v) {
+      return { text: v.text, strategy: v.strategy, score: Math.min(99, analyze(v.text).total) };
+    });
+  }
+
+  // ── Render ────────────────────────────────
+  function renderResults(result, subject) {
+    // Score ring
+    var circumference = 2 * Math.PI * 60;
+    var offset = circumference * (1 - result.total / 100);
+    var fill = el('scoreFill');
+    fill.style.strokeDashoffset = circumference;
+    requestAnimationFrame(function() {
+      setTimeout(function() { fill.style.strokeDashoffset = offset; }, 50);
+    });
+    fill.style.stroke =
+      result.total >= 85 ? '#10b981' :
+      result.total >= 70 ? '#22d3ee' :
+      result.total >= 50 ? '#f59e0b' : '#ef4444';
+
+    setText('scoreNumber', result.total);
+
+    var tier, verdictText;
+    if      (result.total >= 85) { tier = 'excellent'; verdictText = '\uD83C\uDFC6 Excellent';  }
+    else if (result.total >= 70) { tier = 'good';      verdictText = '\uD83D\uDC4D Good';        }
+    else if (result.total >= 50) { tier = 'okay';      verdictText = '\u23F0 Needs Work';        }
+    else                          { tier = 'poor';      verdictText = '\uD83D\uDCA5 Poor';        }
+
+    var verdictEl = el('scoreVerdict');
+    verdictEl.textContent = verdictText;
+    verdictEl.className = 'score-verdict ' + tier;
+
+    var summaries = {
+      excellent: 'Strong open rates expected. Minor tweaks could push it higher.',
+      good:      'Solid subject line. A few refinements could boost opens further.',
+      okay:      'Average performance expected. Apply the suggestions below.',
+      poor:      'High spam risk or weak hooks. Follow the suggestions to improve.'
+    };
+    setText('scoreSummary', summaries[tier]);
+
+    // Metric cards (using safe DOM methods)
+    var grid = el('metricsGrid');
+    grid.textContent = '';
+    var metricDefs = [
+      { label: '\uD83D\uDD25 Emotional Impact', data: result.breakdown.emotion },
+      { label: '\uD83D\uDEAB Spam Risk',         data: result.breakdown.spam    },
+      { label: '\uD83D\uDCCF Length',             data: result.breakdown.length  },
+      { label: '\uD83D\uDCF7 Click-Worthiness',   data: result.breakdown.click   }
+    ];
+    metricDefs.forEach(function(m) {
+      var pct = Math.round((m.data.score / m.data.max) * 100);
+      var barClass = pct >= 80 ? 'bar-excellent' : pct >= 60 ? 'bar-good' : pct >= 40 ? 'bar-okay' : 'bar-poor';
+      var scoreColor = pct >= 80 ? '#10b981' : pct >= 60 ? '#22d3ee' : pct >= 40 ? '#f59e0b' : '#ef4444';
+
+      var card = document.createElement('div');
+      card.className = 'metric-card';
+
+      var header = document.createElement('div');
+      header.className = 'metric-header';
+      var nameSpan = makeEl('span', m.label, { className: 'metric-name' });
+      var scoreSpan = makeEl('span', m.data.score + '/' + m.data.max, {
+        className: 'metric-score',
+        style: 'color:' + scoreColor
+      });
+      header.appendChild(nameSpan);
+      header.appendChild(scoreSpan);
+
+      var barBg = document.createElement('div');
+      barBg.className = 'metric-bar-bg';
+      var barFill = document.createElement('div');
+      barFill.className = 'metric-bar-fill ' + barClass;
+      barFill.style.width = '0%';
+      barBg.appendChild(barFill);
+
+      var detail = makeEl('div', m.data.detail, { className: 'metric-detail' });
+
+      card.appendChild(header);
+      card.appendChild(barBg);
+      card.appendChild(detail);
+      grid.appendChild(card);
+
+      // Animate bar
+      requestAnimationFrame(function() {
+        setTimeout(function() { barFill.style.width = pct + '%'; }, 100);
+      });
+    });
+
+    // Suggestions (all safe static strings)
+    var sugList = el('suggestionList');
+    sugList.textContent = '';
+    result.suggestions.forEach(function(s) {
+      var li = document.createElement('li');
+      var iconSpan = makeEl('span', s.icon, { className: 'sug-icon' });
+      var textSpan = makeEl('span', s.text);
+      li.appendChild(iconSpan);
+      li.appendChild(textSpan);
+      sugList.appendChild(li);
+    });
+
+    // A/B variants (Pro) — use textContent for user-derived text
+    var abSec = el('abSection');
+    var varList = el('variantList');
+    if (isPro()) {
+      abSec.style.display = 'block';
+      varList.textContent = '';
+      result.variants.forEach(function(v) {
+        var li = document.createElement('li');
+        li.className = 'variant-item';
+        var textSpan = document.createElement('span');
+        textSpan.className = 'variant-text';
+        textSpan.textContent = v.text; // textContent = XSS safe
+        var scoreSpan = makeEl('span', '\u26A1 ' + v.score + '/100', { className: 'variant-score' });
+        li.appendChild(textSpan);
+        li.appendChild(scoreSpan);
+        varList.appendChild(li);
+      });
+    } else {
+      abSec.style.display = 'none';
+    }
+
+    // Store for copy
+    _lastResult  = result;
+    _lastSubject = subject;
+  }
+
+  // ── State ─────────────────────────────────
+  var _lastResult  = null;
+  var _lastSubject = '';
+  var _testCount   = 0;
+
+  // ── Main flow ─────────────────────────────
+  function runAnalysis() {
+    var subject = el('subjectInput').value.trim();
+    if (subject.length < 3) return;
+
+    if (!isPro()) {
+      var usage = getUsage();
+      if (usage.count >= FREE_LIMIT) {
+        el('upsellModal').classList.add('open');
+        return;
+      }
+      var newCount = usage.count + 1;
+      saveUsage(newCount);
+      _testCount = newCount;
+      updateUsageUI();
+      if (newCount >= FREE_LIMIT) {
+        setTimeout(function() { el('upsellModal').classList.add('open'); }, 3500);
+      }
+    }
+
+    el('inputSection').style.display  = 'none';
+    el('loadingState').style.display  = 'block';
+    el('resultsPanel').style.display  = 'none';
+
+    setTimeout(function() {
+      var result = analyze(subject);
+
+      el('loadingState').style.display = 'none';
+      el('resultsPanel').style.display = 'block';
+
+      // Email gate after first test
+      if (!hasEmail() && _testCount === 1) {
+        el('emailGate').style.display = 'block';
+      } else {
+        el('emailGate').style.display = 'none';
+      }
+
+      renderResults(result, subject);
+    }, 1200 + Math.floor(Math.random() * 600));
+  }
+
+  function resetTool() {
+    el('inputSection').style.display  = 'block';
+    el('loadingState').style.display  = 'none';
+    el('resultsPanel').style.display  = 'none';
+    el('subjectInput').value = '';
+    updateCharCount('');
+    updateUsageUI();
+  }
+
+  function copyResults() {
+    if (!_lastResult) return;
+    var r = _lastResult;
+    var lines = [
+      'Subject Line: "' + _lastSubject + '"',
+      'Overall Score: ' + r.total + '/100',
+      '',
+      'Breakdown:',
+      '  Emotional Impact: ' + r.breakdown.emotion.score + '/25 — ' + r.breakdown.emotion.detail,
+      '  Spam Risk:        ' + r.breakdown.spam.score    + '/25 — ' + r.breakdown.spam.detail,
+      '  Length:           ' + r.breakdown.length.score  + '/25 — ' + r.breakdown.length.detail,
+      '  Click-Worthiness: ' + r.breakdown.click.score   + '/25 — ' + r.breakdown.click.detail,
+      '',
+      'Suggestions:',
+    ].concat(r.suggestions.map(function(s) { return '  ' + s.icon + ' ' + s.text; }))
+     .concat(['', 'Analyzed by AIMasterTools.com/tools/subject-line-tester/']);
+
+    var text = lines.join('\n');
+    var btn  = el('copyResultsBtn');
+    var orig = btn.textContent;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = '\u2713 Copied!';
+        setTimeout(function() { btn.textContent = orig; }, 2000);
+      }).catch(function() { fallbackCopy(text, btn, orig); });
+    } else {
+      fallbackCopy(text, btn, orig);
+    }
+  }
+
+  function fallbackCopy(text, btn, orig) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity  = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); btn.textContent = '\u2713 Copied!'; setTimeout(function() { btn.textContent = orig; }, 2000); }
+    catch(e) { /* silent */ }
+    document.body.removeChild(ta);
+  }
+
+  // ── FAQ ───────────────────────────────────
+  var FAQ_ITEMS = [
+    {
+      q: 'How does the AI scoring work?',
+      a: 'Our model analyzes your subject line across four dimensions: emotional impact (power words, curiosity triggers), spam risk (filter-triggering words and patterns), length (measured against open-rate benchmarks), and click-worthiness (numbers, urgency, personalization). Each contributes to your final 1\u2013100 score.'
+    },
+    {
+      q: 'What\u2019s a good score?',
+      a: '70+ is good. 85+ is excellent. Subject lines scoring below 50 typically have significant spam risk or are too vague — these will hurt open rates. Most professional marketers aim for 70\u201385 as a consistent target.'
+    },
+    {
+      q: 'Why is there a 3 tests/day limit?',
+      a: 'The free tier lets you test your top ideas without commitment. If you run email campaigns and need unlimited testing plus our A/B variant generator, upgrade to Pro for $9/month.'
+    },
+    {
+      q: 'What does the A/B variant generator do?',
+      a: 'For any subject line you test, Pro generates 5 alternate versions applying best practices \u2014 different emotional angles, curiosity approaches, and length variations \u2014 each pre-scored so you can pick the strongest pair instantly.'
+    },
+    {
+      q: 'Is my data private?',
+      a: 'Yes. Subject lines you enter are analyzed locally in your browser \u2014 nothing is sent to a server unless you opt in to email capture. We never sell your data.'
+    }
+  ];
+
+  function buildFaq() {
+    var container = el('faqList');
+    container.textContent = '';
+    FAQ_ITEMS.forEach(function(item, idx) {
+      var div = document.createElement('div');
+      div.className = 'faq-item';
+
+      var btn = document.createElement('button');
+      btn.className = 'faq-question';
+      var qText = document.createTextNode(item.q + ' ');
+      var chevron = makeEl('span', '\u2964', { className: 'faq-chevron' });
+      btn.appendChild(qText);
+      btn.appendChild(chevron);
+      btn.addEventListener('click', function() {
+        var wasOpen = div.classList.contains('open');
+        container.querySelectorAll('.faq-item.open').forEach(function(d) { d.classList.remove('open'); });
+        if (!wasOpen) div.classList.add('open');
+      });
+
+      var answerDiv = document.createElement('div');
+      answerDiv.className = 'faq-answer';
+      var p = makeEl('p', item.a);
+      answerDiv.appendChild(p);
+
+      div.appendChild(btn);
+      div.appendChild(answerDiv);
+      container.appendChild(div);
+    });
+  }
+
+  // ── Wire up events ────────────────────────
+  el('subjectInput').addEventListener('input', function() {
+    updateCharCount(this.value);
+  });
+
+  el('subjectInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length >= 3) runAnalysis();
+  });
+
+  el('analyzeBtn').addEventListener('click', runAnalysis);
+  el('tryAnotherBtn').addEventListener('click', resetTool);
+  el('copyResultsBtn').addEventListener('click', copyResults);
+
+  el('emailGateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var emailVal = el('gateEmail').value.trim();
+    if (!emailVal) return;
+    storeEmail(emailVal);
+    el('emailGate').style.display = 'none';
+  });
+
+  el('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var emailVal = el('signupEmail').value.trim();
+    if (!emailVal) return;
+    storeEmail(emailVal);
+    e.target.textContent = '';
+    var p = makeEl('p', '\u2713 You\u2019re subscribed! Check your inbox.', { style: 'color:var(--success);font-weight:600;' });
+    e.target.appendChild(p);
+  });
+
+  el('modalCloseBtn').addEventListener('click', function() {
+    el('upsellModal').classList.remove('open');
+  });
+
+  el('modalDismissBtn').addEventListener('click', function() {
+    el('upsellModal').classList.remove('open');
+  });
+
+  el('upgradeBtn').addEventListener('click', function() {
+    window.location.href = '../../pricing.html';
+  });
+
+  el('upsellModal').addEventListener('click', function(e) {
+    if (e.target === this) el('upsellModal').classList.remove('open');
+  });
+
+  el('navToggle').addEventListener('click', function() {
+    el('navLinks').classList.toggle('open');
+  });
+
+  // ── Init ──────────────────────────────────
+  updateUsageUI();
+  buildFaq();
+
+  // If daily limit already hit, adjust button
+  if (!isPro() && getUsage().count >= FREE_LIMIT) {
+    var btn = el('analyzeBtn');
+    btn.disabled = true;
+    btn.textContent = '\u26A1 Upgrade to Pro for Unlimited Tests';
+    btn.addEventListener('click', function() { el('upsellModal').classList.add('open'); });
+  }
+
+})();
+</script>
+</body>
+</html>
