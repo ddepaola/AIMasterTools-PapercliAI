@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tool Playground – Try Our AI Tools Free | AIMasterTools</title>
+  <meta name="description" content="Try our AI tools live — writing assistant, crypto signal scanner, and prompt generator. Interactive demos, no signup required to start." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/playground.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Tool Playground – Try Our AI Tools Free | AIMasterTools" />
+  <meta property="og:description" content="Hands-on demos of our AI writing assistant, crypto signal scanner, and prompt generator." />
+  <meta property="og:url" content="https://aimastertools.com/playground.html" />
+  <meta property="og:site_name" content="AIMasterTools" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .pg-hero { text-align:center; padding:4rem 1.5rem 2.5rem; background:linear-gradient(180deg,var(--bg-secondary) 0%,var(--bg-primary) 100%); }
+    .pg-hero h1 { font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:.75rem; }
+    .pg-hero p  { color:var(--text-secondary); max-width:580px; margin:0 auto; font-size:1.05rem; }
+
+    .demo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.75rem; max-width:1060px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+
+    .demo-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; display:flex; flex-direction:column; }
+    .demo-header { padding:1.25rem 1.5rem 0; display:flex; align-items:center; gap:.75rem; }
+    .demo-icon { width:40px; height:40px; border-radius:var(--radius); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+    .demo-icon.blue   { background:rgba(37,99,235,.18); }
+    .demo-icon.green  { background:rgba(16,185,129,.18); }
+    .demo-icon.purple { background:rgba(139,92,246,.18); }
+    .demo-title { font-weight:700; font-size:1rem; }
+    .demo-tag   { margin-left:auto; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:99px; background:var(--accent); color:#fff; white-space:nowrap; }
+
+    .demo-body { padding:1.25rem 1.5rem 1.5rem; flex:1; display:flex; flex-direction:column; gap:1rem; }
+    .demo-desc { color:var(--text-secondary); font-size:.9rem; line-height:1.55; }
+
+    .demo-input, .demo-select {
+      width:100%; padding:.6rem .85rem; background:var(--bg-primary); border:1px solid var(--border);
+      border-radius:var(--radius-sm); color:var(--text-primary); font-size:.92rem; font-family:inherit; resize:vertical;
+    }
+    .demo-input:focus, .demo-select:focus { outline:none; border-color:var(--accent-light); }
+    .demo-input { min-height:80px; }
+
+    .btn-run { background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); padding:.6rem 1.25rem; font-size:.95rem; font-weight:600; cursor:pointer; transition:opacity .2s; align-self:flex-start; }
+    .btn-run:hover { opacity:.85; }
+    .btn-run:disabled { opacity:.5; cursor:default; }
+
+    .demo-output { background:var(--bg-primary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.85rem 1rem; font-size:.9rem; color:var(--text-secondary); line-height:1.65; min-height:100px; position:relative; overflow:hidden; }
+    .demo-output.hidden { display:none; }
+
+    .gate-overlay { position:absolute; inset:0; background:rgba(6,9,15,.82); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.85rem; padding:1.25rem; text-align:center; border-radius:var(--radius-sm); z-index:5; }
+    .gate-overlay.hidden { display:none; }
+    .gate-title { font-weight:700; color:var(--text-primary); font-size:.95rem; }
+    .gate-sub   { color:var(--text-secondary); font-size:.82rem; }
+    .gate-form  { display:flex; flex-direction:column; gap:.5rem; width:100%; max-width:260px; }
+    .gate-input { padding:.55rem .8rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg-card); color:var(--text-primary); font-size:.9rem; width:100%; }
+    .gate-btn   { background:var(--success); color:#fff; border:none; border-radius:var(--radius-sm); padding:.55rem; font-size:.9rem; font-weight:700; cursor:pointer; transition:opacity .2s; }
+    .gate-btn:hover { opacity:.85; }
+    .gate-note  { color:var(--text-muted); font-size:.75rem; }
+    .gate-err   { color:var(--danger); font-size:.78rem; margin-top:.2rem; display:none; }
+
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+    .cursor::after { content:"▍"; display:inline-block; animation:blink 1s step-start infinite; margin-left:1px; font-size:.8em; color:var(--accent-light); }
+
+    .blurred-text { filter:blur(5px); user-select:none; pointer-events:none; }
+
+    .sig-row { display:flex; align-items:center; gap:.6rem; padding:.4rem 0; border-bottom:1px solid var(--border); }
+    .sig-row:last-child { border-bottom:none; }
+    .sig-coin { font-weight:700; color:var(--text-primary); width:52px; flex-shrink:0; font-size:.85rem; }
+    .sig-dir  { font-size:.78rem; font-weight:700; padding:2px 7px; border-radius:99px; flex-shrink:0; }
+    .sig-buy  { background:rgba(16,185,129,.18); color:#10b981; }
+    .sig-sell { background:rgba(239,68,68,.18);  color:#ef4444; }
+    .sig-hold { background:rgba(245,158,11,.18); color:#f59e0b; }
+    .sig-reason { flex:1; font-size:.78rem; color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .sig-bar  { width:50px; height:6px; border-radius:3px; background:var(--border); overflow:hidden; flex-shrink:0; }
+    .sig-bar-fill { height:100%; border-radius:3px; }
+    .sig-conf { color:var(--text-muted); font-size:.78rem; flex-shrink:0; }
+
+    .prompts-list { display:flex; flex-direction:column; gap:.5rem; }
+    .prompt-chip { background:var(--bg-secondary); border:1px solid var(--border); border-radius:6px; padding:.55rem .8rem; font-size:.82rem; color:var(--text-secondary); line-height:1.5; cursor:pointer; transition:border-color .15s; }
+    .prompt-chip:hover { border-color:var(--accent-light); color:var(--text-primary); }
+    .prompt-num { font-weight:700; color:var(--text-muted); font-size:.75rem; margin-right:.3rem; }
+
+    @keyframes shimmer { 0%{background-position:-400px 0}100%{background-position:400px 0} }
+    .skeleton { background:linear-gradient(90deg,var(--bg-card) 25%,var(--bg-card-hover) 50%,var(--bg-card) 75%); background-size:400px 100%; animation:shimmer 1.4s infinite; border-radius:4px; height:14px; margin:.4rem 0; }
+
+    .footer-signup-wrap { background:var(--bg-secondary); border-top:1px solid var(--border); padding:3rem 1.5rem; text-align:center; }
+    .footer-signup-inner { max-width:560px; margin:0 auto; }
+    .footer-signup-label { color:var(--text-muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.1em; display:block; margin-bottom:.5rem; }
+    .footer-signup-title { font-size:1.5rem; font-weight:700; margin-bottom:.5rem; }
+    .footer-signup-sub   { color:var(--text-secondary); margin-bottom:1rem; }
+    .footer-signup-form  { display:flex; gap:.5rem; max-width:420px; margin:0 auto .75rem; }
+    .footer-signup-email { flex:1; padding:.65rem 1rem; border-radius:8px; border:1px solid var(--border); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; }
+    .footer-signup-btn   { background:var(--success); color:#fff; border:none; border-radius:8px; padding:.65rem 1.25rem; font-size:1rem; font-weight:600; cursor:pointer; white-space:nowrap; }
+    .footer-signup-note  { font-size:.85rem; color:var(--text-muted); }
+
+    @media(max-width:640px){ .demo-grid{grid-template-columns:1fr;} .footer-signup-form{flex-direction:column;} }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="reviews/claude.html">Claude</a></li>
+        <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="reviews/cursor.html">Cursor</a></li>
+        <li><a href="reviews/perplexity.html">Perplexity</a></li>
+        <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="playground.html" class="active">Playground</a></li>
+        <li><a href="#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="pg-hero">
+    <h1>AI Tool Playground</h1>
+    <p>Try our AI tools hands-on — no account needed to start. Enter your email to unlock the full output.</p>
+  </section>
+
+  <div class="demo-grid">
+
+    <!-- Demo 1: Writing Assistant -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <div class="demo-icon blue" aria-hidden="true">✍️</div>
+        <span class="demo-title">AI Writing Assistant</span>
+        <span class="demo-tag">Free Demo</span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-desc">Paste any rough idea and our AI rewrites it into polished, persuasive copy in seconds.</p>
+        <textarea class="demo-input" id="writing-input" placeholder="e.g. Our new crypto tool helps traders find the best entry points fast"></textarea>
+        <button class="btn-run" id="writing-run-btn" type="button">Generate Copy ✦</button>
+        <div class="demo-output hidden" id="writing-output">
+          <div id="writing-result"></div>
+          <div class="gate-overlay hidden" id="writing-gate">
+            <p class="gate-title">Unlock your full copy</p>
+            <p class="gate-sub">Enter your email to see the complete AI-generated version.</p>
+            <form class="gate-form" id="writing-gate-form">
+              <input class="gate-input" type="email" id="writing-gate-email" placeholder="you@example.com" required autocomplete="email" />
+              <button class="gate-btn" type="submit">Unlock Free →</button>
+              <span class="gate-err" id="writing-gate-err"></span>
+            </form>
+            <p class="gate-note">🔒 No spam. Unsubscribe any time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 2: Crypto Signal Scanner -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <div class="demo-icon green" aria-hidden="true">📡</div>
+        <span class="demo-title">Crypto Signal Scanner</span>
+        <span class="demo-tag">Free Demo</span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-desc">See live-style AI signals for top coins — confidence scores, direction, and entry zones.</p>
+        <select class="demo-select" id="crypto-select">
+          <option value="">— Pick a coin —</option>
+          <option value="BTC">Bitcoin (BTC)</option>
+          <option value="ETH">Ethereum (ETH)</option>
+          <option value="SOL">Solana (SOL)</option>
+          <option value="BNB">BNB (BNB)</option>
+          <option value="ARB">Arbitrum (ARB)</option>
+        </select>
+        <button class="btn-run" id="crypto-run-btn" type="button">Scan Signals ✦</button>
+        <div class="demo-output hidden" id="crypto-output">
+          <div id="crypto-result"></div>
+          <div class="gate-overlay hidden" id="crypto-gate">
+            <p class="gate-title">Unlock full signal report</p>
+            <p class="gate-sub">Free members get 3 signals/day. Enter your email to access yours.</p>
+            <form class="gate-form" id="crypto-gate-form">
+              <input class="gate-input" type="email" id="crypto-gate-email" placeholder="you@example.com" required autocomplete="email" />
+              <button class="gate-btn" type="submit">Unlock Signals →</button>
+              <span class="gate-err" id="crypto-gate-err"></span>
+            </form>
+            <p class="gate-note">🔒 No spam. Unsubscribe any time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 3: Prompt Generator -->
+    <div class="demo-card">
+      <div class="demo-header">
+        <div class="demo-icon purple" aria-hidden="true">⚡</div>
+        <span class="demo-title">AI Prompt Generator</span>
+        <span class="demo-tag">Free Demo</span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-desc">Generate high-converting prompts for ChatGPT, Claude, or Midjourney — tailored to your use case.</p>
+        <select class="demo-select" id="prompt-select">
+          <option value="">— Choose a category —</option>
+          <option value="marketing">Marketing Copy</option>
+          <option value="coding">Code Generation</option>
+          <option value="image">Image Generation</option>
+          <option value="research">Deep Research</option>
+          <option value="email">Cold Email</option>
+        </select>
+        <button class="btn-run" id="prompt-run-btn" type="button">Generate Prompts ✦</button>
+        <div class="demo-output hidden" id="prompt-output">
+          <div id="prompt-result"></div>
+          <div class="gate-overlay hidden" id="prompt-gate">
+            <p class="gate-title">Unlock all 5 prompts</p>
+            <p class="gate-sub">You can see 2 above. Enter your email for the full set.</p>
+            <form class="gate-form" id="prompt-gate-form">
+              <input class="gate-input" type="email" id="prompt-gate-email" placeholder="you@example.com" required autocomplete="email" />
+              <button class="gate-btn" type="submit">Get All Prompts →</button>
+              <span class="gate-err" id="prompt-gate-err"></span>
+            </form>
+            <p class="gate-note">🔒 No spam. Unsubscribe any time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<section class="footer-signup-wrap" id="signup">
+  <div class="footer-signup-inner">
+    <span class="footer-signup-label">Stay Updated</span>
+    <h2 class="footer-signup-title">Get the Latest AI Reviews</h2>
+    <p class="footer-signup-sub">New reviews and AI news delivered weekly. No spam, ever.</p>
+    <form class="footer-signup-form" id="footer-signup-form">
+      <input class="footer-signup-email" type="email" placeholder="you@example.com" required autocomplete="email" />
+      <button class="footer-signup-btn" type="submit">Subscribe Free</button>
+    </form>
+    <p class="footer-signup-note">🔒 No spam. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2026 AIMasterTools.com &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="privacy-policy.html">Privacy</a> &nbsp;·&nbsp;
+      <a href="terms-of-service.html">Terms</a> &nbsp;·&nbsp;
+      <a href="affiliate-disclosure.html">Disclosure</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── utilities ── */
+  var UNLOCKED = {};
+  var WRITING_FULL = { content: '' };
+  var CRYPTO_CURRENT = null;
+  var PROMPT_CURRENT = null;
+
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function subscribeEmail(email) {
+    return fetch('https://listmonk.aimastertools.com/api/public/subscription', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.trim(), name: '', list_uuids: ['2a453160-af75-4758-a2d8-d834dd409986'] })
+    });
+  }
+
+  function showSkeleton(container, count) {
+    while (container.firstChild) { container.removeChild(container.firstChild); }
+    var widths = ['80%', '90%', '60%', '80%', '70%'];
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement('div');
+      d.className = 'skeleton';
+      d.style.width = widths[i % widths.length];
+      container.appendChild(d);
+    }
+  }
+
+  function clearContainer(el) {
+    while (el.firstChild) { el.removeChild(el.firstChild); }
+  }
+
+  /* ── gate unlock ── */
+  function setupGate(demoName, formId, emailId, errId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var emailEl = document.getElementById(emailId);
+      var errEl   = document.getElementById(errId);
+      var btn     = form.querySelector('button[type="submit"]');
+      var origText = btn.textContent;
+
+      btn.disabled = true;
+      btn.textContent = 'Unlocking\u2026';
+      errEl.style.display = 'none';
+      errEl.textContent = '';
+
+      subscribeEmail(emailEl.value)
+        .then(function (res) {
+          if (res.ok || res.status === 400) {  /* 400 = already subscribed */
+            UNLOCKED[demoName] = true;
+            document.getElementById(demoName + '-gate').classList.add('hidden');
+            revealFull(demoName);
+          } else {
+            btn.disabled = false;
+            btn.textContent = origText;
+            errEl.style.display = 'block';
+            errEl.textContent = 'Something went wrong, please try again.';
+          }
+        })
+        .catch(function () {
+          /* On network error, still unlock — don't block the user */
+          UNLOCKED[demoName] = true;
+          document.getElementById(demoName + '-gate').classList.add('hidden');
+          revealFull(demoName);
+        });
+    });
+  }
+
+  function revealFull(demoName) {
+    if (demoName === 'writing') { revealWriting(); }
+    if (demoName === 'crypto')  { revealCrypto(); }
+    if (demoName === 'prompt')  { revealPrompt(); }
+  }
+
+  /* ══════════════════════════════════════════
+     Demo 1 — Writing Assistant
+     ══════════════════════════════════════════ */
+  var WRITING_TEMPLATES = [
+    function (raw) {
+      return 'Discover the edge every serious trader has been missing.\n\n' +
+        cap(raw) + ' \u2014 and now you can too. Our AI-powered platform scans thousands of data points in real time, delivering high-confidence signals before the crowd catches on.\n\nWhether you\u2019re a day trader or a long-term HODLer, our tool adapts to your strategy. Join 4,200+ members already trading smarter.\n\n\u2192 Start free today. No credit card needed.';
+    },
+    function (raw) {
+      return 'Stop guessing. Start winning.\n\n' +
+        cap(raw) + '. That\u2019s the promise \u2014 and the data backs it up.\n\nWith advanced AI models trained on three years of on-chain data, our signals arrive with a confidence score so you always know when to act. Pro members see an average of 23% improvement in entry timing.\n\n\u2192 Try it free for 7 days.';
+    },
+    function (raw) {
+      return cap(raw) + '.\n\nIn a market that never sleeps, information is your edge. Our AI never stops scanning \u2014 order books, sentiment feeds, and on-chain flows \u2014 so you can trade with confidence, not hope.\n\nPro plan from $29/mo. Cancel any time.\n\n\u2192 Get your first signal now.';
+    }
+  ];
+
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  async function runWriting() {
+    var inputEl = document.getElementById('writing-input');
+    var raw = inputEl.value.trim();
+    if (!raw) { inputEl.focus(); return; }
+
+    var btn    = document.getElementById('writing-run-btn');
+    var output = document.getElementById('writing-output');
+    var result = document.getElementById('writing-result');
+    var gate   = document.getElementById('writing-gate');
+
+    btn.disabled = true;
+    btn.textContent = 'Generating\u2026';
+    output.classList.remove('hidden');
+    clearContainer(result);
+    gate.classList.add('hidden');
+
+    showSkeleton(result, 4);
+    await sleep(1200);
+    clearContainer(result);
+
+    var tpl = WRITING_TEMPLATES[Math.floor(Math.random() * WRITING_TEMPLATES.length)];
+    var full = tpl(raw);
+    WRITING_FULL.content = full;
+
+    if (UNLOCKED['writing']) {
+      await typeText(result, full);
+    } else {
+      var blurWrap = document.createElement('div');
+      blurWrap.className = 'blurred-text';
+      var preview = document.createElement('p');
+      preview.textContent = full.substring(0, 120) + '\u2026';
+      blurWrap.appendChild(preview);
+      result.appendChild(blurWrap);
+      gate.classList.remove('hidden');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Generate Copy \u2736';
+  }
+
+  function revealWriting() {
+    if (!WRITING_FULL.content) return;
+    var result = document.getElementById('writing-result');
+    clearContainer(result);
+    typeText(result, WRITING_FULL.content);
+  }
+
+  async function typeText(container, text) {
+    var pre = document.createElement('pre');
+    pre.style.cssText = 'white-space:pre-wrap;word-break:break-word;font-family:inherit;margin:0;';
+    pre.classList.add('cursor');
+    container.appendChild(pre);
+    for (var i = 0; i < text.length; i++) {
+      pre.textContent += text[i];
+      if (i % 3 === 0) { await sleep(18); }
+    }
+    pre.classList.remove('cursor');
+  }
+
+  /* ══════════════════════════════════════════
+     Demo 2 — Crypto Signal Scanner
+     ══════════════════════════════════════════ */
+  var SIGNAL_DATA = {
+    BTC: [
+      { coin: 'BTC/USDT', dir: 'buy',  conf: 87, color: '#10b981', reason: 'Strong support at $61k, RSI oversold, bullish divergence on 4H' },
+      { coin: 'BTC/USDT', dir: 'hold', conf: 72, color: '#f59e0b', reason: 'Weekly trend intact. Wait for confirmation above $63.5k.' },
+      { coin: 'BTC dom.',  dir: 'buy',  conf: 80, color: '#10b981', reason: 'Altcoin season cooling. Rotation back to BTC likely in 48h.' }
+    ],
+    ETH: [
+      { coin: 'ETH/USDT', dir: 'buy',  conf: 79, color: '#10b981', reason: 'Dencun upgrade staking activity high. Key level: $3,200.' },
+      { coin: 'ETH/BTC',  dir: 'sell', conf: 65, color: '#ef4444', reason: 'ETH lagging BTC ratio. Wait for BTC cooldown.' },
+      { coin: 'ETH gas',  dir: 'hold', conf: 70, color: '#f59e0b', reason: 'Moderate network activity. No urgent signal either way.' }
+    ],
+    SOL: [
+      { coin: 'SOL/USDT', dir: 'buy',  conf: 91, color: '#10b981', reason: 'Validator count ATH, NFT volume surge. Target $185, stop $155.' },
+      { coin: 'SOL/ETH',  dir: 'buy',  conf: 76, color: '#10b981', reason: 'SOL outperforming ETH over last 14 days. Trend intact.' },
+      { coin: 'SOL perps', dir: 'hold', conf: 60, color: '#f59e0b', reason: 'Funding rate elevated. Long squeeze possible.' }
+    ],
+    BNB: [
+      { coin: 'BNB/USDT', dir: 'hold', conf: 68, color: '#f59e0b', reason: 'Range-bound $540-$590. Breakout direction unclear.' },
+      { coin: 'BNB burn',  dir: 'buy',  conf: 74, color: '#10b981', reason: 'Quarterly burn in 12 days. Historical: +8% in run-up.' },
+      { coin: 'BSC flows', dir: 'sell', conf: 62, color: '#ef4444', reason: 'TVL declining vs competitors. Capital rotation risk.' }
+    ],
+    ARB: [
+      { coin: 'ARB/USDT', dir: 'buy',  conf: 83, color: '#10b981', reason: 'L2 adoption steep. ARB staking proposal positive catalyst.' },
+      { coin: 'ARB/ETH',  dir: 'buy',  conf: 77, color: '#10b981', reason: 'Relative strength vs ETH improving. Accum. zone $1.15-$1.22.' },
+      { coin: 'ARB perps', dir: 'sell', conf: 58, color: '#ef4444', reason: 'OI near recent high. OI-price divergence = caution.' }
+    ]
+  };
+
+  async function runCrypto() {
+    var sel = document.getElementById('crypto-select').value;
+    if (!sel) { document.getElementById('crypto-select').focus(); return; }
+
+    var btn    = document.getElementById('crypto-run-btn');
+    var output = document.getElementById('crypto-output');
+    var result = document.getElementById('crypto-result');
+    var gate   = document.getElementById('crypto-gate');
+
+    btn.disabled = true;
+    btn.textContent = 'Scanning\u2026';
+    output.classList.remove('hidden');
+    clearContainer(result);
+    gate.classList.add('hidden');
+
+    showSkeleton(result, 5);
+    await sleep(1400);
+    clearContainer(result);
+
+    CRYPTO_CURRENT = SIGNAL_DATA[sel] || SIGNAL_DATA['BTC'];
+
+    if (UNLOCKED['crypto']) {
+      renderSignalRows(result, CRYPTO_CURRENT);
+    } else {
+      renderSignalRows(result, [CRYPTO_CURRENT[0]]);
+      var blurWrap = document.createElement('div');
+      blurWrap.className = 'blurred-text';
+      renderSignalRows(blurWrap, CRYPTO_CURRENT.slice(1));
+      result.appendChild(blurWrap);
+      gate.classList.remove('hidden');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Scan Signals \u2736';
+  }
+
+  function revealCrypto() {
+    if (!CRYPTO_CURRENT) return;
+    var result = document.getElementById('crypto-result');
+    clearContainer(result);
+    renderSignalRows(result, CRYPTO_CURRENT);
+  }
+
+  function renderSignalRows(container, signals) {
+    signals.forEach(function (sig) {
+      var row = document.createElement('div');
+      row.className = 'sig-row';
+
+      var coin = document.createElement('span');
+      coin.className = 'sig-coin';
+      coin.textContent = sig.coin;
+      row.appendChild(coin);
+
+      var dir = document.createElement('span');
+      dir.className = 'sig-dir sig-' + sig.dir;
+      dir.textContent = sig.dir.toUpperCase();
+      row.appendChild(dir);
+
+      var reason = document.createElement('span');
+      reason.className = 'sig-reason';
+      reason.textContent = sig.reason;
+      reason.title = sig.reason;
+      row.appendChild(reason);
+
+      var bar = document.createElement('div');
+      bar.className = 'sig-bar';
+      var fill = document.createElement('div');
+      fill.className = 'sig-bar-fill';
+      fill.style.width = sig.conf + '%';
+      fill.style.background = sig.color;
+      bar.appendChild(fill);
+      row.appendChild(bar);
+
+      var conf = document.createElement('span');
+      conf.className = 'sig-conf';
+      conf.textContent = sig.conf + '%';
+      row.appendChild(conf);
+
+      container.appendChild(row);
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     Demo 3 — Prompt Generator
+     ══════════════════════════════════════════ */
+  var PROMPT_DATA = {
+    marketing: [
+      'Write a 3-sentence product description for [PRODUCT] that emphasizes speed, reliability, and ROI for B2B SaaS buyers.',
+      'Create 5 high-converting Facebook ad headlines for [PRODUCT]. Focus on pain points: wasted time, missed revenue, manual work.',
+      'Write a 60-word elevator pitch for [PRODUCT] aimed at a crypto-curious millennial who trades part-time.',
+      'Generate 3 CTA button variants for a pricing page selling an AI tool at $29/mo. A/B test-ready.',
+      'Write a product comparison paragraph positioning [PRODUCT] against [COMPETITOR], emphasizing unique AI features without naming the competitor.'
+    ],
+    coding: [
+      'Write a Python function that fetches top 10 cryptos by market cap from CoinGecko API, handles rate limiting, and returns a clean dataframe.',
+      'Create a TypeScript React hook that polls a REST endpoint every 30 seconds, returns loading/error/data states, and auto-cancels on unmount.',
+      'Write a SQL query to find users who signed up in the last 30 days, made at least one purchase, but have not visited in the last 7 days.',
+      'Explain this code and suggest 3 specific performance improvements: [PASTE CODE HERE]',
+      'Write a GitHub Actions workflow that runs tests on PR, deploys to staging on merge to main, and sends a Slack notification on success or failure.'
+    ],
+    image: [
+      'Hyperrealistic 8K photograph of a glowing holographic trading dashboard floating in a dark Tokyo skyline at 2am, cinematic lighting, Unreal Engine render --ar 16:9 --v 6',
+      'Flat vector illustration of a robot scanning cryptocurrency charts, minimal style, dark background, electric blue and green accents --ar 1:1',
+      'Futuristic data center where AI agents work at glowing terminals, cyberpunk aesthetic, neon-lit, inspired by Blade Runner, ultra detailed --ar 16:9 --style raw',
+      'Logo concept: abstract AI brain merging with a circuit board and upward trend arrow, clean vector, fintech startup, dark navy + electric blue palette --ar 1:1',
+      'Product mockup of a sleek dark-mode dashboard on MacBook Pro showing live crypto charts, photorealistic, studio lighting, isolated on white --ar 3:2'
+    ],
+    research: [
+      'Act as a senior research analyst. Summarize the current state of AI in financial trading in 2026: key players, technology trends, regulatory landscape, and 3 emerging opportunities.',
+      'Compare the on-chain fundamentals of Ethereum, Solana, and Arbitrum across: daily active addresses, TVL, developer activity, and fee revenue. Present as a structured table.',
+      'What are the top 5 mistakes retail crypto traders make that AI signal tools are designed to solve? For each, explain the cognitive bias and how AI addresses it.',
+      'Provide a SWOT analysis for a SaaS startup selling AI-powered crypto signal scanning tools targeting retail traders in 2026.',
+      'Summarize recent research (2023-2026) on machine learning models for cryptocurrency price prediction. What approaches show the most promise? What are the key limitations?'
+    ],
+    email: [
+      'Write a 5-line cold email to a crypto day trader who follows @CryptoBanter on Twitter. Subject line included. Offer a free 7-day trial of our AI signal scanner.',
+      'Write a follow-up cold email (2nd touch, sent 3 days after no reply) for an AI trading tool. Tone: friendly, not pushy. Include one compelling stat and a soft CTA.',
+      'Write a 3-email drip sequence for new free users of a crypto signal SaaS: Day 1 welcome, Day 3 feature highlight, Day 7 upgrade nudge. Each under 120 words.',
+      'Write a re-engagement email for users who signed up but never activated. Subject line A/B variants (3 options). Body: 80 words max, one clear CTA.',
+      'Write a win-back email targeting Pro subscribers who cancelled 30 days ago. Offer: 50% off first month back. Tone: confident, not desperate.'
+    ]
+  };
+
+  async function runPrompt() {
+    var sel = document.getElementById('prompt-select').value;
+    if (!sel) { document.getElementById('prompt-select').focus(); return; }
+
+    var btn    = document.getElementById('prompt-run-btn');
+    var output = document.getElementById('prompt-output');
+    var result = document.getElementById('prompt-result');
+    var gate   = document.getElementById('prompt-gate');
+
+    btn.disabled = true;
+    btn.textContent = 'Generating\u2026';
+    output.classList.remove('hidden');
+    clearContainer(result);
+    gate.classList.add('hidden');
+
+    showSkeleton(result, 4);
+    await sleep(1100);
+    clearContainer(result);
+
+    PROMPT_CURRENT = PROMPT_DATA[sel] || PROMPT_DATA['marketing'];
+
+    if (UNLOCKED['prompt']) {
+      renderPrompts(result, PROMPT_CURRENT);
+    } else {
+      renderPrompts(result, PROMPT_CURRENT.slice(0, 2));
+      var blurWrap = document.createElement('div');
+      blurWrap.className = 'blurred-text';
+      renderPrompts(blurWrap, PROMPT_CURRENT.slice(2));
+      result.appendChild(blurWrap);
+      gate.classList.remove('hidden');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Generate Prompts \u2736';
+  }
+
+  function revealPrompt() {
+    if (!PROMPT_CURRENT) return;
+    var result = document.getElementById('prompt-result');
+    clearContainer(result);
+    renderPrompts(result, PROMPT_CURRENT);
+  }
+
+  function renderPrompts(container, prompts) {
+    var list = document.createElement('div');
+    list.className = 'prompts-list';
+    prompts.forEach(function (text, idx) {
+      var chip = document.createElement('div');
+      chip.className = 'prompt-chip';
+      chip.title = 'Click to copy';
+
+      var num = document.createElement('span');
+      num.className = 'prompt-num';
+      num.textContent = (idx + 1) + '.';
+      chip.appendChild(num);
+
+      var content = document.createElement('span');
+      content.textContent = text;
+      chip.appendChild(content);
+
+      chip.addEventListener('click', function () {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function () {
+            chip.style.borderColor = 'var(--success)';
+            setTimeout(function () { chip.style.borderColor = ''; }, 1000);
+          });
+        }
+      });
+
+      list.appendChild(chip);
+    });
+    container.appendChild(list);
+  }
+
+  /* ══════════════════════════════════════════
+     Wire up buttons and gates
+     ══════════════════════════════════════════ */
+  document.getElementById('writing-run-btn').addEventListener('click', runWriting);
+  document.getElementById('crypto-run-btn').addEventListener('click', runCrypto);
+  document.getElementById('prompt-run-btn').addEventListener('click', runPrompt);
+
+  setupGate('writing', 'writing-gate-form', 'writing-gate-email', 'writing-gate-err');
+  setupGate('crypto',  'crypto-gate-form',  'crypto-gate-email',  'crypto-gate-err');
+  setupGate('prompt',  'prompt-gate-form',  'prompt-gate-email',  'prompt-gate-err');
+
+  /* Footer signup */
+  document.getElementById('footer-signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var emailEl = this.querySelector('input[type="email"]');
+    var btn     = this.querySelector('button');
+    btn.disabled = true;
+    subscribeEmail(emailEl.value)
+      .then(function (res) {
+        if (res.ok || res.status === 400) {
+          var msg = document.createElement('p');
+          msg.style.cssText = 'color:var(--accent-light);font-weight:600;';
+          msg.textContent = "You're subscribed! Check your inbox.";
+          var form = document.getElementById('footer-signup-form');
+          if (form.parentNode) {
+            form.parentNode.replaceChild(msg, form);
+          }
+        } else { btn.disabled = false; }
+      })
+      .catch(function () { btn.disabled = false; });
+  });
+
+  /* Mobile nav */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks  = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () { navLinks.classList.toggle('open'); });
+  }
+
+}());
+</script>
+</body>
+</html>
