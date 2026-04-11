@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A/B Tests Dashboard — AIMasterTools Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e1a;
+      --bg-card: #111827;
+      --bg-card2: #1a2235;
+      --border: #1e2d45;
+      --accent: #3b82f6;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.5; min-height: 100vh; }
+
+    header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    header h1 { font-size: 1.25rem; font-weight: 700; }
+    .header-sub { color: var(--muted); font-size: 0.85rem; }
+    .header-actions { margin-left: auto; display: flex; gap: 0.75rem; }
+
+    .btn { padding: 0.4rem 1rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-card2); color: var(--text); font-size: 0.85rem; cursor: pointer; transition: background 0.15s; }
+    .btn:hover { background: #243050; }
+    .btn-danger { border-color: var(--red); color: var(--red); }
+    .btn-danger:hover { background: rgba(239,68,68,0.1); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .section-title { font-size: 1rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.25rem; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+    .summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .summary-card .s-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .summary-card .s-value { font-size: 1.8rem; font-weight: 800; margin-top: 0.25rem; }
+    .summary-card .s-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.125rem; }
+
+    .test-grid { display: grid; gap: 1.5rem; margin-bottom: 2.5rem; }
+
+    .test-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .test-card-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .test-card-header h2 { font-size: 1rem; font-weight: 600; }
+    .test-id-tag { color: var(--muted); font-size: 0.8rem; font-family: monospace; }
+    .badge { padding: 2px 8px; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+    .badge-running { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid rgba(59,130,246,0.3); }
+    .badge-winner { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .badge-inconclusive { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+    .badge-nodata { background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid rgba(100,116,139,0.3); }
+
+    .test-card-body { padding: 1.25rem; }
+    .variant-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    @media (max-width: 600px) { .variant-row { grid-template-columns: 1fr; } }
+
+    .variant-box { background: var(--bg-card2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; position: relative; }
+    .variant-box.is-winner { border-color: var(--green); }
+    .variant-box.is-loser { opacity: 0.65; }
+    .v-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
+    .v-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); }
+    .v-rate { font-size: 1.5rem; font-weight: 800; margin: 0.5rem 0 0.25rem; }
+    .stat-pair { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.25rem; }
+    .stat-key { color: var(--muted); }
+    .stat-num { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .winner-tag { position: absolute; top: 0.5rem; right: 0.75rem; font-size: 0.7rem; font-weight: 700; color: var(--green); }
+
+    .sig-row { display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; }
+    .sig-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .sig-fill { height: 100%; border-radius: 4px; }
+
+    .test-card-actions { padding: 0 1.25rem 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .heatmap-section { margin-bottom: 2.5rem; }
+    .heatmap-controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .heatmap-controls select, .heatmap-controls input { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; }
+    .heatmap-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; overflow: auto; }
+    #heatmap-canvas { display: block; cursor: crosshair; }
+    .hm-legend { display: flex; align-items: center; gap: 1rem; font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; flex-wrap: wrap; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+
+    .notice { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.82rem; color: var(--yellow); margin-bottom: 1.5rem; }
+    .empty-msg { text-align: center; color: var(--muted); padding: 3rem 1rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>A/B Tests Dashboard</h1>
+  <span class="header-sub">AIMasterTools Admin · localStorage (this device only)</span>
+  <div class="header-actions">
+    <button class="btn" id="btn-export">Export JSON</button>
+    <button class="btn btn-danger" id="btn-reset-all">Reset All Tests</button>
+  </div>
+</header>
+
+<main>
+  <div class="notice" id="notice"></div>
+  <div class="summary-grid" id="summary-grid"></div>
+  <div class="section-title">Active A/B Tests</div>
+  <div class="test-grid" id="test-grid"></div>
+
+  <div class="heatmap-section">
+    <div class="section-title">Click Heatmap</div>
+    <div class="heatmap-controls">
+      <select id="hm-page-select"></select>
+      <label style="font-size:0.85rem;color:var(--muted)">W:</label>
+      <input type="number" id="hm-width" value="1200" min="400" max="1920" style="width:90px"/>
+      <label style="font-size:0.85rem;color:var(--muted)">H:</label>
+      <input type="number" id="hm-height" value="800" min="300" max="1200" style="width:90px"/>
+      <button class="btn btn-danger" id="btn-clear-hm">Clear Heatmap</button>
+    </div>
+    <div class="heatmap-wrap">
+      <canvas id="heatmap-canvas" width="1200" height="800"></canvas>
+      <div class="hm-legend">
+        <span><span class="legend-dot" style="background:rgba(255,50,50,0.8)"></span> High density</span>
+        <span><span class="legend-dot" style="background:rgba(255,200,0,0.7)"></span> Medium</span>
+        <span><span class="legend-dot" style="background:rgba(0,100,255,0.5)"></span> Low</span>
+        <span id="hm-count" style="margin-left:auto"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="../products/ab-testing/ab-config.js"></script>
+<script src="../products/ab-testing/ab-testing.js"></script>
+<script src="../products/ab-testing/click-heatmap.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── Chi-square p-value (duplicated from engine for standalone use) ──────────
+  function chiConf(impA, convA, impB, convB) {
+    if (impA < 1 || impB < 1) return 0;
+    var n = impA + impB;
+    var p = (convA + convB) / n;
+    if (p === 0 || p === 1) return 0;
+    var chi2 = n * Math.pow(convA / impA - convB / impB, 2) / (p * (1 - p));
+    var x = Math.pow(chi2, 1 / 3);
+    var mu = 1 - 2 / 9, sigma = Math.sqrt(2 / 9);
+    var z = (x - mu) / sigma;
+    var t = 1 / (1 + 0.2316419 * Math.abs(z));
+    var poly = t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    var cdf = 1 - Math.exp(-0.5 * z * z) / Math.sqrt(2 * Math.PI) * poly;
+    if (z < 0) cdf = 1 - cdf;
+    return Math.min(100, Math.max(0, Math.round(cdf * 100)));
+  }
+
+  function pct(conv, imp) { return imp ? (conv / imp * 100).toFixed(2) + '%' : '—'; }
+  function liftStr(rA, rB) {
+    if (!rA) return '—';
+    var l = (rB - rA) / rA * 100;
+    return (l >= 0 ? '+' : '') + l.toFixed(1) + '%';
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  // ── Summary ────────────────────────────────────────────────────────────────
+  function renderSummary() {
+    var tests = AIMT_AB ? AIMT_AB.getAll() : {};
+    var totalTests = Object.keys(AIMT_AB_TESTS).length;
+    var withData = 0, totalImp = 0, totalConv = 0, winners = 0;
+    Object.keys(tests).forEach(function (id) {
+      var t = tests[id];
+      var imp = Object.keys(t.impressions || {}).reduce(function (a, k) { return a + t.impressions[k]; }, 0);
+      var conv = Object.keys(t.conversions || {}).filter(function (k) { return k.indexOf(':') === -1; })
+                       .reduce(function (a, k) { return a + t.conversions[k]; }, 0);
+      if (imp > 0) withData++;
+      totalImp += imp;
+      totalConv += conv;
+      if (t.winner) winners++;
+    });
+    var grid = document.getElementById('summary-grid');
+    grid.textContent = '';
+    [
+      { label: 'Tests Configured', value: totalTests, sub: withData + ' have data' },
+      { label: 'Total Impressions', value: totalImp.toLocaleString(), sub: 'this device' },
+      { label: 'Total Conversions', value: totalConv.toLocaleString(), sub: 'all types' },
+      { label: 'Winners Detected', value: winners, sub: 'auto-selected' }
+    ].forEach(function (s) {
+      var card = el('div', 'summary-card');
+      card.appendChild(el('div', 's-label', s.label));
+      card.appendChild(el('div', 's-value', String(s.value)));
+      card.appendChild(el('div', 's-sub', s.sub));
+      grid.appendChild(card);
+    });
+  }
+
+  // ── Test Cards ──────────────────────────────────────────────────────────────
+  function makeVariantBox(v, imp, conv, allVariants, rA, winner, cfg) {
+    var isWinner = winner === v;
+    var isLoser  = !!winner && winner !== v;
+    var box = el('div', 'variant-box' + (isWinner ? ' is-winner' : isLoser ? ' is-loser' : ''));
+
+    if (isWinner) { var wt = el('span', 'winner-tag', '★ WINNER'); box.appendChild(wt); }
+
+    box.appendChild(el('div', 'v-label', v));
+
+    var content = cfg.variantContent && cfg.variantContent[v];
+    var labelText = content ? (content.headline || v) : v;
+    labelText = labelText.replace(/\n/g, ' / ');
+    if (labelText.length > 70) labelText = labelText.slice(0, 67) + '...';
+    box.appendChild(el('div', 'v-name', labelText));
+
+    var r = imp ? conv / imp : 0;
+    var rateEl = el('div', 'v-rate', pct(conv, imp));
+    rateEl.style.color = r > 0 ? 'var(--green)' : 'var(--muted)';
+    box.appendChild(rateEl);
+
+    [['Impressions', imp.toLocaleString()], ['Conversions', conv.toLocaleString()]].forEach(function (pair) {
+      var row = el('div', 'stat-pair');
+      row.appendChild(el('span', 'stat-key', pair[0]));
+      row.appendChild(el('span', 'stat-num', pair[1]));
+      box.appendChild(row);
+    });
+
+    if (v !== allVariants[0] && rA > 0) {
+      var liftRow = el('div', 'stat-pair');
+      liftRow.appendChild(el('span', 'stat-key', 'Lift vs control'));
+      var liftVal = el('span', 'stat-num', liftStr(rA, r));
+      liftVal.style.color = r >= rA ? 'var(--green)' : 'var(--red)';
+      liftRow.appendChild(liftVal);
+      box.appendChild(liftRow);
+    }
+    return box;
+  }
+
+  function makeTestCard(testId) {
+    var cfg = AIMT_AB_TESTS[testId];
+    var allTests = AIMT_AB ? AIMT_AB.getAll() : {};
+    var data = allTests[testId] || { impressions: {}, conversions: {}, variant: null, winner: null };
+    var vA = cfg.variants[0], vB = cfg.variants[1];
+    var impA = data.impressions[vA] || 0, impB = data.impressions[vB] || 0;
+    var convA = data.conversions[vA] || 0, convB = data.conversions[vB] || 0;
+    var rA = impA ? convA / impA : 0;
+    var confidence = chiConf(impA, convA, impB, convB);
+    var totalImp = impA + impB;
+    var winner = data.winner;
+    var noData = totalImp === 0;
+
+    var card = el('div', 'test-card');
+
+    // Header
+    var hdr = el('div', 'test-card-header');
+    hdr.appendChild(el('h2', null, cfg.description));
+    hdr.appendChild(el('span', 'test-id-tag', testId));
+    var badge = el('span', 'badge');
+    if (noData)         { badge.className = 'badge badge-nodata'; badge.textContent = 'No Data'; }
+    else if (winner)    { badge.className = 'badge badge-winner'; badge.textContent = 'Winner: ' + winner; }
+    else if (confidence >= 80) { badge.className = 'badge badge-inconclusive'; badge.textContent = '~' + confidence + '% conf'; }
+    else                { badge.className = 'badge badge-running'; badge.textContent = 'Running'; }
+    hdr.appendChild(badge);
+    card.appendChild(hdr);
+
+    // Body
+    var body = el('div', 'test-card-body');
+    var varRow = el('div', 'variant-row');
+    varRow.appendChild(makeVariantBox(vA, impA, convA, cfg.variants, rA, winner, cfg));
+    varRow.appendChild(makeVariantBox(vB, impB, convB, cfg.variants, rA, winner, cfg));
+    body.appendChild(varRow);
+
+    // Significance meter
+    var sigRow = el('div', 'sig-row');
+    sigRow.appendChild(el('span', null, 'Statistical confidence:'));
+    var track = el('div', 'sig-track');
+    var fill = el('div', 'sig-fill');
+    fill.style.width = Math.min(confidence, 100) + '%';
+    fill.style.background = confidence >= 95 ? 'var(--green)' : confidence >= 80 ? 'var(--yellow)' : 'var(--accent)';
+    track.appendChild(fill);
+    sigRow.appendChild(track);
+    var confLabel = el('span', null, confidence + '%');
+    confLabel.style.fontWeight = '700';
+    confLabel.style.color = confidence >= 95 ? 'var(--green)' : 'var(--muted)';
+    sigRow.appendChild(confLabel);
+    sigRow.appendChild(el('span', null, '(95% needed to auto-select)'));
+    body.appendChild(sigRow);
+    card.appendChild(body);
+
+    // Actions
+    var actions = el('div', 'test-card-actions');
+    if (winner) {
+      [vA, vB].forEach(function (v) {
+        var btn = el('button', 'btn', 'Force ' + v);
+        btn.addEventListener('click', function () { AIMT_AB.setWinner(testId, v); renderAll(); });
+        actions.appendChild(btn);
+      });
+    }
+    var resetBtn = el('button', 'btn btn-danger', 'Reset This Test');
+    resetBtn.addEventListener('click', function () {
+      if (!confirm('Reset test data for "' + testId + '" on this device?')) return;
+      AIMT_AB.resetTest(testId);
+      renderAll();
+    });
+    actions.appendChild(resetBtn);
+    card.appendChild(actions);
+
+    return card;
+  }
+
+  function renderTests() {
+    var grid = document.getElementById('test-grid');
+    grid.textContent = '';
+    var ids = Object.keys(AIMT_AB_TESTS);
+    if (!ids.length) {
+      grid.appendChild(el('div', 'empty-msg', 'No tests configured. Edit ab-config.js to add tests.'));
+      return;
+    }
+    ids.forEach(function (id) { grid.appendChild(makeTestCard(id)); });
+  }
+
+  function renderAll() { renderSummary(); renderTests(); }
+
+  // ── Notice ───────────────────────────────────────────────────────────────────
+  var notice = document.getElementById('notice');
+  notice.appendChild(el('strong', null, '⚠ Data shown is from this device only.'));
+  notice.appendChild(document.createTextNode(' For cross-device aggregation, set '));
+  var code = el('code', null, 'AIMT_AB_CONFIG.analyticsEndpoint');
+  notice.appendChild(code);
+  notice.appendChild(document.createTextNode(' to a server endpoint.'));
+
+  // ── Heatmap ────────────────────────────────────────────────────────────────
+  function populatePageSelect() {
+    var sel = document.getElementById('hm-page-select');
+    sel.textContent = '';
+    var defaultOpt = el('option', null, '— select page —');
+    defaultOpt.value = '';
+    sel.appendChild(defaultOpt);
+    var allClicks = AIMT_HEATMAP.getAllClicks();
+    var pages = Object.keys(allClicks);
+    Object.values(AIMT_AB_TESTS).forEach(function (t) {
+      if (t.page && pages.indexOf(t.page) === -1) pages.push(t.page);
+    });
+    pages.forEach(function (p) {
+      var count = (allClicks[p] || []).length;
+      var opt = el('option', null, p + ' (' + count + ' clicks)');
+      opt.value = p;
+      sel.appendChild(opt);
+    });
+    if (pages.length) sel.value = pages[0];
+  }
+
+  function renderHeatmap() {
+    var page = document.getElementById('hm-page-select').value;
+    var W = parseInt(document.getElementById('hm-width').value, 10) || 1200;
+    var H = parseInt(document.getElementById('hm-height').value, 10) || 800;
+    var canvas = document.getElementById('heatmap-canvas');
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0a0e1a';
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = '#1e2d45'; ctx.lineWidth = 1;
+    for (var gx = 0; gx < W; gx += 100) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+    for (var gy = 0; gy < H; gy += 100) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+
+    if (!page) { document.getElementById('hm-count').textContent = ''; return; }
+
+    var clicks = AIMT_HEATMAP.getPageClicks(page);
+    document.getElementById('hm-count').textContent = clicks.length + ' clicks recorded';
+    if (!clicks.length) {
+      ctx.fillStyle = '#64748b'; ctx.font = '16px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('No clicks recorded for this page', W / 2, H / 2);
+      return;
+    }
+
+    var radius = 30;
+    var density = new Float32Array(W * H);
+    clicks.forEach(function (c) {
+      var cx = Math.round((c.xp !== undefined ? c.xp : c.x / 1440) * W);
+      var cy = Math.round((c.yp !== undefined ? c.yp : c.y / 900) * H);
+      cx = Math.max(0, Math.min(W - 1, cx));
+      cy = Math.max(0, Math.min(H - 1, cy));
+      var sigma2 = 2 * Math.pow(radius / 2.5, 2);
+      for (var dy = -radius; dy <= radius; dy++) {
+        for (var dx = -radius; dx <= radius; dx++) {
+          if (dx * dx + dy * dy > radius * radius) continue;
+          var px = cx + dx, py = cy + dy;
+          if (px < 0 || px >= W || py < 0 || py >= H) continue;
+          density[py * W + px] += Math.exp(-(dx * dx + dy * dy) / sigma2);
+        }
+      }
+    });
+    var maxD = 0;
+    for (var i = 0; i < density.length; i++) if (density[i] > maxD) maxD = density[i];
+    if (!maxD) return;
+
+    var imgData = ctx.getImageData(0, 0, W, H);
+    var d = imgData.data;
+    for (var y = 0; y < H; y++) {
+      for (var x = 0; x < W; x++) {
+        var t = density[y * W + x] / maxD;
+        if (t < 0.02) continue;
+        var pidx = (y * W + x) * 4;
+        var r, g, b, a;
+        if (t < 0.5) { var s = t / 0.5; r = Math.round(s * 255); g = Math.round(s * 200); b = Math.round(255 - s * 200); a = Math.round(t * 200); }
+        else         { var s2 = (t - 0.5) / 0.5; r = 255; g = Math.round(200 - s2 * 200); b = 0; a = Math.round(150 + s2 * 105); }
+        d[pidx] = r; d[pidx + 1] = g; d[pidx + 2] = b; d[pidx + 3] = Math.min(255, d[pidx + 3] + a);
+      }
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+    clicks.forEach(function (c) {
+      var cx = Math.round((c.xp !== undefined ? c.xp : c.x / 1440) * W);
+      var cy = Math.round((c.yp !== undefined ? c.yp : c.y / 900) * H);
+      ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fill();
+    });
+  }
+
+  // ── Wire up controls ────────────────────────────────────────────────────────
+  document.getElementById('btn-export').addEventListener('click', function () {
+    var data = { timestamp: new Date().toISOString(), tests: AIMT_AB.getAll(), heatmap: AIMT_HEATMAP.getAllClicks() };
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'aimt-ab-' + new Date().toISOString().slice(0, 10) + '.json'; a.click();
+  });
+
+  document.getElementById('btn-reset-all').addEventListener('click', function () {
+    if (!confirm('Reset ALL A/B test and heatmap data on this device?')) return;
+    AIMT_HEATMAP.clearAll();
+    Object.keys(AIMT_AB_TESTS).forEach(function (id) { AIMT_AB.resetTest(id); });
+    renderAll(); renderHeatmap();
+  });
+
+  document.getElementById('hm-page-select').addEventListener('change', renderHeatmap);
+  document.getElementById('hm-width').addEventListener('change', renderHeatmap);
+  document.getElementById('hm-height').addEventListener('change', renderHeatmap);
+
+  document.getElementById('btn-clear-hm').addEventListener('click', function () {
+    var page = document.getElementById('hm-page-select').value;
+    if (!page) { alert('Select a page first.'); return; }
+    if (!confirm('Clear heatmap data for ' + page + '?')) return;
+    AIMT_HEATMAP.clearAll();
+    renderHeatmap(); populatePageSelect();
+  });
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  renderAll();
+  populatePageSelect();
+  renderHeatmap();
+
+}());
+</script>
+
+</body>
+</html>

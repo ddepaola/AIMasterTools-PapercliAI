@@ -150,8 +150,8 @@
        Hero
        ============================================================ -->
   <section class="pricing-hero">
-    <h1>Simple, Transparent Pricing</h1>
-    <p>AI-powered crypto signals for every trader — from curious beginners to institutional desks.</p>
+    <h1 id="ab-pricing-headline">Simple, Transparent Pricing</h1>
+    <p id="ab-pricing-sub">AI-powered crypto signals for every trader — from curious beginners to institutional desks.</p>
     <div class="toggle-wrapper">
       <button class="toggle-btn active" id="toggleMonthly">Monthly</button>
       <button class="toggle-btn" id="toggleAnnual">Annual <span class="save-badge">Save 20%</span></button>
@@ -449,6 +449,40 @@
       navLinks.classList.toggle('open');
     });
   }
+</script>
+
+<!-- A/B Testing + Heatmap -->
+<script src="/products/ab-testing/ab-config.js"></script>
+<script src="/products/ab-testing/ab-testing.js"></script>
+<script src="/products/ab-testing/click-heatmap.js"></script>
+<script>
+(function () {
+  var TEST_ID = 'pricing-hero-headline';
+  var cfg = window.AIMT_AB_TESTS && window.AIMT_AB_TESTS[TEST_ID];
+  if (!cfg || !window.AIMT_AB) return;
+
+  var variant = AIMT_AB.assign(TEST_ID, cfg.variants);
+  var content = cfg.variantContent[variant];
+  if (variant !== cfg.variants[0] && content) {
+    var h1 = document.getElementById('ab-pricing-headline');
+    var sub = document.getElementById('ab-pricing-sub');
+    if (h1 && content.headline) h1.textContent = content.headline;
+    if (sub && content.sub) sub.textContent = content.sub;
+  }
+
+  AIMT_AB.impression(TEST_ID);
+
+  // Track CTA button clicks as conversions
+  document.querySelectorAll('.btn-pricing-primary, .btn-pricing-secondary').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      AIMT_AB.conversion(TEST_ID, 'cta_click');
+    });
+  });
+
+  if (window.AIMT_HEATMAP) {
+    AIMT_HEATMAP.init({ page: '/pricing.html' });
+  }
+}());
 </script>
 </body>
 </html>

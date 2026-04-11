@@ -848,7 +848,7 @@
     Live Signals Active
   </div>
 
-  <h1>
+  <h1 id="ab-crypto-headline">
     Let AI Detect<br/>
     <span class="highlight">Crypto Arbitrage</span><br/>
     Before You Blink
@@ -1297,6 +1297,65 @@
       }
     });
   });
+</script>
+
+<!-- A/B Testing + Heatmap -->
+<script src="/products/ab-testing/ab-config.js"></script>
+<script src="/products/ab-testing/ab-testing.js"></script>
+<script src="/products/ab-testing/click-heatmap.js"></script>
+<script>
+(function () {
+  var TEST_ID = 'crypto-hero-headline';
+  var cfg = window.AIMT_AB_TESTS && window.AIMT_AB_TESTS[TEST_ID];
+  if (!cfg || !window.AIMT_AB) return;
+
+  // Assign variant and apply headline
+  var variant = AIMT_AB.assign(TEST_ID, cfg.variants);
+  var content = cfg.variantContent[variant];
+  if (variant !== cfg.variants[0] && content) {
+    var h1 = document.getElementById('ab-crypto-headline');
+    if (h1) {
+      // Use safe DOM construction — no innerHTML with user-controlled text
+      h1.textContent = '';
+      var lines = content.headline.split('\n');
+      lines.forEach(function (line, i) {
+        if (i > 0) h1.appendChild(document.createElement('br'));
+        // Second line gets the highlight span (mirrors control structure)
+        if (i === 1) {
+          var span = document.createElement('span');
+          span.className = 'highlight';
+          span.textContent = line;
+          h1.appendChild(span);
+        } else {
+          h1.appendChild(document.createTextNode(line));
+        }
+      });
+    }
+  }
+
+  // Record impression
+  AIMT_AB.impression(TEST_ID);
+
+  // Track email signup as conversion
+  var emailForm = document.getElementById('signup-form');
+  if (emailForm) {
+    emailForm.addEventListener('submit', function () {
+      AIMT_AB.conversion(TEST_ID, 'email_signup');
+    });
+  }
+
+  // Track CTA button clicks
+  document.querySelectorAll('.btn-primary, .btn-pricing-primary').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      AIMT_AB.conversion(TEST_ID, 'cta_click');
+    });
+  });
+
+  // Start click heatmap
+  if (window.AIMT_HEATMAP) {
+    AIMT_HEATMAP.init({ page: '/crypto-signals/' });
+  }
+}());
 </script>
 </body>
 </html>

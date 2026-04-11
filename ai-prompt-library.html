@@ -403,8 +403,8 @@
 <section class="library-hero">
   <div class="container">
     <div class="hero-badge">&#128218; Curated Prompt Library</div>
-    <h1>150+ Free AI Prompts That Actually Work</h1>
-    <p>Hand-curated prompts for ChatGPT, Claude, Midjourney, Cursor &amp; more — organized by category, searchable, and ready to copy.</p>
+    <h1 id="ab-prompts-headline">150+ Free AI Prompts That Actually Work</h1>
+    <p id="ab-prompts-sub">Hand-curated prompts for ChatGPT, Claude, Midjourney, Cursor &amp; more — organized by category, searchable, and ready to copy.</p>
     <div class="library-stats">
       <span><strong id="totalCount">150+</strong> prompts</span>
       <span><strong>8</strong> categories</span>
@@ -1351,6 +1351,40 @@ document.addEventListener('keydown', function(e) {
 document.getElementById('totalCount').textContent = PROMPTS.length + '+';
 if (isUnlocked) document.getElementById('ctaBanner').style.display = 'none';
 render();
+</script>
+
+<!-- A/B Testing + Heatmap -->
+<script src="/products/ab-testing/ab-config.js"></script>
+<script src="/products/ab-testing/ab-testing.js"></script>
+<script src="/products/ab-testing/click-heatmap.js"></script>
+<script>
+(function () {
+  var TEST_ID = 'prompts-hero-headline';
+  var cfg = window.AIMT_AB_TESTS && window.AIMT_AB_TESTS[TEST_ID];
+  if (!cfg || !window.AIMT_AB) return;
+
+  var variant = AIMT_AB.assign(TEST_ID, cfg.variants);
+  var content = cfg.variantContent[variant];
+  if (variant !== cfg.variants[0] && content) {
+    var h1 = document.getElementById('ab-prompts-headline');
+    var sub = document.getElementById('ab-prompts-sub');
+    if (h1 && content.headline) h1.textContent = content.headline;
+    if (sub && content.sub) sub.textContent = content.sub;
+  }
+
+  AIMT_AB.impression(TEST_ID);
+
+  // Track all signup form submissions as conversions
+  document.querySelectorAll('form.signup-form').forEach(function (form) {
+    form.addEventListener('submit', function () {
+      AIMT_AB.conversion(TEST_ID, 'email_signup');
+    });
+  });
+
+  if (window.AIMT_HEATMAP) {
+    AIMT_HEATMAP.init({ page: '/ai-prompt-library.html' });
+  }
+}());
 </script>
 </body>
 </html>
