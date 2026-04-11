@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing – AI Crypto Signal Scanner | AIMasterTools</title>
+  <meta name="description" content="Choose the right plan for AI-powered crypto signals. Free, Pro ($29/mo), and Enterprise ($99/mo) tiers with real-time alerts, backtesting, and advanced analytics." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/pricing.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pricing – AI Crypto Signal Scanner | AIMasterTools" />
+  <meta property="og:description" content="Transparent pricing for the AI Crypto Signal Scanner. Start free, upgrade when you're ready." />
+  <meta property="og:url" content="https://aimastertools.com/pricing.html" />
+  <meta property="og:site_name" content="AIMasterTools" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AI Crypto Signal Scanner",
+    "description": "AI-powered crypto signal scanner with real-time alerts, backtesting, and portfolio analytics.",
+    "brand": { "@type": "Organization", "name": "AIMasterTools" },
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Pro", "price": "29", "priceCurrency": "USD", "billingIncrement": "P1M" },
+      { "@type": "Offer", "name": "Enterprise", "price": "99", "priceCurrency": "USD", "billingIncrement": "P1M" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Pricing-specific styles ── */
+    .pricing-hero {
+      text-align: center;
+      padding: 4rem 1.5rem 2.5rem;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+    .pricing-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .pricing-hero p  { color: var(--text-secondary); max-width: 560px; margin: 0 auto 1.5rem; font-size: 1.1rem; }
+    .toggle-wrapper  { display: inline-flex; background: var(--bg-card); border: 1px solid var(--border); border-radius: 99px; padding: 4px; gap: 4px; }
+    .toggle-btn      { padding: 0.4rem 1.2rem; border-radius: 99px; border: none; background: transparent; color: var(--text-secondary); font-size: 0.95rem; cursor: pointer; transition: var(--transition); }
+    .toggle-btn.active { background: var(--accent); color: #fff; font-weight: 600; }
+    .save-badge      { display: inline-block; background: var(--success); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
+
+    /* ── Cards ── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; transition: border-color var(--transition), transform var(--transition); }
+    .pricing-card:hover { border-color: var(--accent-light); transform: translateY(-3px); }
+    .pricing-card.popular { border-color: var(--accent); position: relative; }
+    .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 3px 14px; border-radius: 99px; white-space: nowrap; }
+    .plan-name   { font-size: 1rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .08em; }
+    .plan-price  { display: flex; align-items: baseline; gap: 4px; }
+    .plan-price .amount { font-size: 2.75rem; font-weight: 800; color: var(--text-primary); }
+    .plan-price .period { color: var(--text-muted); font-size: 0.9rem; }
+    .plan-desc   { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.55; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.93rem; color: var(--text-secondary); }
+    .plan-features li .icon { flex-shrink: 0; margin-top: 2px; }
+    .plan-features li .icon.yes { color: var(--success); }
+    .plan-features li .icon.no  { color: var(--text-muted); }
+    .plan-cta { display: block; text-align: center; padding: 0.75rem 1rem; border-radius: var(--radius); font-weight: 700; font-size: 1rem; text-decoration: none; transition: opacity var(--transition); }
+    .plan-cta.primary { background: var(--accent); color: #fff; }
+    .plan-cta.primary:hover { opacity: 0.88; }
+    .plan-cta.secondary { background: transparent; color: var(--accent-light); border: 1px solid var(--accent-light); }
+    .plan-cta.secondary:hover { background: var(--accent-glow); }
+
+    /* ── Comparison table ── */
+    .section-title { text-align: center; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .section-sub   { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+    .comparison-wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 3rem; overflow-x: auto; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+    .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); text-align: center; }
+    .comparison-table th:first-child, .comparison-table td:first-child { text-align: left; color: var(--text-primary); font-weight: 500; }
+    .comparison-table thead th { background: var(--bg-secondary); color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: .06em; }
+    .comparison-table thead th.highlight { color: var(--accent-light); }
+    .comparison-table tbody tr:hover td { background: var(--bg-card); }
+    .comparison-table .cat-row td { background: var(--bg-secondary); color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; padding-top: 1rem; border-bottom: none; }
+    .check { color: var(--success); font-size: 1.1rem; }
+    .dash  { color: var(--text-muted); }
+
+    /* ── Testimonials ── */
+    .testimonials { background: var(--bg-secondary); padding: 3rem 1.5rem; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
+    .testimonial-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .testimonial-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.6rem; }
+    .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #fff; flex-shrink: 0; }
+    .testimonial-name  { font-weight: 600; font-size: 0.9rem; }
+    .testimonial-role  { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── FAQ ── */
+    .faq-section { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+    .faq-question { font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-question::after { content: "+"; font-size: 1.3rem; color: var(--accent-light); flex-shrink: 0; transition: transform var(--transition); }
+    .faq-item.open .faq-question::after { transform: rotate(45deg); }
+    .faq-answer { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+    .faq-item.open .faq-answer { max-height: 300px; padding-top: 0.65rem; }
+
+    /* ── Final CTA ── */
+    .final-cta { text-align: center; background: linear-gradient(135deg, #0d1f4a, #0a1628); border-top: 1px solid var(--border); padding: 4rem 1.5rem; }
+    .final-cta h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .final-cta p  { color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.75rem; }
+    .final-cta .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary  { background: var(--accent); color: #fff; padding: 0.8rem 2rem; border-radius: var(--radius); font-weight: 700; font-size: 1rem; text-decoration: none; transition: opacity var(--transition); }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline  { border: 1px solid var(--border-accent); color: var(--accent-light); padding: 0.8rem 2rem; border-radius: var(--radius); font-weight: 700; font-size: 1rem; text-decoration: none; transition: background var(--transition); }
+    .btn-outline:hover { background: var(--accent-glow); }
+
+    @media (max-width: 640px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation
+     ============================================================ -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="reviews/claude.html">Claude</a></li>
+        <li><a href="reviews/chatgpt.html">ChatGPT</a></li>
+        <li><a href="reviews/midjourney.html">Midjourney</a></li>
+        <li><a href="reviews/cursor.html">Cursor</a></li>
+        <li><a href="reviews/perplexity.html">Perplexity</a></li>
+        <li><a href="ai-prompt-library.html">Prompt Library</a></li>
+        <li><a href="pricing.html" class="active">Pricing</a></li>
+        <li><a href="#signup" class="nav-signup btn">Newsletter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       Hero
+       ============================================================ -->
+  <section class="pricing-hero">
+    <h1>Simple, Transparent Pricing</h1>
+    <p>AI-powered crypto signals for every trader — from curious beginners to institutional desks.</p>
+    <div class="toggle-wrapper">
+      <button class="toggle-btn active" id="toggleMonthly">Monthly</button>
+      <button class="toggle-btn" id="toggleAnnual">Annual <span class="save-badge">Save 20%</span></button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Pricing Cards
+       ============================================================ -->
+  <section aria-label="Pricing plans">
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div>
+          <p class="plan-name">Free</p>
+          <div class="plan-price">
+            <span class="amount" data-monthly="$0" data-annual="$0">$0</span>
+            <span class="period">/mo forever</span>
+          </div>
+          <p class="plan-desc">Get started with AI signals, no credit card required.</p>
+        </div>
+        <ul class="plan-features">
+          <li><span class="icon yes">✓</span> 3 signal alerts per day</li>
+          <li><span class="icon yes">✓</span> Top 10 coins tracked</li>
+          <li><span class="icon yes">✓</span> Basic trend indicator</li>
+          <li><span class="icon yes">✓</span> Community Discord access</li>
+          <li><span class="icon no">–</span> <span style="color:var(--text-muted)">Backtesting</span></li>
+          <li><span class="icon no">–</span> <span style="color:var(--text-muted)">Portfolio analytics</span></li>
+          <li><span class="icon no">–</span> <span style="color:var(--text-muted)">API access</span></li>
+          <li><span class="icon no">–</span> <span style="color:var(--text-muted)">Priority support</span></li>
+        </ul>
+        <a class="plan-cta secondary" href="#signup">Start Free</a>
+      </div>
+
+      <!-- Pro (popular) -->
+      <div class="pricing-card popular">
+        <span class="popular-badge">Most Popular</span>
+        <div>
+          <p class="plan-name">Pro</p>
+          <div class="plan-price">
+            <span class="amount" data-monthly="$29" data-annual="$23">$29</span>
+            <span class="period" id="proPeriod">/mo</span>
+          </div>
+          <p class="plan-desc">Everything you need to trade smarter with real-time AI signals.</p>
+        </div>
+        <ul class="plan-features">
+          <li><span class="icon yes">✓</span> Unlimited signal alerts</li>
+          <li><span class="icon yes">✓</span> 200+ coins &amp; tokens tracked</li>
+          <li><span class="icon yes">✓</span> Advanced AI trend indicators</li>
+          <li><span class="icon yes">✓</span> Full backtesting engine (3 yr history)</li>
+          <li><span class="icon yes">✓</span> Portfolio analytics dashboard</li>
+          <li><span class="icon yes">✓</span> Telegram &amp; email alerts</li>
+          <li><span class="icon yes">✓</span> API access (500 req/day)</li>
+          <li><span class="icon no">–</span> <span style="color:var(--text-muted)">White-label &amp; custom models</span></li>
+        </ul>
+        <a class="plan-cta primary" href="#stripe-pro">Get Pro →</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card">
+        <div>
+          <p class="plan-name">Enterprise</p>
+          <div class="plan-price">
+            <span class="amount" data-monthly="$99" data-annual="$79">$99</span>
+            <span class="period" id="entPeriod">/mo</span>
+          </div>
+          <p class="plan-desc">Full power for trading desks, funds, and serious quants.</p>
+        </div>
+        <ul class="plan-features">
+          <li><span class="icon yes">✓</span> Everything in Pro</li>
+          <li><span class="icon yes">✓</span> Unlimited API access</li>
+          <li><span class="icon yes">✓</span> Custom AI model fine-tuning</li>
+          <li><span class="icon yes">✓</span> White-label dashboard</li>
+          <li><span class="icon yes">✓</span> Dedicated account manager</li>
+          <li><span class="icon yes">✓</span> SLA &amp; uptime guarantee</li>
+          <li><span class="icon yes">✓</span> Team seats (up to 10 users)</li>
+          <li><span class="icon yes">✓</span> Priority phone &amp; Slack support</li>
+        </ul>
+        <a class="plan-cta primary" href="#stripe-enterprise">Get Enterprise →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Feature Comparison Table
+       ============================================================ -->
+  <section aria-label="Feature comparison">
+    <div class="comparison-wrap">
+      <h2 class="section-title">Full Feature Comparison</h2>
+      <p class="section-sub">See exactly what's included in each plan.</p>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th class="highlight">Pro</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Signals -->
+          <tr class="cat-row"><td colspan="4">Signal Coverage</td></tr>
+          <tr><td>Daily signal alerts</td><td>3/day</td><td class="highlight">Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>Coins &amp; tokens tracked</td><td>Top 10</td><td class="highlight">200+</td><td>All listed assets</td></tr>
+          <tr><td>Signal confidence score</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>On-chain data signals</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <!-- AI & Analytics -->
+          <tr class="cat-row"><td colspan="4">AI &amp; Analytics</td></tr>
+          <tr><td>Basic trend indicator</td><td><span class="check">✓</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Advanced AI indicators</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Backtesting (history)</td><td><span class="dash">–</span></td><td class="highlight">3 years</td><td>Full history</td></tr>
+          <tr><td>Portfolio analytics</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Custom AI model fine-tuning</td><td><span class="dash">–</span></td><td class="highlight"><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+          <!-- Alerts & Integrations -->
+          <tr class="cat-row"><td colspan="4">Alerts &amp; Integrations</td></tr>
+          <tr><td>Email alerts</td><td><span class="check">✓</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Telegram alerts</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Webhook / Zapier</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>REST API access</td><td><span class="dash">–</span></td><td class="highlight">500 req/day</td><td>Unlimited</td></tr>
+          <!-- Support & Admin -->
+          <tr class="cat-row"><td colspan="4">Support &amp; Admin</td></tr>
+          <tr><td>Community Discord</td><td><span class="check">✓</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Email support</td><td><span class="dash">–</span></td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Priority support (SLA)</td><td><span class="dash">–</span></td><td class="highlight"><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Dedicated account manager</td><td><span class="dash">–</span></td><td class="highlight"><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>White-label dashboard</td><td><span class="dash">–</span></td><td class="highlight"><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Team seats</td><td>1</td><td class="highlight">1</td><td>Up to 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Testimonials (placeholder)
+       ============================================================ -->
+  <section class="testimonials" aria-label="Customer testimonials">
+    <h2 class="section-title">Traders Love the Signals</h2>
+    <p class="section-sub">Real results from our growing community. <em>(Testimonials coming soon — be our first review!)</em></p>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <p>"The Pro signals helped me avoid two major dumps last quarter. The confidence scores alone are worth the $29 a month."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div>
+            <p class="testimonial-name">Alex K.</p>
+            <p class="testimonial-role">Crypto day trader — placeholder</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p>"Backtesting my strategy over 3 years of data in minutes was a game-changer. I finally have confidence in my setups."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div>
+            <p class="testimonial-name">Maria R.</p>
+            <p class="testimonial-role">Quant analyst — placeholder</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p>"Enterprise tier gives our fund the API depth we need. Custom model fine-tuning on our own trade history is something none of our other tools offer."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JT</div>
+          <div>
+            <p class="testimonial-name">James T.</p>
+            <p class="testimonial-role">Hedge fund PM — placeholder</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section aria-label="Frequently asked questions">
+    <div class="faq-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub" style="margin-bottom:2rem;">Everything you need to know before you sign up.</p>
+
+      <div class="faq-item">
+        <p class="faq-question">Is the free plan really free forever?</p>
+        <div class="faq-answer">Yes. The Free plan is free forever with no credit card required. You get 3 signal alerts per day on the top 10 coins. Upgrade any time when you want more power.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">Can I cancel my subscription at any time?</p>
+        <div class="faq-answer">Absolutely. You can cancel Pro or Enterprise at any time from your account settings. You'll keep access until the end of your current billing period — no hidden fees, no questions asked.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">How accurate are the AI signals?</p>
+        <div class="faq-answer">Our models are trained on historical price data, on-chain metrics, and social sentiment. In internal backtests (2021–2024) our Pro signals showed a positive expectancy in trending markets. Past performance does not guarantee future results — always manage your risk appropriately.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">What exchanges and coins are supported?</p>
+        <div class="faq-answer">Free covers the top 10 coins by market cap. Pro expands to 200+ assets across Binance, Coinbase, Kraken, and OKX. Enterprise covers all listed assets including altcoins and perpetual futures.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">Do you offer refunds?</p>
+        <div class="faq-answer">If you're not happy in the first 7 days of a paid plan, contact us and we'll issue a full refund — no hassle.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">Is there a discount for annual billing?</p>
+        <div class="faq-answer">Yes — switch to annual billing and save 20%. Pro drops to $23/mo ($276/yr) and Enterprise to $79/mo ($948/yr). Toggle "Annual" at the top of this page to see updated prices.</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-question">What is the Enterprise custom model fine-tuning?</p>
+        <div class="faq-answer">Enterprise customers can provide their own historical trade data. Our team fine-tunes a signal model specifically on your strategy's patterns, improving signal relevance for your specific trading style and timeframes.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Final CTA
+       ============================================================ -->
+  <section class="final-cta" id="signup">
+    <h2>Start Trading Smarter Today</h2>
+    <p>Join thousands of traders using AI signals to cut noise and find edge. Start free — no credit card needed.</p>
+    <div class="btn-group">
+      <a class="btn-primary" href="#stripe-pro">Get Pro for $29/mo →</a>
+      <a class="btn-outline" href="#signup">Start Free</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     Footer
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2026 AIMasterTools.com &nbsp;·&nbsp;
+      <a href="about.html">About</a> &nbsp;·&nbsp;
+      <a href="privacy-policy.html">Privacy</a> &nbsp;·&nbsp;
+      <a href="terms-of-service.html">Terms</a> &nbsp;·&nbsp;
+      <a href="affiliate-disclosure.html">Disclosure</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ── Billing toggle ── */
+  const btnMonthly = document.getElementById('toggleMonthly');
+  const btnAnnual  = document.getElementById('toggleAnnual');
+
+  function setMode(annual) {
+    btnMonthly.classList.toggle('active', !annual);
+    btnAnnual.classList.toggle('active',  annual);
+    document.querySelectorAll('.amount').forEach(function(el) {
+      el.textContent = annual ? el.dataset.annual : el.dataset.monthly;
+    });
+    ['proPeriod','entPeriod'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = annual ? '/mo billed annually' : '/mo';
+    });
+  }
+
+  btnMonthly.addEventListener('click', function() { setMode(false); });
+  btnAnnual.addEventListener('click',  function() { setMode(true);  });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-question').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.closest('.faq-item');
+      item.classList.toggle('open');
+    });
+  });
+
+  /* ── Mobile nav toggle (shared pattern) ── */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks  = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+</body>
+</html>
