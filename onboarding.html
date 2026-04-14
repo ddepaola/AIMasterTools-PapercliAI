@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Your Perfect AI Tools — AIMasterTools</title>
+  <meta name="description" content="Answer 3 quick questions and get personalised AI tool recommendations matched to your goals." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aimastertools.com/onboarding.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Onboarding page styles ── */
+    .onboarding-wrap {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--bg-card);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #818cf8);
+      border-radius: 999px;
+      transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .progress-dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.75rem;
+    }
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .progress-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.25);
+    }
+    .progress-dot.done {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    /* Step cards */
+    .step-card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      animation: fadeUp 0.35s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .step-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      background: rgba(37,99,235,0.12);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .step-card h2 {
+      font-size: clamp(1.3rem, 4vw, 1.75rem);
+      margin-bottom: 0.5rem;
+    }
+    .step-card > p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Interest tiles */
+    .interest-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .interest-tile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      text-align: left;
+      width: 100%;
+    }
+    .interest-tile:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+    .interest-tile.selected {
+      border-color: var(--accent);
+      background: rgba(37,99,235,0.12);
+    }
+    .interest-tile-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+      width: 2.5rem;
+      text-align: center;
+    }
+    .interest-tile-name {
+      display: block;
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .interest-tile-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Recommendation cards */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .rec-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .rec-card:hover { border-color: var(--accent); }
+    .rec-card-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .rec-card-name {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .rec-card-desc { font-size: 0.8rem; color: var(--text-secondary); display: block; }
+    .rec-card-link {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* Email form */
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .email-form input[type="email"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .email-form input[type="email"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .email-form input[type="email"]::placeholder { color: var(--text-muted); }
+    .privacy-note {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.25rem;
+    }
+
+    /* Buttons */
+    .btn-next {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-align: center;
+    }
+    .btn-next:hover { background: var(--accent-light); transform: translateY(-1px); }
+    .btn-next:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-skip {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      text-decoration: underline;
+      width: 100%;
+      text-align: center;
+      transition: color 0.2s;
+    }
+    .btn-skip:hover { color: var(--text-secondary); }
+
+    /* Completion */
+    .completion-wrap {
+      text-align: center;
+      max-width: 480px;
+      padding: 2rem 1rem;
+      animation: fadeUp 0.4s ease both;
+    }
+    .completion-wrap .big-check {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .completion-wrap h2 { margin-bottom: 0.75rem; }
+    .completion-wrap p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .completion-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Segment badge */
+    .segment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .segment-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 480px) {
+      .interest-grid { grid-template-columns: 1fr 1fr; }
+      .interest-grid .full-width { grid-column: 1 / -1; }
+      .rec-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">AI<span>Master</span>Tools</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="directory.html">Directory</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="onboarding-wrap" id="onboardingWrap">
+
+    <!-- Progress bar -->
+    <div class="progress-bar-wrap" id="progressBar">
+      <div class="progress-meta">
+        <span id="progressLabel">Step 1 of 3</span>
+        <span id="progressPct">33%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:33%"></div>
+      </div>
+      <div class="progress-dots">
+        <div class="progress-dot active" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+      </div>
+    </div>
+
+    <!-- ── STEP 1 ── -->
+    <div class="step-card" id="step1">
+      <span class="step-emoji">🎯</span>
+      <span class="step-label">Step 1 of 3</span>
+      <h2>What's your main focus?</h2>
+      <p>We'll personalise your tool recommendations based on your answer.</p>
+
+      <div class="interest-grid" id="interestGrid">
+        <!-- tiles injected by JS to keep HTML declarative and avoid XSS surface -->
+      </div>
+
+      <button class="btn-next" id="btnStep1" disabled>
+        See My Recommendations &#8594;
+      </button>
+    </div>
+
+    <!-- ── STEP 2 ── -->
+    <div class="step-card" id="step2" style="display:none">
+      <span class="step-emoji">&#10024;</span>
+      <span class="step-label">Step 2 of 3</span>
+      <div class="segment-badge" id="segmentBadge2">
+        <span class="dot"></span>
+        <span id="segmentLabel2">Loading…</span>
+      </div>
+      <h2>Your personalised picks</h2>
+      <p>Based on your interest, here are the tools most likely to help you in 2026.</p>
+      <div class="rec-grid" id="recGrid"></div>
+      <button class="btn-next" id="btnStep2">
+        Get My Free Resource Guide &#8594;
+      </button>
+    </div>
+
+    <!-- ── STEP 3 ── -->
+    <div class="step-card" id="step3" style="display:none">
+      <span class="step-emoji">&#128235;</span>
+      <span class="step-label">Step 3 of 3</span>
+      <div class="segment-badge" id="segmentBadge3">
+        <span class="dot"></span>
+        <span id="segmentLabel3">Loading…</span>
+      </div>
+      <h2>Where should we send your guide?</h2>
+      <p>Get a free, personalised resource guide + weekly tool updates. No spam — unsubscribe any time.</p>
+      <form class="email-form" id="emailForm" novalidate>
+        <input
+          type="email"
+          id="emailInput"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" class="btn-next" id="btnSubmit">
+          Send My Free Guide &#8594;
+        </button>
+      </form>
+      <p class="privacy-note">&#128274; We respect your privacy. <a href="privacy-policy.html">Privacy Policy</a></p>
+      <button class="btn-skip" id="btnSkip">Skip — just browse the tools</button>
+    </div>
+
+    <!-- ── COMPLETION ── -->
+    <div class="completion-wrap" id="stepDone" style="display:none">
+      <span class="big-check">&#127881;</span>
+      <h2>You're all set!</h2>
+      <p id="doneMessage">Your personalised AI tool guide is on its way to your inbox.</p>
+      <div class="completion-actions">
+        <a id="primaryCTA" href="directory.html" class="btn btn-primary btn-lg">Explore All AI Tools &#8594;</a>
+        <a href="compare.html" class="btn btn-secondary">Compare Top Tools</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>&#169; 2026 AIMasterTools.
+        <a href="affiliate-disclosure.html">Affiliate Disclosure</a> &#183;
+        <a href="privacy-policy.html">Privacy</a> &#183;
+        <a href="terms-of-service.html">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ── Data ─────────────────────────────────────────────────────────────────
+  var INTERESTS = [
+    { key: "ai-tools",  icon: "🤖", name: "AI Tools",                desc: "Chatbots, image gen, coding AI",  fullWidth: false },
+    { key: "crypto",    icon: "₿",  name: "Crypto & Web3",           desc: "Trading signals, DeFi, NFTs",     fullWidth: false },
+    { key: "business",  icon: "🚀", name: "Business & Productivity",  desc: "Automation, SEO, growth tools",   fullWidth: true  }
+  ];
+
+  var RECS = {
+    "ai-tools": [
+      { icon: "🤖", name: "Claude 3.7",   desc: "Best for coding & reasoning",    href: "reviews/claude.html"      },
+      { icon: "💬", name: "ChatGPT",       desc: "Industry-leading chatbot",       href: "reviews/chatgpt.html"     },
+      { icon: "🎨", name: "Midjourney",    desc: "Top AI image generation",        href: "reviews/midjourney.html"  },
+      { icon: "💻", name: "Cursor",        desc: "AI-first code editor",           href: "reviews/cursor.html"      }
+    ],
+    "crypto": [
+      { icon: "📡", name: "Crypto Signals", desc: "Real-time market signals",     href: "crypto-signals/index.html" },
+      { icon: "🔍", name: "Perplexity AI",  desc: "Research & market news",       href: "reviews/perplexity.html"   },
+      { icon: "🤖", name: "Claude",         desc: "Analyse whitepapers fast",     href: "reviews/claude.html"       },
+      { icon: "📊", name: "AI Directory",   desc: "Find the best trading AIs",    href: "directory.html"            }
+    ],
+    "business": [
+      { icon: "📎", name: "PaperclipAI",   desc: "Autonomous AI agent teams",    href: "reviews/paperclipai.html"  },
+      { icon: "🔍", name: "Perplexity",    desc: "AI-powered research tool",     href: "reviews/perplexity.html"   },
+      { icon: "🚀", name: "OpenClaw",      desc: "Automate workflows with AI",   href: "reviews/openclaw.html"     },
+      { icon: "📚", name: "Prompt Library", desc: "1000+ productivity prompts", href: "ai-prompt-library.html"    }
+    ]
+  };
+
+  var SEGMENT_LABELS = {
+    "ai-tools":  "AI Tools Track",
+    "crypto":    "Crypto & Web3 Track",
+    "business":  "Business Track"
+  };
+
+  var PRIMARY_CTAS = {
+    "ai-tools":  { text: "Browse AI Tool Reviews →", href: "directory.html"             },
+    "crypto":    { text: "View Crypto Signals →",    href: "crypto-signals/index.html"  },
+    "business":  { text: "Explore Business Tools →", href: "directory.html"             }
+  };
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  var state = { interest: null, emailProvided: false, step: 1 };
+
+  // ── DOM refs ──────────────────────────────────────────────────────────────
+  var progressFill  = document.getElementById("progressFill");
+  var progressLabel = document.getElementById("progressLabel");
+  var progressPct   = document.getElementById("progressPct");
+  var progressBar   = document.getElementById("progressBar");
+
+  // ── Safe DOM helpers ──────────────────────────────────────────────────────
+  function el(tag, props) {
+    var node = document.createElement(tag);
+    if (props) {
+      Object.keys(props).forEach(function (k) {
+        if (k === "cls") {
+          node.className = props[k];
+        } else if (k === "text") {
+          node.textContent = props[k];
+        } else if (k === "href") {
+          node.href = props[k];
+        } else {
+          node.setAttribute(k, props[k]);
+        }
+      });
+    }
+    return node;
+  }
+
+  function append(parent) {
+    var children = Array.prototype.slice.call(arguments, 1);
+    children.forEach(function (c) { parent.appendChild(c); });
+    return parent;
+  }
+
+  // ── Progress ──────────────────────────────────────────────────────────────
+  function updateProgress(step) {
+    var pct = Math.round((step / 3) * 100);
+    progressFill.style.width = pct + "%";
+    progressLabel.textContent = "Step " + step + " of 3";
+    progressPct.textContent = pct + "%";
+    for (var i = 1; i <= 3; i++) {
+      var dot = document.getElementById("dot" + i);
+      if (i < step) {
+        dot.className = "progress-dot done";
+      } else if (i === step) {
+        dot.className = "progress-dot active";
+      } else {
+        dot.className = "progress-dot";
+      }
+    }
+  }
+
+  // ── Build interest tiles ──────────────────────────────────────────────────
+  function buildInterestTiles() {
+    var grid = document.getElementById("interestGrid");
+    INTERESTS.forEach(function (interest) {
+      var tile = el("button", {
+        cls: "interest-tile" + (interest.fullWidth ? " full-width" : ""),
+        type: "button",
+        "data-interest": interest.key
+      });
+      var iconSpan = el("span", { cls: "interest-tile-icon", text: interest.icon });
+      var textWrap = el("span");
+      var nameSpan = el("span", { cls: "interest-tile-name", text: interest.name });
+      var descSpan = el("span", { cls: "interest-tile-desc", text: interest.desc });
+      append(textWrap, nameSpan, descSpan);
+      append(tile, iconSpan, textWrap);
+      tile.addEventListener("click", function () { selectInterest(interest.key); });
+      grid.appendChild(tile);
+    });
+  }
+
+  // ── Step 1: interest selection ────────────────────────────────────────────
+  function selectInterest(key) {
+    state.interest = key;
+    document.querySelectorAll(".interest-tile").forEach(function (t) {
+      if (t.getAttribute("data-interest") === key) {
+        t.classList.add("selected");
+      } else {
+        t.classList.remove("selected");
+      }
+    });
+    document.getElementById("btnStep1").disabled = false;
+    saveState();
+  }
+
+  // ── Step 2: render recommendations ───────────────────────────────────────
+  function renderStep2() {
+    var recs = RECS[state.interest] || RECS["ai-tools"];
+    var grid = document.getElementById("recGrid");
+    while (grid.firstChild) { grid.removeChild(grid.firstChild); }
+
+    recs.forEach(function (r) {
+      var card = el("a", { cls: "rec-card", href: r.href });
+      var iconEl = el("span", { cls: "rec-card-icon", text: r.icon });
+      var body   = el("span");
+      var name   = el("span", { cls: "rec-card-name", text: r.name });
+      var desc   = el("span", { cls: "rec-card-desc", text: r.desc });
+      var link   = el("span", { cls: "rec-card-link", text: "Read Review →" });
+      append(body, name, desc, link);
+      append(card, iconEl, body);
+      grid.appendChild(card);
+    });
+
+    var label = SEGMENT_LABELS[state.interest] || "Personalised";
+    document.getElementById("segmentLabel2").textContent = label;
+  }
+
+  // ── Step 3: set segment badge ─────────────────────────────────────────────
+  function renderStep3() {
+    var label = SEGMENT_LABELS[state.interest] || "Personalised";
+    document.getElementById("segmentLabel3").textContent = label;
+  }
+
+  // ── Navigation ────────────────────────────────────────────────────────────
+  function showStep(n) {
+    ["step1","step2","step3"].forEach(function (id) {
+      document.getElementById(id).style.display = "none";
+    });
+    if (n === 1) {
+      document.getElementById("step1").style.display = "block";
+      updateProgress(1);
+    } else if (n === 2) {
+      renderStep2();
+      document.getElementById("step2").style.display = "block";
+      updateProgress(2);
+    } else if (n === 3) {
+      renderStep3();
+      document.getElementById("step3").style.display = "block";
+      updateProgress(3);
+    }
+    state.step = n;
+    saveState();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // ── Completion ────────────────────────────────────────────────────────────
+  function showCompletion(emailProvided) {
+    ["step1","step2","step3"].forEach(function (id) {
+      document.getElementById(id).style.display = "none";
+    });
+    progressBar.style.display = "none";
+
+    var done = document.getElementById("stepDone");
+    done.style.display = "block";
+
+    var msg = document.getElementById("doneMessage");
+    if (emailProvided) {
+      msg.textContent = "Your personalised AI tool guide is on its way to your inbox. Check out your top picks below.";
+    } else {
+      msg.textContent = "No worries! Explore your personalised tool picks below — no sign-up required.";
+    }
+
+    var cta = PRIMARY_CTAS[state.interest] || PRIMARY_CTAS["ai-tools"];
+    var primaryBtn = document.getElementById("primaryCTA");
+    primaryBtn.textContent = cta.text;
+    primaryBtn.href = cta.href;
+
+    state.emailProvided = emailProvided;
+    state.step = 4;
+    saveState();
+  }
+
+  // ── Email submit ──────────────────────────────────────────────────────────
+  document.getElementById("emailForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("emailInput").value.trim();
+    if (!email || email.indexOf("@") === -1) { return; }
+
+    var btn = document.getElementById("btnSubmit");
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    fetch("https://listmonk.aimastertools.com/api/public/subscription", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        name: "",
+        list_uuids: ["2a453160-af75-4758-a2d8-d834dd409986"],
+        attribs: { segment: state.interest || "general" }
+      })
+    }).then(function () {
+      showCompletion(true);
+    }).catch(function () {
+      showCompletion(true);
+    });
+  });
+
+  // ── Wire up static buttons ────────────────────────────────────────────────
+  document.getElementById("btnStep1").addEventListener("click", function () { showStep(2); });
+  document.getElementById("btnStep2").addEventListener("click", function () { showStep(3); });
+  document.getElementById("btnSkip").addEventListener("click",  function () { showCompletion(false); });
+
+  // ── LocalStorage persistence ──────────────────────────────────────────────
+  var STORAGE_KEY = "amt_onboarding";
+  var EXPIRY_MS   = 30 * 24 * 60 * 60 * 1000; // 30 days
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        interest: state.interest,
+        emailProvided: state.emailProvided,
+        step: state.step,
+        ts: Date.now()
+      }));
+    } catch (e) { /* quota or private mode — silently ignore */ }
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) { return; }
+      var saved = JSON.parse(raw);
+      if (!saved || (Date.now() - saved.ts) > EXPIRY_MS) { return; }
+
+      state.interest      = saved.interest      || null;
+      state.emailProvided = saved.emailProvided  || false;
+      state.step          = saved.step           || 1;
+
+      if (state.step >= 4) {
+        showCompletion(state.emailProvided);
+        return;
+      }
+      if (state.step >= 2 && state.interest) {
+        // Re-mark tile so visual state matches
+        var tile = document.querySelector('[data-interest="' + state.interest + '"]');
+        if (tile) { tile.classList.add("selected"); }
+        document.getElementById("btnStep1").disabled = false;
+        showStep(state.step);
+      }
+    } catch (e) { /* corrupt storage — start fresh */ }
+  }
+
+  // ── Nav toggle ────────────────────────────────────────────────────────────
+  document.getElementById("navToggle").addEventListener("click", function () {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  buildInterestTiles();
+  updateProgress(1);
+  loadState();
+}());
+</script>
+</body>
+</html>
