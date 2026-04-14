@@ -66,6 +66,19 @@ window.AIMT_AB_TESTS = {
     significance: 0.95
   },
 
+  // ── Dynamic Pricing Engine – segment impression/conversion tracking ─────────
+  'dynamic-pricing-engine': {
+    description: 'Dynamic Pricing – Segment Offer Impressions vs Conversions',
+    page: '/pricing.html',
+    conversionGoal: 'cta_click',
+    // Variants represent segments; winner detection is disabled (all "variants" coexist,
+    // each user only ever sees one segment — so this is used for reporting only).
+    variants: ['first_visit', 'returning', 'referred', 'high_intent'],
+    variantContent: {},
+    minConversions: 50,
+    significance: 0.95
+  },
+
   // ── AI Prompt Library / Prompt Marketplace ────────────────────────────────
   'prompts-hero-headline': {
     description: 'Prompt Library – Hero Headline',
