@@ -562,7 +562,7 @@ const AI_TOOLS = [
     name: "Kling AI",
     category: "video",
     tagline: "Cinematic AI video from China's Kuaishou",
-    description: "Kling AI produces cinematic, physics-accurate AI video rivaling Runway. Its character consistency and motion quality are standout features in 2025.",
+    description: "Kling AI produces cinematic, physics-accurate AI video rivaling Runway. Its character consistency and motion quality are standout features in 2026.",
     pricing: "Free (limited) / From $8/mo",
     pricingTier: "freemium",
     rating: 9.0,
