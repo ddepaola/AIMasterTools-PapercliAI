@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your 3 daily signals — here's how to read them</title>
+<style>
+  body{margin:0;padding:0;background:#0f1117;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#e2e8f0}
+  .wrapper{max-width:600px;margin:0 auto;padding:32px 24px}
+  .logo{font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:32px}
+  .logo span{color:#3b82f6}
+  h1{font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 16px}
+  p{color:#94a3b8;line-height:1.7;margin:0 0 16px}
+  .signal-box{background:#1e2330;border:1px solid #2d3748;border-radius:8px;padding:20px;margin:24px 0;font-family:monospace;font-size:.85rem}
+  .signal-box .label{color:#64748b;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+  .signal-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2d3748;color:#94a3b8}
+  .signal-row:last-child{border-bottom:none}
+  .signal-row .val{color:#e2e8f0;font-weight:600}
+  .signal-row .green{color:#22c55e}
+  .signal-row .red{color:#ef4444}
+  .signal-row .blue{color:#3b82f6;font-size:1rem}
+  .cta-btn{display:block;background:#3b82f6;color:#fff;text-align:center;padding:14px 24px;border-radius:6px;font-weight:700;font-size:1rem;text-decoration:none;margin:28px 0}
+  .divider{border:none;border-top:1px solid #2d3748;margin:24px 0}
+  .footer{color:#475569;font-size:.8rem;line-height:1.6}
+  .footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="logo">AI<span>Master</span>Tools</div>
+
+  <h1>Your signals are live. Here's how to read them.</h1>
+
+  <p>You're on the free tier, which means you get 3 signals a day from the live feed. Before you start trading off them, let me show you what each field actually means — because the numbers only make sense once you understand the logic behind them.</p>
+
+  <p>Here's a real signal from the feed:</p>
+
+  <div class="signal-box">
+    <div class="label">Live Signal — BTC/USDT</div>
+    <div class="signal-row"><span>Asset</span><span class="val">BTC/USDT</span></div>
+    <div class="signal-row"><span>Signal</span><span class="val">RSI Divergence + Volume Spike</span></div>
+    <div class="signal-row"><span>Entry Zone</span><span class="val">$83,200 – $83,750</span></div>
+    <div class="signal-row"><span>Target 1</span><span class="val green">$89,400 (+7.1%)</span></div>
+    <div class="signal-row"><span>Target 2</span><span class="val green">$94,100 (+12.6%)</span></div>
+    <div class="signal-row"><span>Stop Loss</span><span class="val red">$81,400 (-2.2%)</span></div>
+    <div class="signal-row"><span>Confidence</span><span class="val blue">79%</span></div>
+  </div>
+
+  <p><strong style="color:#fff">What each field means:</strong></p>
+
+  <p><strong style="color:#e2e8f0">Signal type</strong> — what the AI detected. "RSI Divergence + Volume Spike" means price made a lower low but RSI made a higher low (hidden bullish divergence), AND volume on that candle was significantly above the 20-period average. Two independent signals agreeing.</p>
+
+  <p><strong style="color:#e2e8f0">Entry zone</strong> — the price range where the signal is valid. If price is already above it, wait for the next signal. Don't chase entries outside the zone.</p>
+
+  <p><strong style="color:#e2e8f0">Targets</strong> — where the AI expects the move to reach. Target 1 is conservative, Target 2 is full extension. Most traders take partial profit at Target 1 and let the rest run.</p>
+
+  <p><strong style="color:#e2e8f0">Stop loss</strong> — where the setup is invalidated. If price hits your stop, the signal was wrong. Take the loss. A 2.2% stop with a 7.1% target is a 3:1 risk/reward ratio. That math compounds well over time.</p>
+
+  <p><strong style="color:#e2e8f0">Confidence score</strong> — how many of our detection layers agree, weighted by their historical accuracy. 79% is a solid signal. Anything below 65% we filter out before it reaches you. Above 85% is rare and worth paying close attention to.</p>
+
+  <hr class="divider" />
+
+  <p>On the free tier you're seeing 3 signals a day. Pro subscribers see every signal the moment it fires — typically 8–15 per day across BTC, ETH, and the top altcoins. They also get the live dashboard and API access.</p>
+
+  <p>If you want the full feed, it's $9/month right now (launch pricing).</p>
+
+  <a class="cta-btn" href="https://aimastertools.com/#signup">Upgrade to Pro — $9/month →</a>
+
+  <p style="color:#64748b;font-size:.85rem">Tomorrow I'll show you a signal that caught an 18% move before the crowd noticed it. Most people saw nothing in the chart. The AI saw four things happening at once.</p>
+
+  <hr class="divider" />
+  <div class="footer">
+    <p>AI Master Tools | <a href="https://aimastertools.com">aimastertools.com</a></p>
+    <p>Not financial advice. Crypto trading involves substantial risk of loss. Past signal performance does not guarantee future results.</p>
+    <p><a href="{{ unsubscribe_url }}">Unsubscribe</a> &nbsp;&middot;&nbsp; <a href="https://aimastertools.com">View in browser</a></p>
+  </div>
+</div>
+</body>
+</html>
