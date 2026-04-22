@@ -1,135 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aimastertools.com/</loc><lastmod>2026-04-19</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aimastertools.com/about.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aimastertools.com/pricing.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/compare.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/developers.html</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/playground.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/claude.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/chatgpt.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/midjourney.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/cursor.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/perplexity.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/reviews/paperclipai.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/reviews/openclaw.html</loc><lastmod>2026-04-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/tools/</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/tools/ai-detector/</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aimastertools.com/tools/subject-line-tester/</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/tools/saas-pricing-calculator/</loc><lastmod>2026-04-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/tools/image-prompt-generator/</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://aimastertools.com/tools/crypto-scanner/</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/ai-prompt-library.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/crypto-signals/</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/products/</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/refer.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/directory.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aimastertools.com/directory/automation.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/directory/coding.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/directory/image.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/directory/marketing.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/directory/productivity.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/directory/writing.html</loc><lastmod>2026-04-11</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/free-ai-tools-2026.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-ai-tools-small-business.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-productivity-hacks.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-image-generators.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-automation-comparison.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-content-creation-tools.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-email-marketing-tools.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-for-passive-income.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-ai-coding-assistants.html</loc><lastmod>2026-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-trading-bots.html</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/privacy-policy.html</loc><lastmod>2026-04-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aimastertools.com/terms-of-service.html</loc><lastmod>2026-04-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aimastertools.com/affiliate-disclosure.html</loc><lastmod>2026-04-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <!-- Mini-course -->
+  <url><loc>https://aimastertools.com/products/mini-course/lesson-1.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/products/mini-course/lesson-2.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/products/mini-course/lesson-3.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/products/mini-course/lesson-4.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/products/mini-course/lesson-5.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Campaigns -->
+  <url><loc>https://aimastertools.com/campaigns/7day-challenge/</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/crypto-scanner-launch.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url>
-    <loc>https://aimastertools.com/</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/about.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/compare.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/claude.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/chatgpt.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/midjourney.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/cursor.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/perplexity.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/ai-prompt-library.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/pricing.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/products/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/tools/subject-line-tester/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/tools/ai-detector/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/tools/saas-pricing-calculator/</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/playground.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/tools/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://aimastertools.com/content/blog/okx-review-2026.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aimastertools.com/directory.html</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/crypto-signals/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aimastertools.com/reviews/paperclipai.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://aimastertools.com/content/blog/kraken-review-2026.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aimastertools.com/reviews/openclaw.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://aimastertools.com/content/blog/coinbase-vs-kraken-2026.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aimastertools.com/refer.html</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://aimastertools.com/content/blog/how-to-sign-up-coinbase.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aimastertools.com/tools/image-prompt-generator/</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <loc>https://aimastertools.com/content/blog/how-to-sign-up-kraken.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://aimastertools.com/content/blog/how-to-sign-up-kucoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aimastertools.com/content/blog/how-to-sign-up-bybit.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aimastertools.com/content/blog/how-to-sign-up-okx.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url><loc>https://aimastertools.com/content/blog/ultimate-guide-ai-crypto-trading-tools.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-free-crypto-signal-scanners-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/top-5-ai-crypto-trading-tools-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/free-vs-paid-crypto-signals-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-free-crypto-scanner-tools-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/free-crypto-airdrop-trackers-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/ai-crypto-trading-signals-review-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/how-to-detect-rug-pulls-meme-coin-scanners-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-crypto-portfolio-tools-beginners-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/tradingview-alternative-crypto-signals-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/coinigy-vs-aimastertools-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-crypto-signal-tools-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/crypto-scanner-comparison-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/free-crypto-alert-tools-2026.html</loc><lastmod>2026-04-19</lastmod><priority>0.8</priority></url>
+
+  <url><loc>https://aimastertools.com/content/blog/how-to-use-ai-for-crypto-day-trading-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/crypto-arbitrage-explained-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/fear-greed-index-crypto-trading-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/how-to-automate-crypto-trading-without-coding-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/bitcoin-vs-altcoin-signals-reliability-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/crypto-trading-mistakes-ai-can-fix-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/real-time-crypto-sentiment-analysis-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/how-to-build-crypto-trading-bot-python-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/crypto-market-analysis-ai-vs-human-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aimastertools.com/content/blog/best-time-to-trade-crypto-ai-signals-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://aimastertools.com/content/blog/crypto-whale-tracking-guide-2026.html</loc><lastmod>2026-04-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <url><loc>https://aimastertools.com/free-crypto-signals.html</loc><lastmod>2026-04-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/crypto-trading-alerts.html</loc><lastmod>2026-04-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/ai-crypto-scanner.html</loc><lastmod>2026-04-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/best-crypto-signal-service-2026.html</loc><lastmod>2026-04-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aimastertools.com/crypto-technical-analysis-bot.html</loc><lastmod>2026-04-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>
