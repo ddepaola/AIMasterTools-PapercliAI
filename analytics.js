@@ -1,9 +1,9 @@
 // AIMasterTools Analytics — GA4 + local API dual tracking
-// GA4 Measurement ID: replace G-XXXXXXXXXX once you create the property at analytics.google.com
-// To deploy with real ID: sed -i "s/G-XXXXXXXXXX/G-YOUR_REAL_ID/g" /var/www/aimastertools.com/analytics.js
+// GA4 Measurement ID: replace G-VGLTKQ98V7 once you create the property at analytics.google.com
+// To deploy with real ID: sed -i "s/G-VGLTKQ98V7/G-YOUR_REAL_ID/g" /var/www/aimastertools.com/analytics.js
 (function () {
-  var GA4_ID = 'G-XXXXXXXXXX';
-  var GA4_READY = GA4_ID !== 'G-XXXXXXXXXX';
+  var GA4_ID = 'G-VGLTKQ98V7';
+  var GA4_READY = true; // ID is live
 
   // ── Load GA4 gtag.js ──────────────────────────────────────────────────────
   if (GA4_READY) {

@@ -21,14 +21,15 @@ fi
 
 echo "Deploying GA4 Measurement ID: $NEW_ID"
 
-# Replace placeholder in analytics.js
-sed -i "s|G-XXXXXXXXXX|$NEW_ID|g" "$SITE_DIR/analytics.js"
+# Replace placeholder ID - only in the var assignment line, not in the sentinel check
+sed -i "s|var GA4_ID = 'G-XXXXXXXXXX';|var GA4_ID = '$NEW_ID';|" "$SITE_DIR/analytics.js"
+# Activate tracking (set GA4_READY to true)
+sed -i "s|var GA4_READY = GA4_ID !== 'G-XXXXXXXXXX';|var GA4_READY = true; // ID is live|" "$SITE_DIR/analytics.js"
 
 echo "Deployed. Verifying..."
-grep "GA4_ID" "$SITE_DIR/analytics.js" | head -3
+grep -n "GA4_ID\|GA4_READY" "$SITE_DIR/analytics.js" | head -5
 
 echo ""
 echo "Next steps:"
-echo "1. Commit and push: cd $SITE_DIR && git add analytics.js && git commit -m 'feat: activate GA4 measurement ID $NEW_ID' && git push"
-echo "2. Verify tracking at: https://analytics.google.com/analytics/web/#/p<PROPERTY_ID>/reports/overview"
-echo "3. Use GA4 Realtime report to confirm events are firing"
+echo "1. Commit: cd $SITE_DIR && git add analytics.js && git commit -m 'feat: activate GA4 measurement ID $NEW_ID' && git push"
+echo "2. Check realtime at: https://analytics.google.com/analytics/web/#/p526378056/reports/overview"
