@@ -31,10 +31,12 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@AIMasterTools" />
   <meta name="twitter:title" content="AIMasterTools — Independent AI Tool Reviews" />
   <meta name="twitter:description" content="Unbiased, in-depth reviews and comparisons of the best AI tools." />
+  <meta name="twitter:image" content="https://aimastertools.com/og-image.png" />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD: WebSite -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,6 +48,55 @@
       "@type": "SearchAction",
       "target": "https://aimastertools.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AIMasterTools",
+    "url": "https://aimastertools.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aimastertools.com/icons/icon-192x192.png",
+      "width": 192,
+      "height": 192
+    },
+    "sameAs": [],
+    "description": "Independent AI tool reviews, comparisons, and guides to help you find the right AI software."
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication (AI Crypto Signal Scanner) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AI Crypto Signal Scanner",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://aimastertools.com/crypto-signals/",
+    "description": "Real-time AI-powered crypto trading signals and arbitrage detection across 20+ exchanges.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free plan available — upgrade for Pro ($29/mo) and Enterprise ($99/mo)"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "ratingCount": "38",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AIMasterTools",
+      "url": "https://aimastertools.com/"
     }
   }
   </script>
